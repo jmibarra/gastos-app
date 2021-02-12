@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import logo from './logo.svg';
-import './App.css';
-import firebase from './firebase';
+import { Badge, Container, Row, Col,Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+
+
 import $ from 'jquery';
 import Popper from 'popper.js';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { Container, Row, Col,Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
-import NavBarComponent from './Componentes/Navbar.js';
+
+import firebase from './firebase'; //Remover luego de sacar todo a clase
+import NavBarComponent from './componentes/Navbar.js';
+import firebaseUtils from './utils/FirebaseUtils.js';
 
 class App extends Component {
 
@@ -27,12 +29,29 @@ class App extends Component {
       fecha: '',
       total: '',
       estado: '',
-      mes:'',
-      año:''
     },
     id: 0
   };
 
+  /******************************** FUNCIONES *********************************/
+
+  doPost = (año,mes,tipo) => {
+    firebaseUtils.peticionPost(this.state.formItem,año,mes,tipo)
+    this.setState({modalInsertar: false});
+  }
+
+  updateItem = (año,mes,tipo) => {
+    firebaseUtils.peticionPut(this.state.formItem,año,mes,tipo,this.state.id)
+    this.setState({modalEditar: false});
+
+  }
+
+  componentDidMount() {
+    this.peticionGet("2020","01","gastos");
+    //firebaseUtils.peticionGet("2020","01","gastos");
+  }
+
+  /****************************************************************************/
 
   peticionGet = (año,mes,tipo) => {
     firebase.child(año).child(mes).child(tipo).on("value", (motivo) => {
@@ -44,34 +63,6 @@ class App extends Component {
     });
   };
 
-  //Construyo la petición para el post en firebase indicando el año, el mes y el tipo de item(Gasto o ingreso)
-  peticionPost=(año,mes,tipo)=>{
-    firebase.child(año).child(mes).child(tipo).push(this.state.formItem,
-      error=>{
-        if(error)console.log(error)
-      });
-      this.setState({modalInsertar: false});
-  }
-
-  peticionPut=()=>{
-    firebase.child(`canales/${this.state.id}`).set(
-      this.state.formItem,
-      error=>{
-        if(error)console.log(error)
-      });
-      this.setState({modalEditar: false});
-  }
-
-  peticionDelete=()=>{
-    if(window.confirm(`Estás seguro que deseas eliminar el canal ${this.state.formItem && this.state.formItem.canal}?`))
-    {
-    firebase.child(`canales/${this.state.id}`).remove(
-      error=>{
-        if(error)console.log(error)
-      });
-    }
-  }
-
   handleChange=e=>{
     this.setState({formItem:{
       ...this.state.formItem,
@@ -80,17 +71,13 @@ class App extends Component {
     console.log(this.state.formItem);
   }
 
-  seleccionarCanal=async(canal, id, caso)=>{
+  seleccionarCanal=async(item, id, caso)=>{
 
-    await this.setState({formItem: canal, id: id});
+    await this.setState({formItem: item, id: id});
 
     (caso==="Editar")?this.setState({modalEditar: true}):
-    this.peticionDelete()
+    firebaseUtils.peticionDelete(this.state.formItem,año,mes,tipo,this.state.id)
 
-  }
-
-  componentDidMount() {
-    this.peticionGet("2020","01","gastos");
   }
 
   render() {
@@ -120,7 +107,16 @@ class App extends Component {
                      <td>{this.state.dataGastos[i].motivo}</td>
                      <td>{this.state.dataGastos[i].fecha}</td>
                      <td>{this.state.dataGastos[i].total}</td>
-                     <td>{this.state.dataGastos[i].estado}</td>
+                     <td>
+                       {(() => {
+                         switch (this.state.dataGastos[i].estado) {
+                             case "Pendiente":   return <Badge href="#" color="secondary">{this.state.dataGastos[i].estado}</Badge>;
+                             case "Estimado": return <Badge href="#" color="warning">{this.state.dataGastos[i].estado}</Badge>;
+                             case "Pago":  return <Badge href="#" color="success">{this.state.dataGastos[i].estado}</Badge>;
+                             default:      return <Badge href="#" color="primary">{this.state.dataGastos[i].estado}</Badge>;
+                           }
+                         })()}
+                     </td>
                      <td>
                        <button className="btn btn-primary" onClick={()=>this.seleccionarCanal(this.state.dataGastos[i], i, 'Editar')}>Editar</button> {"   "}
                        <button className="btn btn-danger" onClick={()=>this.seleccionarCanal(this.state.dataGastos[i], i, 'Eliminar')}>Eliminar</button>
@@ -150,7 +146,16 @@ class App extends Component {
                       <td>{this.state.dataGastos[i].motivo}</td>
                       <td>{this.state.dataGastos[i].fecha}</td>
                       <td>{this.state.dataGastos[i].total}</td>
-                      <td>{this.state.dataGastos[i].estado}</td>
+                      <td>
+                        {(() => {
+                          switch (this.state.dataGastos[i].estado) {
+                              case "Pendiente":   return <Badge href="#" color="secondary">{this.state.dataGastos[i].estado}</Badge>;
+                              case "Estimado": return <Badge href="#" color="warning">{this.state.dataGastos[i].estado}</Badge>;
+                              case "Pago":  return <Badge href="#" color="success">{this.state.dataGastos[i].estado}</Badge>;
+                              default:      return <Badge href="#" color="primary">{this.state.dataGastos[i].estado}</Badge>;
+                            }
+                          })()}
+                      </td>
                       <td>
                         <button className="btn btn-primary" onClick={()=>this.seleccionarCanal(this.state.dataGastos[i], i, 'Editar')}>Editar</button> {"   "}
                         <button className="btn btn-danger" onClick={()=>this.seleccionarCanal(this.state.dataGastos[i], i, 'Eliminar')}>Eliminar</button>
@@ -165,15 +170,6 @@ class App extends Component {
 
         </Container>
         <div className="container">
-
-
-          <br />
-
-          <br />
-          <br />
-
-
-
 
         <Modal isOpen={this.state.modalInsertar}>
         <ModalHeader>Insertar Gasto</ModalHeader>
@@ -193,42 +189,46 @@ class App extends Component {
             <br />
             <label>Estado: </label>
             <br />
-            <input type="text" className="form-control" name="estado" onChange={this.handleChange}/>
-            <input type="hidden" className="form-control" name="año" value="2020"/>
-            <input type="hidden" className="form-control" name="mes" value="enero"/>
+            <select className="form-control" name="estado" onChange={this.handleChange}>
+              <option value="Estimado">Estimado</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Pago">Pago</option>
+            </select>
           </div>
         </ModalBody>
         <ModalFooter>
-          <button className="btn btn-primary" onClick={()=>this.peticionPost("2020","01","gastos")}>Insertar</button>{"   "}
+          <button className="btn btn-primary" onClick={()=>this.doPost("2020","01","gastos")}>Insertar</button>{"   "}
           <button className="btn btn-danger" onClick={()=>this.setState({modalInsertar: false})}>Cancelar</button>
         </ModalFooter>
       </Modal>
-
-
 
       <Modal isOpen={this.state.modalEditar}>
         <ModalHeader>Editar Registro</ModalHeader>
         <ModalBody>
           <div className="form-group">
-            <label>Canal: </label>
+            <label>Motivo: </label>
             <br />
-            <input type="text" className="form-control" name="canal" onChange={this.handleChange} value={this.state.form && this.state.form.canal}/>
+            <input type="text" className="form-control" name="motivo" onChange={this.handleChange} value={this.state.formItem && this.state.formItem.motivo}/>
             <br />
             <label>Fecha: </label>
             <br />
-            <input type="text" className="form-control" name="fecha" onChange={this.handleChange} value={this.state.form && this.state.form.pais}/>
+            <input type="text" className="form-control" name="fecha" onChange={this.handleChange} value={this.state.formItem && this.state.formItem.fecha}/>
             <br />
             <label>Total: </label>
             <br />
-            <input type="text" className="form-control" name="total" onChange={this.handleChange} value={this.state.form && this.state.form.idioma}/>
+            <input type="text" className="form-control" name="total" onChange={this.handleChange} value={this.state.formItem && this.state.formItem.total}/>
             <br />
-            <label>Cantidad de Suscriptores (millones): </label>
+            <label>Estado: </label>
             <br />
-            <input type="text" className="form-control" name="suscriptores" onChange={this.handleChange} value={this.state.form && this.state.form.suscriptores}/>
+            <select className="form-control" name="estado" onChange={this.handleChange} value={this.state.formItem && this.state.formItem.estado}>
+              <option value="Estimado">Estimado</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Pago">Pago</option>
+            </select>
           </div>
         </ModalBody>
         <ModalFooter>
-          <button className="btn btn-primary" onClick={()=>this.peticionPut()}>Editar</button>{"   "}
+          <button className="btn btn-primary" onClick={()=>this.updateItem("2020","01","gastos")}>Editar</button>{"   "}
           <button className="btn btn-danger" onClick={()=>this.setState({modalEditar: false})}>Cancelar</button>
         </ModalFooter>
       </Modal>
