@@ -20,7 +20,7 @@ class FirebaseUtils{
   }
 
   peticionDelete=(formItem,año,mes,tipo,id)=>{
-    if(window.confirm(`Estás seguro que deseas eliminar el canal ${formItem && formItem.canal}?`))
+    if(window.confirm(`Estás seguro que deseas eliminar el elemento ${formItem && formItem.motivo}?`))
     {
     firebase.child(tipo).child(año).child(mes).child(id).remove(
       error=>{
@@ -29,20 +29,17 @@ class FirebaseUtils{
     }
   }
 
-  petitionGetAvailableYears = () => {
-    console.log(firebase.child("gastos").on("value", (key) => { return key.val()}));
-  }
-
-  peticionGet = (año,mes,tipo) => {
-    firebase.child(año).child(mes).child(tipo).on("value", (motivo) => {
-      if (motivo.val() !== null) {
-        return (this.setState({ ...this.state.dataGastos, dataGastos: motivo.val() }))
+  peticionGetGastos = async (año,mes) => {
+    await firebase.child("gastos").child(año).child(mes).on("value", (gastos) => {
+      if (gastos.val() !== null) {
+        return gastos.val();
+        //this.setState({ ...this.state.dataGastos, dataGastos: gastos.val() });
       } else {
-        return (this.setState({ dataGastos: [] }))
+          return []
+        //this.setState({ dataGastos: [] });
       }
     });
   };
-
 }
 
 const firebaseUtils = new FirebaseUtils();
