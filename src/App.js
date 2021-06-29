@@ -38,16 +38,21 @@ class App extends Component {
   };
 
   async componentDidMount() {
+    console.log("Hola")
+    console.log(this.props);
     this.peticionGetGastos("2020","01");
     this.peticionGetIngresos("2020","01");
   }
 
-  // TODO: 1) Armar forms para insertar gastos, ingresos y peticionPost
+
   // TODO: 3) Armar tablas que sumaricen datos
-  // TODO: 4) Mejorar las tablas para poder ingresar estados y fechas con calendario y Dropdown
-  // TODO: 5) Edit y delete con iconos
   // TODO: 6) Manejo de mes y año desde la tabla principal
   // TODO: 7) Separar las tablas en componentes para que la página principal quede bien compacta
+  // TODO: 8) Armar la modularización con parámetros del insert de ingresos y gastos transformandolos en 1 solo componente al que le paso el modo y el título
+  // TODO: 9) Agregar una pantalla de vista principal(Para elegir mes y año)
+  // TODO: 10) Sección de ahorros
+  // TODO: 11) Manejo de parámetros desde la URL
+  // TODO: 12) Validacion de datos en el insert y edit(Minimo un estado inicial y un nombre)
 
 
   /******************************** FUNCIONES *********************************/
@@ -117,7 +122,6 @@ class App extends Component {
             </Col>
           </Row>
         </Container>
-
           <Modal isOpen={this.state.modalInsertarGastos}>
           <ModalHeader>Insertar Gasto</ModalHeader>
           <ModalBody>
@@ -161,6 +165,7 @@ class App extends Component {
           </ModalFooter>
         </Modal>
 
+        //TODO: Mover este modal a un componente
         <Modal isOpen={this.state.modalInsertarIngresos}>
         <ModalHeader>Insertar Ingresos</ModalHeader>
         <ModalBody>
@@ -204,6 +209,8 @@ class App extends Component {
         </ModalFooter>
       </Modal>
 
+
+        //TODO: Mover este modal a un componente
         <Modal isOpen={this.state.modalEditar}>
           <ModalHeader>Editar Registro</ModalHeader>
           <ModalBody>
