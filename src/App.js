@@ -1,7 +1,5 @@
 import React, { Component } from "react"
-import { Container, Row, Col,Modal, ModalBody, ModalHeader, ModalFooter,
-  FormGroup, Label, Input,InputGroup, InputGroupAddon,
-  InputGroupText } from "reactstrap"
+import { Container, Row, Col} from "reactstrap"
 import { AiFillPlusCircle } from 'react-icons/ai'
 
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -12,6 +10,7 @@ import firebaseUtils from './utils/FirebaseUtils.js'
 import NavBarComponent from './Componentes/Navbar.js'
 import ItemTableComponent from './Componentes/ItemTable.js'
 import InsertModalComponent from './Componentes/InsertModal.js'
+import EditModalComponent from './Componentes/EditModal.js'
 
 
 class App extends Component {
@@ -58,9 +57,10 @@ class App extends Component {
     this.setState({modalInsertarGastos: false});
   }
 
-  closeModalInsertar = () => {
+  closeModal = () => {
     this.setState({modalInsertarIngresos: false})
     this.setState({modalInsertarGastos: false})
+    this.setState({modalEditar: false})
   }
 
   updateItem = (tipo) => {
@@ -123,52 +123,11 @@ class App extends Component {
           </Row>
         </Container>
       
-        <InsertModalComponent isOpen={this.state.modalInsertarIngresos} title={"Insertar Ingresos"} tipo={"ingresos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
-        <InsertModalComponent isOpen={this.state.modalInsertarGastos} title={"Insertar gastos"} tipo={"gastos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
+        <InsertModalComponent isOpen={this.state.modalInsertarIngresos} title={"Insertar Ingresos"} tipo={"ingresos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModal} />
+        <InsertModalComponent isOpen={this.state.modalInsertarGastos} title={"Insertar gastos"} tipo={"gastos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModal} />
         
-        {/*TODO: Mover este modal a un componente */}
-        <Modal isOpen={this.state.modalEditar}>
-          <ModalHeader>Editar Registro</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Motivo: </label>
-              <br />
-              <input type="text" className="form-control" name="motivo" onChange={this.handleChange} value={this.state.formItem && this.state.formItem.motivo}/>
-              <br />
-              <FormGroup>
-                <Label for="exampleDate">Fecha:</Label>
-                <Input
-                  type="date"
-                  name="fecha"
-                  id="fecha"
-                  placeholder="Fecha de gasto"
-                  value={this.state.formItem && this.state.formItem.fecha}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <label>Total: </label>
-              <br />
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>$</InputGroupText>
-                </InputGroupAddon>
-                <input type="text" className="form-control" name="total" onChange={this.handleChange} value={this.state.formItem && this.state.formItem.total}/>
-              </InputGroup>
-              <br />
-              <label>Estado: </label>
-              <br />
-              <select className="form-control" name="estado" onChange={this.handleChange} value={this.state.formItem && this.state.formItem.estado}>
-                <option value="Estimado">Estimado</option>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Pago">Pago</option>
-              </select>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={()=>this.updateItem(this.state.elementoEdicion)}>Editar</button>{"   "}
-            <button className="btn btn-danger" onClick={()=>this.setState({modalEditar: false})}>Cancelar</button>
-          </ModalFooter>
-        </Modal>
+        <EditModalComponent isOpen={this.state.modalEditar} handleChange={this.handleChange} formItem={this.state.formItem} updateItem={this.updateItem} elementoEdicion={this.state.elementoEdicion} closeModal={this.closeModal} />
+
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Modal, ModalBody, ModalHeader, ModalFooter,
     FormGroup, Label, Input,InputGroup, InputGroupAddon,
