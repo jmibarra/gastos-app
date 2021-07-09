@@ -7,6 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 import firebase from './firebase'; //Remover luego de sacar todo a clase
 import firebaseUtils from './utils/FirebaseUtils.js'
+import dateUtils from './utils/DateUtils.js'
 import NavBarComponent from './Componentes/Navbar.js'
 import ItemTableComponent from './Componentes/ItemTable.js'
 import InsertModalComponent from './Componentes/InsertModal.js'
@@ -28,26 +29,20 @@ class App extends Component {
       total: '',
       estado: '',
     },
-    año:'2020',
-    mes:'01',
+    año:'',
+    mes:'',
+    mes_name:'',
     id: 0
   };
 
   async componentDidMount() {
-    console.log(this.props);
-    this.peticionGetGastos("2020","01");
-    this.peticionGetIngresos("2020","01");
+
+    var today = new Date();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    this.selectDate(yyyy,mm)
   }
-
-
-  // TODO: 3) Armar tablas que sumaricen datos
-  // TODO: 6) Manejo de mes y año desde la tabla principal
-  // TODO: 7) Separar las tablas en componentes para que la página principal quede bien compacta
-  // TODO: 9) Agregar una pantalla de vista principal(Para elegir mes y año)
-  // TODO: 10) Sección de ahorros
-  // TODO: 11) Manejo de parámetros desde la URL
-  // TODO: 12) Validacion de datos en el insert y edit(Minimo un estado inicial y un nombre)
-
 
   /******************************** FUNCIONES *********************************/
 
@@ -55,6 +50,8 @@ class App extends Component {
     firebaseUtils.peticionPost(this.state.formItem,this.state.año,this.state.mes,tipo)
     this.setState({modalInsertarIngresos: false});
     this.setState({modalInsertarGastos: false});
+    this.peticionGetGastos(this.state.año,this.state.mes);
+    this.peticionGetIngresos(this.state.año,this.state.mes);
   }
 
   closeModal = () => {
@@ -68,8 +65,8 @@ class App extends Component {
     this.setState({modalEditar: false});
   }
 
-  /****************************************************************************/
 
+  //TODO: Quitar estas dos funciones y mandarlas al utils
   peticionGetGastos = (año,mes) => {
     firebase.child("gastos").child(año).child(mes).on("value", (gastos) => {
       if (gastos.val() !== null) {
@@ -90,6 +87,24 @@ class App extends Component {
     });
   };
 
+  selectDate = (año, mes) => {
+
+    this.setState({año:año});
+    this.setState({mes:mes});
+    this.setState({mes_name:this.getMonthName(mes)});
+    this.peticionGetGastos(año,mes);
+    this.peticionGetIngresos(año,mes);
+  }
+
+  //Obtengo el nombre del mes desde el string
+  getMonthName = (mes) => {
+    var monthNames = [ "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" ];
+
+    let monthName = monthNames[parseInt(mes,10)-1] //Al ser un array enero es el 0 por eso al numero de mes se le resta 1.
+
+    return monthName
+  }
+
   handleChange=e=>{
     this.setState({formItem:{
       ...this.state.formItem,
@@ -104,12 +119,14 @@ class App extends Component {
     firebaseUtils.peticionDelete(this.state.formItem,this.state.año,this.state.mes,tipo,this.state.id)
   }
 
+    /****************************************************************************/
+
   render() {
     return (
       <div className="App">
         <Container>
           <Row>
-            <Col><NavBarComponent/></Col>
+            <Col><NavBarComponent year={this.state.año} month={this.state.mes} monthName={this.state.mes_name} selectDate={this.selectDate}/></Col>
           </Row>
           <Row>
             <Col xs="6">

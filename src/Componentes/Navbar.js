@@ -19,19 +19,19 @@ const NavBarComponent = (props) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Gastos</NavbarBrand>
+        <NavbarBrand href="/">Gastos {props.monthName} {props.year} </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="navbar navbar-light"  navbar>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Año
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
+                <DropdownItem  onClick={()=>props.selectDate('2021',props.month)}>
                   2021
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate('2022',props.month)}>
                   2022
                 </DropdownItem>
                 <DropdownItem divider />
@@ -39,6 +39,49 @@ const NavBarComponent = (props) => {
                   Agregar año
                 </DropdownItem>
               </DropdownMenu>
+            </UncontrolledDropdown>
+            <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                    Mes
+                </DropdownToggle>
+                <DropdownMenu right>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'01')}>
+                    Enero
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'02')}>
+                    Febrero
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'03')}>
+                    Marzo
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'04')}>
+                    Abril
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'05')}>
+                    Mayo
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'06')}>
+                    Junio
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'07')}>
+                    Julio
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'08')}>
+                    Agosto
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'09')}>
+                    Septiembre
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'10')}>
+                    Octubre
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'11')}>
+                    Noviembre
+                </DropdownItem>
+                <DropdownItem onClick={()=>props.selectDate(props.year,'12')}>
+                    Diciembre
+                </DropdownItem>
+                </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
         </Collapse>
