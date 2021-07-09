@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from "react"
+import ReactDOM from "react-dom"
 import { Container, Row, Col,Modal, ModalBody, ModalHeader, ModalFooter,
   Form, FormGroup, Label, Input, FormText,InputGroup, InputGroupAddon,
-  InputGroupText } from "reactstrap";
-import { AiFillPlusCircle } from 'react-icons/ai';
+  InputGroupText } from "reactstrap"
+import { AiFillPlusCircle } from 'react-icons/ai'
 
-import $ from 'jquery';
-import Popper from 'popper.js';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import $ from 'jquery'
+import Popper from 'popper.js'
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 import firebase from './firebase'; //Remover luego de sacar todo a clase
-import firebaseUtils from './utils/FirebaseUtils.js';
-import NavBarComponent from './componentes/Navbar.js';
-import StatusBadgeComponent from './componentes/StatusBadge.js';
-import ItemTableComponent from './componentes/ItemTable.js'
+import firebaseUtils from './utils/FirebaseUtils.js'
+import NavBarComponent from './Componentes/Navbar.js'
+import StatusBadgeComponent from './Componentes/StatusBadge.js'
+import ItemTableComponent from './Componentes/ItemTable.js'
+import ActionModalComponent from './Componentes/ActionModal.js'
 
 
 class App extends Component {
@@ -61,6 +62,11 @@ class App extends Component {
     firebaseUtils.peticionPost(this.state.formItem,this.state.año,this.state.mes,tipo)
     this.setState({modalInsertarIngresos: false});
     this.setState({modalInsertarGastos: false});
+  }
+
+  closeModalInsertar = () => {
+    this.setState({modalInsertarIngresos: false})
+    this.setState({modalInsertarGastos: false})
   }
 
   updateItem = (tipo) => {
@@ -122,95 +128,11 @@ class App extends Component {
             </Col>
           </Row>
         </Container>
-          <Modal isOpen={this.state.modalInsertarGastos}>
-          <ModalHeader>Insertar Gasto</ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Motivo: </label>
-              <br />
-              <input type="text" className="form-control" name="motivo" onChange={this.handleChange} required/>
-              <br />
-              <FormGroup>
-                <Label for="exampleDate">Fecha:</Label>
-                <Input
-                  type="date"
-                  name="fecha"
-                  id="fecha"
-                  placeholder="Fecha de gasto"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <label>Total: </label>
-              <br />
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>$</InputGroupText>
-                </InputGroupAddon>
-                <input type="text" className="form-control" name="total" onChange={this.handleChange}/>
-              </InputGroup>
-              <br />
-              <label>Estado: </label>
-              <br />
-              <select className="form-control" name="estado" onChange={this.handleChange} required>
-                <option value="">Ninguno</option>
-                <option value="Estimado">Estimado</option>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Pago">Pago</option>
-              </select>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={()=>this.doPost("gastos")}>Insertar</button>{"   "}
-            <button className="btn btn-danger" onClick={()=>this.setState({modalInsertarGastos: false})}>Cancelar</button>
-          </ModalFooter>
-        </Modal>
-
-        //TODO: Mover este modal a un componente
-        <Modal isOpen={this.state.modalInsertarIngresos}>
-        <ModalHeader>Insertar Ingresos</ModalHeader>
-        <ModalBody>
-          <div className="form-group">
-            <label>Motivo: </label>
-            <br />
-            <input type="text" className="form-control" name="motivo" onChange={this.handleChange} required/>
-            <br />
-            <FormGroup>
-              <Label for="exampleDate">Fecha:</Label>
-              <Input
-                type="date"
-                name="fecha"
-                id="fecha"
-                placeholder="Fecha de gasto"
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <label>Total: </label>
-            <br />
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>$</InputGroupText>
-              </InputGroupAddon>
-              <input type="text" className="form-control" name="total" onChange={this.handleChange}/>
-            </InputGroup>
-            <br />
-            <label>Estado: </label>
-            <br />
-            <select className="form-control" name="estado" onChange={this.handleChange} required>
-              <option value="">Ninguno</option>
-              <option value="Estimado">Estimado</option>
-              <option value="Pendiente">Pendiente</option>
-              <option value="Pago">Pago</option>
-            </select>
-          </div>
-        </ModalBody>
-        <ModalFooter>
-          <button className="btn btn-primary" onClick={()=>this.doPost("ingresos")}>Insertar</button>{"   "}
-          <button className="btn btn-danger" onClick={()=>this.setState({modalInsertarIngresos: false})}>Cancelar</button>
-        </ModalFooter>
-      </Modal>
-
-
-        //TODO: Mover este modal a un componente
+      
+        <ActionModalComponent isOpen={this.state.modalInsertarIngresos} title={"Insertar Ingresos"} tipo={"ingresos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
+        <ActionModalComponent isOpen={this.state.modalInsertarGastos} title={"Insertar gastos"} tipo={"gastos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
+        
+        {/*TODO: Mover este modal a un componente */}
         <Modal isOpen={this.state.modalEditar}>
           <ModalHeader>Editar Registro</ModalHeader>
           <ModalBody>
