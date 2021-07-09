@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 
-import { Container, Row, Col,Modal, ModalBody, ModalHeader, ModalFooter,
-    Form, FormGroup, Label, Input, FormText,InputGroup, InputGroupAddon,
+import { Modal, ModalBody, ModalHeader, ModalFooter,
+    FormGroup, Label, Input,InputGroup, InputGroupAddon,
     InputGroupText } from "reactstrap";
-  import { AiFillPlusCircle } from 'react-icons/ai';
-  
-  import $ from 'jquery';
-  import Popper from 'popper.js';
+
   import "bootstrap/dist/css/bootstrap.min.css";
   import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 
-const ActionModalComponent = (props) => {
+const InsertModalComponent = (props) => {
 
     return(
         <Modal isOpen={props.isOpen}>
@@ -64,4 +61,4 @@ const ActionModalComponent = (props) => {
 
 }
 
-export default ActionModalComponent;
+export default InsertModalComponent;

@@ -1,21 +1,17 @@
 import React, { Component } from "react"
-import ReactDOM from "react-dom"
 import { Container, Row, Col,Modal, ModalBody, ModalHeader, ModalFooter,
-  Form, FormGroup, Label, Input, FormText,InputGroup, InputGroupAddon,
+  FormGroup, Label, Input,InputGroup, InputGroupAddon,
   InputGroupText } from "reactstrap"
 import { AiFillPlusCircle } from 'react-icons/ai'
 
-import $ from 'jquery'
-import Popper from 'popper.js'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 import firebase from './firebase'; //Remover luego de sacar todo a clase
 import firebaseUtils from './utils/FirebaseUtils.js'
 import NavBarComponent from './Componentes/Navbar.js'
-import StatusBadgeComponent from './Componentes/StatusBadge.js'
 import ItemTableComponent from './Componentes/ItemTable.js'
-import ActionModalComponent from './Componentes/ActionModal.js'
+import InsertModalComponent from './Componentes/InsertModal.js'
 
 
 class App extends Component {
@@ -39,7 +35,6 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    console.log("Hola")
     console.log(this.props);
     this.peticionGetGastos("2020","01");
     this.peticionGetIngresos("2020","01");
@@ -49,7 +44,6 @@ class App extends Component {
   // TODO: 3) Armar tablas que sumaricen datos
   // TODO: 6) Manejo de mes y año desde la tabla principal
   // TODO: 7) Separar las tablas en componentes para que la página principal quede bien compacta
-  // TODO: 8) Armar la modularización con parámetros del insert de ingresos y gastos transformandolos en 1 solo componente al que le paso el modo y el título
   // TODO: 9) Agregar una pantalla de vista principal(Para elegir mes y año)
   // TODO: 10) Sección de ahorros
   // TODO: 11) Manejo de parámetros desde la URL
@@ -129,8 +123,8 @@ class App extends Component {
           </Row>
         </Container>
       
-        <ActionModalComponent isOpen={this.state.modalInsertarIngresos} title={"Insertar Ingresos"} tipo={"ingresos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
-        <ActionModalComponent isOpen={this.state.modalInsertarGastos} title={"Insertar gastos"} tipo={"gastos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
+        <InsertModalComponent isOpen={this.state.modalInsertarIngresos} title={"Insertar Ingresos"} tipo={"ingresos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
+        <InsertModalComponent isOpen={this.state.modalInsertarGastos} title={"Insertar gastos"} tipo={"gastos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModalInsertar} />
         
         {/*TODO: Mover este modal a un componente */}
         <Modal isOpen={this.state.modalEditar}>
