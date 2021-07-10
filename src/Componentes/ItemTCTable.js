@@ -39,7 +39,7 @@ const ItemTCTableComponent = (props) => {
         <tfoot>
             <tr>
                 <td colspan="3"><b>Total tarjetas de crédito</b></td>
-                <td colspan="3"><b>$ 1000</b></td>
+                <td colspan="3"><b>$ {props.totales}</b></td>
             </tr>
         </tfoot>
     </Table>

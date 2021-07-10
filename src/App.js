@@ -35,6 +35,7 @@ class App extends Component {
     mes_name:'',
     ingresos_mes: 0,
     gastos_mes:0,
+    gastos_tc_mes:0,
     ahorros_mes:0,
     id: 0
   };
@@ -52,14 +53,14 @@ class App extends Component {
 
   doPost = (tipo) => {
     firebaseUtils.peticionPost(this.state.formItem,this.state.año,this.state.mes,tipo)
-    this.setState({modalInsertarIngresos: false});
-    this.setState({modalInsertarGastos: false});
-    this.setState({modalInsertarGastosTC: false});
+    
+    this.closeModal();
     
     this.peticionGetGastos(this.state.año,this.state.mes);
     this.peticionGetIngresos(this.state.año,this.state.mes);
     this.peticionGetGastosTC(this.state.año,this.state.mes);
-  }
+  
+}
 
   closeModal = () => {
     this.setState({modalInsertarIngresos: false})
@@ -88,12 +89,12 @@ class App extends Component {
     };
 
     peticionGetGastosTC = (año,mes) => {
-        firebase.child("tc").child(año).child(mes).on("value", (gastos) => {
-                if (gastos.val() !== null) {
-                this.setState({ ...this.state.dataGastos, dataGastos: gastos.val() });
-                this.calcularGastosTotales(gastos.val());
+        firebase.child("tc").child(año).child(mes).on("value", (tc) => {
+                if (tc.val() !== null) {
+                this.setState({ ...this.state.dataGastosTC, dataGastosTC: tc.val() });
+                this.calcularGastosTCTotales(tc.val());
             } else {
-                this.setState({ dataGastos: [] });
+                this.setState({ dataGastosTC: [] });
                 this.setState({gastos_mes: 0});
             }
         });
@@ -130,6 +131,17 @@ class App extends Component {
         })
 
         this.setState({gastos_mes: gastosTotales});
+
+    };
+
+    calcularGastosTCTotales = (gastos) => {
+
+        let gastosTotales = 0;
+        Object.keys(gastos).map(i=> {
+            gastosTotales += parseInt(gastos[i].total);
+        })
+
+        this.setState({gastos_tc_mes: gastosTotales});
 
     };
 
@@ -193,7 +205,10 @@ class App extends Component {
                         <h3> Gastos </h3>
                     </ToastHeader>
                     <ToastBody>
-                        <h3> $ {this.state.gastos_mes} </h3>
+                        <h3> $ {this.state.gastos_mes} </h3> <br/>
+                        <h3> $ {this.state.gastos_tc_mes} (TC)</h3>
+                        <hr></hr>
+                        <h3> $ {parseInt(this.state.gastos_tc_mes) + parseInt(this.state.gastos_mes)}</h3>
                     </ToastBody>
                 </Toast>
             </Col>
@@ -222,7 +237,7 @@ class App extends Component {
               
             <Col sm="12" md={{ size: 8, offset: 2 }}>
             <h1> Gastos Tarjeta de crédito <button className="btn btn-success" onClick={()=>this.setState({modalInsertarGastosTC: true})}><AiFillPlusCircle/></button> </h1>
-                <ItemTCTableComponent dataItem={this.state.dataGastos} tipo="gastos" seleccionarCanal={this.seleccionarCanal}/>
+                <ItemTCTableComponent dataItem={this.state.dataGastosTC} totales={this.state.gastos_tc_mes} tipo="tc" seleccionarCanal={this.seleccionarCanal}/>
             </Col>
           </Row>
         </Container>
