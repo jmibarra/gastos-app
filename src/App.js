@@ -1,9 +1,6 @@
 import React, { Component } from "react"
-import { Container, Row, Col} from "reactstrap"
+import { Container, Row, Col,Jumbotron,Toast, ToastBody, ToastHeader} from "reactstrap"
 import { AiFillPlusCircle } from 'react-icons/ai'
-
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 import firebase from './firebase'; //Remover luego de sacar todo a clase
 import firebaseUtils from './utils/FirebaseUtils.js'
@@ -32,6 +29,9 @@ class App extends Component {
     año:'',
     mes:'',
     mes_name:'',
+    ingresos_mes: 0,
+    gastos_mes:0,
+    ahorros_mes:0,
     id: 0
   };
 
@@ -66,35 +66,62 @@ class App extends Component {
   }
 
 
-  //TODO: Quitar estas dos funciones y mandarlas al utils
-  peticionGetGastos = (año,mes) => {
-    firebase.child("gastos").child(año).child(mes).on("value", (gastos) => {
-      if (gastos.val() !== null) {
-        this.setState({ ...this.state.dataGastos, dataGastos: gastos.val() });
-      } else {
-        this.setState({ dataGastos: [] });
-      }
-    });
-  };
+    //TODO: Quitar estas dos funciones y mandarlas al utils
+    peticionGetGastos = (año,mes) => {
+        firebase.child("gastos").child(año).child(mes).on("value", (gastos) => {
+                if (gastos.val() !== null) {
+                this.setState({ ...this.state.dataGastos, dataGastos: gastos.val() });
+                this.calcularGastosTotales(gastos.val());
+            } else {
+                this.setState({ dataGastos: [] });
+                this.setState({gastos_mes: 0});
+            }
+        });
+    };
 
-  peticionGetIngresos = (año,mes) => {
-    firebase.child("ingresos").child(año).child(mes).on("value", (ingresos) => {
-      if (ingresos.val() !== null) {
-        this.setState({ ...this.state.dataIngresos, dataIngresos: ingresos.val() });
-      } else {
-        this.setState({ dataIngresos: [] });
-      }
-    });
-  };
+    peticionGetIngresos = (año,mes) => {
+        firebase.child("ingresos").child(año).child(mes).on("value", (ingresos) => {
+            if (ingresos.val() !== null) {
+                this.setState({ ...this.state.dataIngresos, dataIngresos: ingresos.val() });
+                this.calcularIngresosTotales(ingresos.val());
+            } else {
+                this.setState({ dataIngresos: [] });
+                this.setState({ingresos_mes: 0});
+            }
+        });
+    };
 
-  selectDate = (año, mes) => {
+    calcularIngresosTotales = (ingresos) => {
 
-    this.setState({año:año});
-    this.setState({mes:mes});
-    this.setState({mes_name:this.getMonthName(mes)});
-    this.peticionGetGastos(año,mes);
-    this.peticionGetIngresos(año,mes);
-  }
+        let ingresosTotales = 0;
+        Object.keys(ingresos).map(i=> {
+            ingresosTotales += parseInt(ingresos[i].total);
+        })
+
+        this.setState({ingresos_mes: ingresosTotales});
+
+    };
+
+    calcularGastosTotales = (gastos) => {
+
+        let gastosTotales = 0;
+        Object.keys(gastos).map(i=> {
+            gastosTotales += parseInt(gastos[i].total);
+        })
+
+        this.setState({gastos_mes: gastosTotales});
+
+    };
+
+    selectDate = (año, mes) => {
+
+        this.setState({año:año});
+        this.setState({mes:mes});
+        this.setState({mes_name:this.getMonthName(mes)});
+        this.peticionGetGastos(año,mes);
+        this.peticionGetIngresos(año,mes);
+  
+    }
 
   //Obtengo el nombre del mes desde el string
   getMonthName = (mes) => {
@@ -124,9 +151,41 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Container>
+        <Container fluid={true}>
           <Row>
             <Col><NavBarComponent year={this.state.año} month={this.state.mes} monthName={this.state.mes_name} selectDate={this.selectDate}/></Col>
+          </Row>
+          <Row className="p-3 bg-dark my-2 rounded">
+            <Col xs="6" sm="4">
+                <Toast>
+                    <ToastHeader>
+                        <h3>Ingresos</h3>
+                    </ToastHeader>
+                    <ToastBody>
+                        <h3>$ {this.state.ingresos_mes}</h3>
+                    </ToastBody>
+                </Toast>
+            </Col>
+            <Col xs="6" sm="4">
+                <Toast>
+                    <ToastHeader>
+                        <h3> Gastos </h3>
+                    </ToastHeader>
+                    <ToastBody>
+                        <h3> $ {this.state.gastos_mes} </h3>
+                    </ToastBody>
+                </Toast>
+            </Col>
+            <Col xs="6" sm="4">
+                <Toast>
+                    <ToastHeader>
+                        <h3>Ahorros</h3>
+                    </ToastHeader>
+                    <ToastBody>
+                       <h3> $ {this.state.ahorros_mes} </h3>
+                    </ToastBody>
+                </Toast>
+            </Col>   
           </Row>
           <Row>
             <Col xs="6">

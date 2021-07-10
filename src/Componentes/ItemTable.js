@@ -23,7 +23,7 @@ const ItemTableComponent = (props) => {
           return <tr key={i}>
             <td>{props.dataItem[i].motivo}</td>
             <td>{props.dataItem[i].fecha}</td>
-            <td>{props.dataItem[i].total}</td>
+            <td>$ {props.dataItem[i].total}</td>
             <td><StatusBadgeComponent estado={props.dataItem[i].estado}/></td>
             <td>
             <ButtonGroup>
