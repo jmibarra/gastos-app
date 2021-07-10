@@ -95,7 +95,7 @@ class App extends Component {
                 this.calcularGastosTCTotales(tc.val());
             } else {
                 this.setState({ dataGastosTC: [] });
-                this.setState({gastos_mes: 0});
+                this.setState({gastos_tc_mes: 0});
             }
         });
     };
@@ -213,6 +213,14 @@ class App extends Component {
                 </Toast>
             </Col>
             <Col xs="6" sm="4">
+                <Toast>
+                    <ToastHeader>
+                        <h3>Sobrante</h3>
+                    </ToastHeader>
+                    <ToastBody>
+                       <h3> $ {parseInt(this.state.ingresos_mes) - parseInt(this.state.gastos_tc_mes) + parseInt(this.state.gastos_mes)} </h3>
+                    </ToastBody>
+                </Toast>
                 <Toast>
                     <ToastHeader>
                         <h3>Ahorros</h3>
