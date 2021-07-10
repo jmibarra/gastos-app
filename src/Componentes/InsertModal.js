@@ -41,8 +41,7 @@ const InsertModalComponent = (props) => {
                 <label>Estado: </label>
                 <br />
                 <select className="form-control" name="estado" onChange={props.handleChange} required>
-                  <option value="">Ninguno</option>
-                  <option value="Estimado">Estimado</option>
+                  <option value="Estimado" selected="selected">Estimado</option>
                   <option value="Pendiente">Pendiente</option>
                   <option value="Pago">Pago</option>
                 </select>

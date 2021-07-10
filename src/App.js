@@ -7,6 +7,7 @@ import firebaseUtils from './utils/FirebaseUtils.js'
 import dateUtils from './utils/DateUtils.js'
 import NavBarComponent from './Componentes/Navbar.js'
 import ItemTableComponent from './Componentes/ItemTable.js'
+import ItemTCTableComponent from './Componentes/ItemTCTable.js'
 import InsertModalComponent from './Componentes/InsertModal.js'
 import EditModalComponent from './Componentes/EditModal.js'
 
@@ -16,13 +17,16 @@ class App extends Component {
   state = {
     dataGastos: [],
     dataIngresos: [],
+    dataGastosTC: [],
     elementoEdicion:'',
     modalInsertarGastos: false,
     modalInsertarIngresos: false,
+    modalInsertarGastosTC:false,
     modalEditar: false,
     formItem:{
       motivo: '',
       fecha: '',
+      fecha_cierre: '',
       total: '',
       estado: '',
     },
@@ -50,13 +54,17 @@ class App extends Component {
     firebaseUtils.peticionPost(this.state.formItem,this.state.año,this.state.mes,tipo)
     this.setState({modalInsertarIngresos: false});
     this.setState({modalInsertarGastos: false});
+    this.setState({modalInsertarGastosTC: false});
+    
     this.peticionGetGastos(this.state.año,this.state.mes);
     this.peticionGetIngresos(this.state.año,this.state.mes);
+    this.peticionGetGastosTC(this.state.año,this.state.mes);
   }
 
   closeModal = () => {
     this.setState({modalInsertarIngresos: false})
     this.setState({modalInsertarGastos: false})
+    this.setState({modalInsertarGastosTC: false})
     this.setState({modalEditar: false})
   }
 
@@ -66,9 +74,21 @@ class App extends Component {
   }
 
 
-    //TODO: Quitar estas dos funciones y mandarlas al utils
+    //TODO: Quitar estas tres funciones y mandarlas al utils
     peticionGetGastos = (año,mes) => {
         firebase.child("gastos").child(año).child(mes).on("value", (gastos) => {
+                if (gastos.val() !== null) {
+                this.setState({ ...this.state.dataGastos, dataGastos: gastos.val() });
+                this.calcularGastosTotales(gastos.val());
+            } else {
+                this.setState({ dataGastos: [] });
+                this.setState({gastos_mes: 0});
+            }
+        });
+    };
+
+    peticionGetGastosTC = (año,mes) => {
+        firebase.child("tc").child(año).child(mes).on("value", (gastos) => {
                 if (gastos.val() !== null) {
                 this.setState({ ...this.state.dataGastos, dataGastos: gastos.val() });
                 this.calcularGastosTotales(gastos.val());
@@ -120,6 +140,7 @@ class App extends Component {
         this.setState({mes_name:this.getMonthName(mes)});
         this.peticionGetGastos(año,mes);
         this.peticionGetIngresos(año,mes);
+        this.peticionGetGastosTC(año,mes);
   
     }
 
@@ -197,10 +218,18 @@ class App extends Component {
               <ItemTableComponent dataItem={this.state.dataGastos} tipo="gastos" seleccionarCanal={this.seleccionarCanal}/>
             </Col>
           </Row>
+          <Row>
+              
+            <Col sm="12" md={{ size: 8, offset: 2 }}>
+            <h1> Gastos Tarjeta de crédito <button className="btn btn-success" onClick={()=>this.setState({modalInsertarGastosTC: true})}><AiFillPlusCircle/></button> </h1>
+                <ItemTCTableComponent dataItem={this.state.dataGastos} tipo="gastos" seleccionarCanal={this.seleccionarCanal}/>
+            </Col>
+          </Row>
         </Container>
       
         <InsertModalComponent isOpen={this.state.modalInsertarIngresos} title={"Insertar Ingresos"} tipo={"ingresos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModal} />
         <InsertModalComponent isOpen={this.state.modalInsertarGastos} title={"Insertar gastos"} tipo={"gastos"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModal} />
+        <InsertModalComponent isOpen={this.state.modalInsertarGastosTC} title={"Insertar gastos TC"} tipo={"tc"} handleChange={this.handleChange} doPost={this.doPost} closeModal={this.closeModal} />
         
         <EditModalComponent isOpen={this.state.modalEditar} handleChange={this.handleChange} formItem={this.state.formItem} updateItem={this.updateItem} elementoEdicion={this.state.elementoEdicion} closeModal={this.closeModal} />
 
