@@ -50,7 +50,7 @@ const EditModalComponent = (props) => {
           </ModalBody>
           <ModalFooter>
             <button className="btn btn-primary" onClick={()=>props.updateItem(props.elementoEdicion)}>Editar</button>{"   "}
-            <button className="btn btn-danger" onClick={()=>this.setState({modalEditar: false})}>Cancelar</button>
+            <button className="btn btn-danger" onClick={()=>props.closeModal()}>Cancelar</button>
           </ModalFooter>
         </Modal>
     )
