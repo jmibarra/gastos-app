@@ -4,7 +4,6 @@ import { AiFillPlusCircle } from 'react-icons/ai'
 
 import firebase from './firebase'; //Remover luego de sacar todo a clase
 import firebaseUtils from './utils/FirebaseUtils.js'
-import dateUtils from './utils/DateUtils.js'
 import NavBarComponent from './Componentes/Navbar.js'
 import ItemTableComponent from './Componentes/ItemTable.js'
 import ItemTCTableComponent from './Componentes/ItemTCTable.js'
