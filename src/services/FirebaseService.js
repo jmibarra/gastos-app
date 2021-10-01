@@ -1,6 +1,6 @@
-import firebase from './../firebase';
+import firebase from '../firebase';
 
-class FirebaseUtils{
+class FirebaseService{
 
   //Construyo la petición para el post en firebase indicando el año, el mes y el tipo de item(Gasto o ingreso)
   peticionPost=(formItem,año,mes,tipo)=>{
@@ -41,6 +41,6 @@ class FirebaseUtils{
   };
 }
 
-const firebaseUtils = new FirebaseUtils();
+const firebaseService = new FirebaseService();
 
-export default firebaseUtils;
+export default firebaseService;

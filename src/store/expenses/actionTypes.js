@@ -1,0 +1,1 @@
+export const EXPENSES_FETCHED = 'expenses.TOPICS_FETCHED';
