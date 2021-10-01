@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/gastos-app/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/gastos-app/static/js/main.9b4c9308.chunk.js",
-    "main.js.map": "/gastos-app/static/js/main.9b4c9308.chunk.js.map",
+    "main.js": "/gastos-app/static/js/main.5c83d0e2.chunk.js",
+    "main.js.map": "/gastos-app/static/js/main.5c83d0e2.chunk.js.map",
     "runtime-main.js": "/gastos-app/static/js/runtime-main.769c81a6.js",
     "runtime-main.js.map": "/gastos-app/static/js/runtime-main.769c81a6.js.map",
     "static/css/2.081f420c.chunk.css": "/gastos-app/static/css/2.081f420c.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.081f420c.chunk.css",
     "static/js/2.c5c53338.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.9b4c9308.chunk.js"
+    "static/js/main.5c83d0e2.chunk.js"
   ]
 }
