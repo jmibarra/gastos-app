@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/gastos-app/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/gastos-app/static/js/main.9b4c9308.chunk.js",
+    "main.js.map": "/gastos-app/static/js/main.9b4c9308.chunk.js.map",
+    "runtime-main.js": "/gastos-app/static/js/runtime-main.769c81a6.js",
+    "runtime-main.js.map": "/gastos-app/static/js/runtime-main.769c81a6.js.map",
+    "static/css/2.081f420c.chunk.css": "/gastos-app/static/css/2.081f420c.chunk.css",
+    "static/js/2.c5c53338.chunk.js": "/gastos-app/static/js/2.c5c53338.chunk.js",
+    "static/js/2.c5c53338.chunk.js.map": "/gastos-app/static/js/2.c5c53338.chunk.js.map",
+    "static/js/3.750fe8a2.chunk.js": "/gastos-app/static/js/3.750fe8a2.chunk.js",
+    "static/js/3.750fe8a2.chunk.js.map": "/gastos-app/static/js/3.750fe8a2.chunk.js.map",
+    "index.html": "/gastos-app/index.html",
+    "static/css/2.081f420c.chunk.css.map": "/gastos-app/static/css/2.081f420c.chunk.css.map",
+    "static/css/main.6dea0f05.chunk.css.map": "/gastos-app/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.c5c53338.chunk.js.LICENSE.txt": "/gastos-app/static/js/2.c5c53338.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.769c81a6.js",
+    "static/css/2.081f420c.chunk.css",
+    "static/js/2.c5c53338.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.9b4c9308.chunk.js"
+  ]
+}
