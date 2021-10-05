@@ -9,15 +9,14 @@ import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
-  expensesByMonth: undefined,
-  Expenses: []
+    expensesArray: [],
 });
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
       case types.EXPENSES_FETCHED:
         return state.merge({
-          topicsByUrl: action.topicsByUrl
+            expensesArray: action.expensesArray
         });
       default:
         return state;
@@ -26,10 +25,6 @@ export default function reduce(state = initialState, action = {}) {
   
   // selectors
   
-  export function getExpensesByMonth(state) {
-    return state.expenses.expensesByMonth;
-  }
-  
-  export function getExpensesArray(state) {
-    return _.keys(state.expenses.Expenses);
+  export function getExpenses(state) {
+    return state.expenses.expensesArray;
   }

@@ -1,1 +1,1 @@
-export const EXPENSES_FETCHED = 'expenses.TOPICS_FETCHED';
+export const EXPENSES_FETCHED = 'expenses.EXPENSES_FETCHED';
