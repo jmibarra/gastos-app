@@ -28,17 +28,18 @@ class FirebaseService{
     }
   }
 
-  peticionGetGastos = async (año,mes) => {
-    await firebase.child("gastos").child(año).child(mes).once("value", (gastos) => {
-      if (gastos.val() !== null) {
-          console.log("Llega de la base: "+gastos.val().toString())
-        return gastos.val();
-      } else {
-          return []
-      }
-    });
-  };
+    peticionGetGastos = async (año,mes) => {
 
+        let response = []
+        await firebase.child("gastos").child(año).child(mes).once("value", (gastos) => {
+            if (gastos.val() !== null) {  
+                response = gastos.val();
+            }
+        });
+
+        return response
+    
+    };
 }
 
 const firebaseService = new FirebaseService();
