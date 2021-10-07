@@ -25,8 +25,16 @@ class HeaderModule extends Component {
         this.props.dispatch(dateActions.calculateDate());
     }
 
-    handleChange = (event) => {
-      //setAge(Number(event.target.value) || '');
+    handleChangeYear = (event) => {
+        this.props.dispatch(dateActions.updateDate(event.target.value,this.props.month));
+    };
+
+    handleChangeMonth = (event) => {
+        this.props.dispatch(dateActions.updateDate(this.props.year,event.target.value));
+    };
+
+    handleDateToday = (event) => {
+        this.props.dispatch(dateActions.calculateDate());
     };
   
     handleClickOpen = () => {
@@ -45,64 +53,63 @@ class HeaderModule extends Component {
                 <Box sx={{ flexGrow: 1 }}>
                     <AppBar position="static">
                         <Toolbar>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={this.handleClickOpen}>
                                 Gastos {this.props.month_name} {this.props.year}
                                 
                             </Typography>
                             
                         </Toolbar>
                     </AppBar>
-                    <Button onClick={this.handleClickOpen}>Open select dialog</Button>
-                            <Dialog disableEscapeKeyDown open={this.props.date_selector_open} onClose={this.handleClose}>
-                                <DialogTitle>Seleccionar mes y año</DialogTitle>
-                                <DialogContent>
+                        <Dialog disableEscapeKeyDown open={this.props.date_selector_open} onClose={this.handleClose}>
+                            <DialogTitle>Seleccionar mes y año</DialogTitle>
+                            <DialogContent>
                                 <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
                                     <FormControl sx={{ m: 1, minWidth: 120 }}>
-                                    <InputLabel id="demo-dialog-select-label">Año</InputLabel>
-                                    <Select
-                                        labelId="demo-dialog-select-label"
-                                        id="demo-dialog-select"
-                                        value={this.props.year}
-                                        onChange={this.handleChange}
-                                        input={<OutlinedInput label="Yeas" />}
-                                    >
-                                        <MenuItem value={this.props.year - 1}>{this.props.year - 1}</MenuItem>
-                                        <MenuItem value={this.props.year}>{this.props.year}</MenuItem>
-                                        <MenuItem value={this.props.year + 1}>{this.props.year + 1}</MenuItem>
-
-                                    
-                                    </Select>
+                                        <InputLabel id="demo-dialog-select-label">Mes</InputLabel>
+                                        <Select
+                                            labelId="month-select-label"
+                                            id="demo-dialog-select"
+                                            value={this.props.month}
+                                            onChange={this.handleChangeMonth}
+                                            input={<OutlinedInput label="Month" />}
+                                        >
+                                            <MenuItem value={1}>Enero</MenuItem>
+                                            <MenuItem value={2}>Febrero</MenuItem>
+                                            <MenuItem value={3}>Marzo</MenuItem>
+                                            <MenuItem value={4}>Abril</MenuItem>
+                                            <MenuItem value={5}>Mayo</MenuItem>
+                                            <MenuItem value={6}>Junio</MenuItem>
+                                            <MenuItem value={7}>Julio</MenuItem>
+                                            <MenuItem value={8}>Agosto</MenuItem>
+                                            <MenuItem value={9}>Septiembre</MenuItem>
+                                            <MenuItem value={10}>Octubre</MenuItem>
+                                            <MenuItem value={11}>Noviembre</MenuItem>
+                                            <MenuItem value={12}>Diciembre</MenuItem>
+                                        </Select>
                                     </FormControl>
                                     <FormControl sx={{ m: 1, minWidth: 120 }}>
-                                    <InputLabel id="demo-dialog-select-label">Mes</InputLabel>
-                                    <Select
-                                        labelId="demo-dialog-select-label"
-                                        id="demo-dialog-select"
-                                        value={this.props.month}
-                                        onChange={this.handleChange}
-                                        input={<OutlinedInput label="Month" />}
-                                    >
-                                        <MenuItem value={1}>Enero</MenuItem>
-                                        <MenuItem value={2}>Febrero</MenuItem>
-                                        <MenuItem value={3}>Marzo</MenuItem>
-                                        <MenuItem value={4}>Abril</MenuItem>
-                                        <MenuItem value={5}>Mayo</MenuItem>
-                                        <MenuItem value={6}>Junio</MenuItem>
-                                        <MenuItem value={7}>Julio</MenuItem>
-                                        <MenuItem value={8}>Agosto</MenuItem>
-                                        <MenuItem value={9}>Septiembre</MenuItem>
-                                        <MenuItem value={10}>Octubre</MenuItem>
-                                        <MenuItem value={11}>Noviembre</MenuItem>
-                                        <MenuItem value={12}>Diciembre</MenuItem>
-                                    </Select>
+                                        <InputLabel id="demo-dialog-select-label">Año</InputLabel>
+                                        <Select
+                                            labelId="year-select-label"
+                                            id="demo-dialog-select"
+                                            value={this.props.year}
+                                            onChange={this.handleChangeYear}
+                                            input={<OutlinedInput label="Yeas" />}
+                                        >
+                                            <MenuItem value={2020}>{2020}</MenuItem>
+                                            <MenuItem value={2021}>{2021}</MenuItem>
+                                            <MenuItem value={2022}>{2022}</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl sx={{ mt: 2, minWidth: 50 }}>
+                                        <Button onClick={this.handleDateToday}>Today</Button>
                                     </FormControl>
                                 </Box>
-                                </DialogContent>
-                                <DialogActions>
-                                <Button onClick={this.handleClose}>Cancel</Button>
-                                <Button onClick={this.handleClose}>Ok</Button>
-                                </DialogActions>
-                            </Dialog>
+                            </DialogContent>
+                            <DialogActions>
+                            <Button onClick={this.handleClose}>Ok</Button>
+                            </DialogActions>
+                        </Dialog>
                 </Box>                
             </div>
         );

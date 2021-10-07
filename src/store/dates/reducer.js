@@ -23,6 +23,12 @@ export default function reduce(state = initialState, action = {}) {
             month: action.month,
             month_name: action.month_name
         });
+        case types.UPDATE_DATE:
+            return state.merge({
+                year: action.year,
+                month: action.month,
+                month_name: action.month_name
+            })
         case types.OPEN_DATE_DIALOG:
             return state.merge({
                 date_selector_open:true

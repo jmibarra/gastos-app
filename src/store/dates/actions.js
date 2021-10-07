@@ -17,6 +17,18 @@ export function calculateDate(){
     };
 }
 
+export function updateDate(year,month){
+    return (dispatch, getState) => {
+        try{
+            let dateUtils = new DateUtils()
+            const month_name = dateUtils.getMonthName(month);
+            dispatch({type: types.GET_CURRENT_DATE, year:year,month:month,month_name:month_name});
+        }catch(error){
+            console.error(error)
+        }
+    };
+}
+
 export function openDateDialog(){
     return (dispatch, getState) => {
         try{
