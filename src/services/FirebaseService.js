@@ -28,12 +28,12 @@ class FirebaseService{
     }
   }
 
-    peticionGetGastos = async (año,mes) => {
+    peticionGet = async (año,mes,tipo) => {
 
         let response = []
-        await firebase.child("gastos").child(año).child(mes).once("value", (gastos) => {
-            if (gastos.val() !== null) {  
-                response = gastos.val();
+        await firebase.child(tipo).child(año).child(mes).once("value", (item) => {
+            if (item.val() !== null) {  
+                response = item.val();
             }
         });
 

@@ -13,6 +13,7 @@ class ExpensesModule extends Component {
     render(){
         return(
             <div className="ExpensesModule">
+                <h1>Gastos</h1>
                 <ItemTableComponent expensesArray={this.props.expensesArray} />   
             </div>
         );

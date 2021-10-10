@@ -1,0 +1,1 @@
+export const INCOMES_FETCHED = 'incomes.INCOMES_FETCHED';

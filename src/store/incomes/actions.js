@@ -1,17 +1,16 @@
 import _ from 'lodash';
 import * as types from './actionTypes';
 import firebaseService from '../../services/FirebaseService';
-import * as expensesSelectors from './reducer';
 
-export function fetchExpenses(){
+export function fetchIncomes(){
     return async(dispatch, getState) => {
         try{
-            let responseObject = await firebaseService.peticionGet('2021','10','gastos').then(); //Dinamizar el mes y año
+            let responseObject = await firebaseService.peticionGet('2021','10','ingresos').then(); //Dinamizar el mes y año
 
-            let expensesArray = []
+            let incomesArray = []
 
             Object.keys(responseObject).map(index => {
-                expensesArray.push({
+                incomesArray.push({
                         id: index,
                         estado: responseObject[index].estado,
                         fecha: responseObject[index].fecha,
@@ -20,7 +19,7 @@ export function fetchExpenses(){
                 })
             })
 
-            dispatch({type: types.EXPENSES_FETCHED, expensesArray:expensesArray})
+            dispatch({type: types.INCOMES_FETCHED, incomesArray:incomesArray})
 
         }catch(error){
             console.error(error)
