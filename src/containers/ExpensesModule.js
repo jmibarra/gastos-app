@@ -14,7 +14,7 @@ class ExpensesModule extends Component {
         return(
             <div className="ExpensesModule">
                 <h1>Gastos</h1>
-                <ItemTableComponent expensesArray={this.props.expensesArray} />   
+                <ItemTableComponent itemsArray={this.props.expensesArray} />   
             </div>
         );
     }

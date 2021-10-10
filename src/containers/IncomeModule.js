@@ -14,7 +14,7 @@ class IncomesModule extends Component {
         return(
             <div className="IncomesModule">
                 <h1>Ingresos</h1>
-                <ItemTableComponent expensesArray={this.props.incomesArray} />   
+                <ItemTableComponent itemsArray={this.props.incomesArray} />   
             </div>
         );
     }

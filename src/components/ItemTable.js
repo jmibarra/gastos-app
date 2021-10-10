@@ -55,7 +55,7 @@ const ItemTableComponent = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.expensesArray.map((row) => (
+                        {props.itemsArray.map((row) => (
                             <StyledTableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <StyledTableCell component="th" scope="row">
                                     {row.motivo}
