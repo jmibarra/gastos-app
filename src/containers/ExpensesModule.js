@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
-
 import ItemTableComponent from '../components/ItemTable';
-
 import * as expensesActions from '../store/expenses/actions';
 import * as expensesSelectors from '../store/expenses/reducer';
 
@@ -16,14 +13,12 @@ class ExpensesModule extends Component {
     render(){
         return(
             <div className="ExpensesModule">
-                <ItemTableComponent expensesArray={this.props.expensesArray} />
-                    
+                <ItemTableComponent expensesArray={this.props.expensesArray} />   
             </div>
         );
     }
 }
 
-// which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
     return {
       expensesArray: expensesSelectors.getExpenses(state)

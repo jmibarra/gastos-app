@@ -9,6 +9,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 const columns = [
     { field: 'motivo', headerName: 'Motivo' },
     { field: 'fecha', headerName: 'Fecha' },
@@ -59,7 +63,14 @@ const ItemTableComponent = (props) => {
                                 <StyledTableCell align="right">{row.fecha}</StyledTableCell>
                                 <StyledTableCell align="right">{row.total}</StyledTableCell>
                                 <StyledTableCell align="right">{row.estado}</StyledTableCell>
-                                <StyledTableCell align="right"></StyledTableCell>
+                                <StyledTableCell align="right">
+                                <IconButton color="secondary" aria-label="upload picture" component="span">
+                                    <EditIcon />
+                                </IconButton>
+                                <IconButton color="error" aria-label="upload picture" component="span">
+                                    <DeleteIcon />
+                                </IconButton>
+                                </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
