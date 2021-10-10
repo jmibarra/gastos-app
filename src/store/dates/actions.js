@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import * as types from './actionTypes';
 import  DateUtils from '../../utils/DateUtils';
-import * as topicsSelectors from './reducer';
 
 export function calculateDate(){
     return (dispatch, getState) => {
