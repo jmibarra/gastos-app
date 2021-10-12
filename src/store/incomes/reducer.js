@@ -10,16 +10,25 @@ import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
     incomesArray: [],
+    income_modal_open: false,
 });
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
-      case types.INCOMES_FETCHED:
-        return state.merge({
-            incomesArray: action.incomesArray
+        case types.INCOMES_FETCHED:
+            return state.merge({
+                incomesArray: action.incomesArray
+            });
+        case types.OPEN_INCOME_MODAL:
+            return state.merge({
+                income_modal_open:true
         });
-      default:
-        return state;
+        case types.CLOSE_INCOME_MODAL:
+            return state.merge({
+                income_modal_open:false
+        });
+        default:
+            return state;
     }
   }
   
@@ -27,3 +36,7 @@ export default function reduce(state = initialState, action = {}) {
   export function getIncomes(state) {
     return state.incomes.incomesArray;
   }
+
+  export function isIncomeModalOpen(state) {
+    return state.incomes.income_modal_open;
+}

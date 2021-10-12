@@ -27,4 +27,22 @@ export function fetchIncomes(){
     };
 }
 
+export function openIncomeModal(){
+    return (dispatch, getState) => {
+        try{
+            dispatch({type: types.OPEN_INCOME_MODAL});
+        }catch(error){
+            console.error(error)
+        }
+    };
+}
 
+export function closeIncomeModal(){
+    return (dispatch, getState) => {
+        try{
+            dispatch({type: types.CLOSE_INCOME_MODAL});
+        }catch(error){
+            console.error(error)
+        }
+    };
+}

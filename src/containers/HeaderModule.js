@@ -54,10 +54,8 @@ class HeaderModule extends Component {
                     <AppBar position="static">
                         <Toolbar>
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={this.handleClickOpen}>
-                                Gastos {this.props.month_name} {this.props.year}
-                                
+                                Gastos {this.props.month_name} {this.props.year}  
                             </Typography>
-                            
                         </Toolbar>
                     </AppBar>
                         <Dialog disableEscapeKeyDown open={this.props.date_selector_open} onClose={this.handleClose}>

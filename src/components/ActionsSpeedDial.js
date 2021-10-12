@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
@@ -8,9 +9,14 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveIcon from '@mui/icons-material/Remove';
 
+import * as incomeSelector from '../store/incomes/reducer';
+import * as incomeActions from '../store/incomes/actions';
+
+import NewIncomeModal from './NewIncomeModal';
+
 const ActionsSpeedDial = (props) => {
 
-    const handleIncome = () => alert("hola Ingreso");
+    const handleIncome = () => {props.dispatch(incomeActions.openIncomeModal())};
     const handleExpense = () => alert("hola Expense");
     const handleExpenseTC = () => alert("hola Expense con TC");
 
@@ -21,22 +27,30 @@ const ActionsSpeedDial = (props) => {
     ];
 
     return(
-        <SpeedDial 
-            ariaLabel="Ingresar item" 
-            sx={{ position: 'absolute', bottom: 16, right: 16 }} 
-            icon={<SpeedDialIcon />}
-        >
-            {actions.map((action) => (
-                <SpeedDialAction
-                    key={action.name}
-                    icon={action.icon}
-                    tooltipTitle={action.name}
-                    onClick={action.action}
-                />
-            ))}
-        </SpeedDial>
-
+        <div>
+            <SpeedDial 
+                ariaLabel="Ingresar item" 
+                sx={{ position: 'absolute', bottom: 16, right: 16 }} 
+                icon={<SpeedDialIcon />}
+            >
+                {actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={action.icon}
+                        tooltipTitle={action.name}
+                        onClick={action.action}
+                    />
+                ))}
+            </SpeedDial>
+            <NewIncomeModal />
+        </div>
     );
 }
-    
-export default ActionsSpeedDial;
+
+function mapStateToProps(state) {
+    return {
+        income_modal_open: incomeSelector.isIncomeModalOpen(state)
+    };
+}
+
+export default connect(mapStateToProps)(ActionsSpeedDial);
