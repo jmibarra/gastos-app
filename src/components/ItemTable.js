@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import ButtonGroup from '@mui/material/ButtonGroup';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -64,12 +64,14 @@ const ItemTableComponent = (props) => {
                                 <StyledTableCell align="right">{row.total}</StyledTableCell>
                                 <StyledTableCell align="right">{row.estado}</StyledTableCell>
                                 <StyledTableCell align="right">
-                                <IconButton color="secondary" aria-label="upload picture" component="span">
-                                    <EditIcon />
-                                </IconButton>
-                                <IconButton color="error" aria-label="upload picture" component="span">
-                                    <DeleteIcon />
-                                </IconButton>
+                                    <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+                                        <IconButton color="secondary" aria-label="upload picture" component="span">
+                                            <EditIcon />
+                                        </IconButton>
+                                        <IconButton color="error" aria-label="upload picture" component="span">
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </ButtonGroup>
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}

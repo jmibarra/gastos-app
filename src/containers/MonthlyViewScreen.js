@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
@@ -10,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import HeaderModule from './HeaderModule';
 import ExpensesModule from './ExpensesModule';
 import IncomeModule from './IncomeModule';
+import ActionsSpeedDial from '../components/ActionsSpeedDial';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -44,6 +44,7 @@ class MonthlyViewScreen extends Component {
                             </Grid>
                         </Grid>
                     </Box>
+                    <ActionsSpeedDial />
                 </Container>
             </React.Fragment>
         )
