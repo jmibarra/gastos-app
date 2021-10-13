@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import HeaderModule from './HeaderModule';
 import ExpensesModule from './ExpensesModule';
 import IncomeModule from './IncomeModule';
-import ActionsSpeedDial from '../components/ActionsSpeedDial';
+
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -19,7 +19,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 class MonthlyViewScreen extends Component {
-
     render() {
         return (
             <React.Fragment>
@@ -42,9 +41,18 @@ class MonthlyViewScreen extends Component {
                                     <ExpensesModule />
                                 </Item>
                             </Grid>
+                            <Grid item xs={6}>
+                                <Item>
+                                    <IncomeModule />
+                                </Item>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Item>
+                                    <ExpensesModule />
+                                </Item>
+                            </Grid>     
                         </Grid>
                     </Box>
-                    <ActionsSpeedDial />
                 </Container>
             </React.Fragment>
         )

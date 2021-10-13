@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Badge } from "reactstrap";
+import React from 'react';
+import Chip from '@mui/material/Chip';
 
 const StatusBadgeComponent = (props) => {
     switch (props.estado) {
-        case "Pendiente":   return <Badge href="#" color="secondary">{props.estado}</Badge>;
-        case "Estimado": return <Badge href="#" color="warning">{props.estado}</Badge>;
-        case "Pago":  return <Badge href="#" color="success">{props.estado}</Badge>;
-        default:      return <Badge href="#" color="primary">{props.estado}</Badge>;
+        case "Pendiente":   return <Chip label={props.estado} color="secondary" variant="outlined"/>;
+        case "Estimado": return <Chip label={props.estado} color="warning" variant="outlined">{props.estado}</Chip>;
+       case "Pago":  return <Chip label={props.estado} color="success" variant="outlined">{props.estado}</Chip>;
+        default:      return <Chip label={props.estado} color="primary" variant="outlined">{props.estado}</Chip>;
     }
 }
 

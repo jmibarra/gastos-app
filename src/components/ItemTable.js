@@ -13,6 +13,8 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import StatusBadgeComponent from './StatusBadge.js';
+
 const columns = [
     { field: 'motivo', headerName: 'Motivo' },
     { field: 'fecha', headerName: 'Fecha' },
@@ -62,7 +64,9 @@ const ItemTableComponent = (props) => {
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.fecha}</StyledTableCell>
                                 <StyledTableCell align="right">{row.total}</StyledTableCell>
-                                <StyledTableCell align="right">{row.estado}</StyledTableCell>
+                                <StyledTableCell align="right">
+                                    <StatusBadgeComponent estado={row.estado}/>       
+                                </StyledTableCell>
                                 <StyledTableCell align="right">
                                     <ButtonGroup variant="outlined" aria-label="outlined primary button group">
                                         <IconButton color="secondary" aria-label="upload picture" component="span">

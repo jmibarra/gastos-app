@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Button from '@mui/material/Button';
-
-import TextField from '@mui/material/TextField';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
@@ -22,10 +19,6 @@ import * as incomeSelector from '../store/incomes/reducer';
 import * as incomeActions from '../store/incomes/actions';
 
 const NewIncomeModal = (props) => {
-
-    const Transition = React.forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
-      });
       
     const handleClose = () => {
         props.dispatch(incomeActions.closeIncomeModal());
@@ -39,8 +32,6 @@ const NewIncomeModal = (props) => {
         <div>
             <Dialog
             open={props.income_modal_open}
-            TransitionComponent={Transition}
-            keepMounted
             onClose={handleClose}
             aria-describedby="alert-dialog-slide-description"
             >

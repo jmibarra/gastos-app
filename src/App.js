@@ -1,18 +1,6 @@
 import React, { Component } from "react"
 import MonthlyViewScreen from './containers/MonthlyViewScreen';
 
-import { Container, Row, Col,Jumbotron,Toast, ToastBody, ToastHeader} from "reactstrap"
-import { AiFillPlusCircle } from 'react-icons/ai'
-
-import firebase from './firebase'; //Remover luego de sacar todo a clase
-import firebaseService from './services/FirebaseService.js'
-import NavBarComponent from './components/Navbar.js'
-import ItemTableComponent from './components/ItemTable.js'
-import ItemTCTableComponent from './components/ItemTCTable.js'
-import InsertModalComponent from './components/InsertModal.js'
-import EditModalComponent from './components/EditModal.js'
-
-
 class App extends Component {
 
     render() {
@@ -22,6 +10,9 @@ class App extends Component {
           </div>
         );
     }
+} 
+
+export default App;
 
 /* state = {
     dataGastos: [],
@@ -266,6 +257,3 @@ class App extends Component {
     );
   }
   */
-} 
-
-export default App;
