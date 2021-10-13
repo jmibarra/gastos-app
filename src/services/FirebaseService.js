@@ -1,6 +1,6 @@
-import firebase from './../firebase';
+import firebase from '../firebase';
 
-class FirebaseUtils{
+class FirebaseService{
 
   //Construyo la petición para el post en firebase indicando el año, el mes y el tipo de item(Gasto o ingreso)
   peticionPost=(formItem,año,mes,tipo)=>{
@@ -28,19 +28,20 @@ class FirebaseUtils{
     }
   }
 
-  peticionGetGastos = async (año,mes) => {
-    await firebase.child("gastos").child(año).child(mes).on("value", (gastos) => {
-      if (gastos.val() !== null) {
-        return gastos.val();
-        //this.setState({ ...this.state.dataGastos, dataGastos: gastos.val() });
-      } else {
-          return []
-        //this.setState({ dataGastos: [] });
-      }
-    });
-  };
+    peticionGet = async (año,mes,tipo) => {
+
+        let response = []
+        await firebase.child(tipo).child(año).child(mes).once("value", (item) => {
+            if (item.val() !== null) {  
+                response = item.val();
+            }
+        });
+
+        return response
+    
+    };
 }
 
-const firebaseUtils = new FirebaseUtils();
+const firebaseService = new FirebaseService();
 
-export default firebaseUtils;
+export default firebaseService;

@@ -23,6 +23,4 @@ class DateUtils{
 
 }
 
-const dateUtils = new DateUtils();
-
 export default DateUtils;

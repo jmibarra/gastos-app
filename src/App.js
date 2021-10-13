@@ -1,19 +1,20 @@
 import React, { Component } from "react"
-import { Container, Row, Col,Jumbotron,Toast, ToastBody, ToastHeader} from "reactstrap"
-import { AiFillPlusCircle } from 'react-icons/ai'
-
-import firebase from './firebase'; //Remover luego de sacar todo a clase
-import firebaseUtils from './utils/FirebaseUtils.js'
-import NavBarComponent from './Componentes/Navbar.js'
-import ItemTableComponent from './Componentes/ItemTable.js'
-import ItemTCTableComponent from './Componentes/ItemTCTable.js'
-import InsertModalComponent from './Componentes/InsertModal.js'
-import EditModalComponent from './Componentes/EditModal.js'
-
+import MonthlyViewScreen from './containers/MonthlyViewScreen';
 
 class App extends Component {
 
-  state = {
+    render() {
+        return (
+          <div className="App">
+            <MonthlyViewScreen />
+          </div>
+        );
+    }
+} 
+
+export default App;
+
+/* state = {
     dataGastos: [],
     dataIngresos: [],
     dataGastosTC: [],
@@ -48,10 +49,8 @@ class App extends Component {
     this.selectDate(yyyy,mm)
   }
 
-  /******************************** FUNCIONES *********************************/
-
   doPost = (tipo) => {
-    firebaseUtils.peticionPost(this.state.formItem,this.state.año,this.state.mes,tipo)
+    firebaseService.peticionPost(this.state.formItem,this.state.año,this.state.mes,tipo)
     
     this.closeModal();
     
@@ -69,7 +68,7 @@ class App extends Component {
   }
 
   updateItem = (tipo) => {
-    firebaseUtils.peticionPut(this.state.formItem,this.state.año,this.state.mes,tipo,this.state.id)
+    firebaseService.peticionPut(this.state.formItem,this.state.año,this.state.mes,tipo,this.state.id)
     this.setState({modalEditar: false});
   }
 
@@ -175,10 +174,9 @@ class App extends Component {
     await this.setState({formItem: item, id: id});
 
     (caso==="Editar")?this.setState({modalEditar: true,elementoEdicion: tipo}):
-    firebaseUtils.peticionDelete(this.state.formItem,this.state.año,this.state.mes,tipo,this.state.id)
+    firebaseService.peticionDelete(this.state.formItem,this.state.año,this.state.mes,tipo,this.state.id)
   }
 
-    /****************************************************************************/
 
   render() {
     return (
@@ -258,6 +256,4 @@ class App extends Component {
       </div>
     );
   }
-}
-
-export default App;
+  */
