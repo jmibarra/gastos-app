@@ -15,8 +15,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import * as incomeSelector from '../store/incomes/reducer';
-import * as incomeActions from '../store/incomes/actions';
+import * as incomeSelector from '../../store/incomes/reducer';
+import * as incomeActions from '../../store/incomes/actions';
 
 const NewIncomeModal = (props) => {
       
@@ -64,7 +64,7 @@ const NewIncomeModal = (props) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleCancel}>Cancelar</Button>
-                <Button onClick={handleClose}>Crear</Button>
+                <Button variant="contained" color="success" onClick={handleClose}>Crear</Button>
             </DialogActions>
             </Dialog>
         </div>

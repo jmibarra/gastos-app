@@ -4,7 +4,7 @@ import ItemTableComponent from '../components/ItemTable';
 import * as incomesActions from '../store/incomes/actions';
 import * as incomesSelectors from '../store/incomes/reducer';
 
-import NewIncomeModal from '../components/NewIncomeModal';
+import NewIncomeModal from '../components/incomes/NewIncomeModal';
 
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
