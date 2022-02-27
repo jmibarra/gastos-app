@@ -2,10 +2,10 @@ import _ from 'lodash';
 import * as types from './actionTypes';
 import firebaseService from '../../services/FirebaseService';
 
-export function fetchIncomes(){
+export function fetchIncomes(year,month){
     return async(dispatch, getState) => {
         try{
-            let responseObject = await firebaseService.peticionGet('2021','10','ingresos').then(); //Dinamizar el mes y año
+            let responseObject = await firebaseService.peticionGet(year,month,'ingresos').then(); //Dinamizar el mes y año
 
             let incomesArray = []
 

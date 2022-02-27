@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import ItemTableComponent from '../components/ItemTable';
 import * as incomesActions from '../store/incomes/actions';
@@ -10,26 +10,26 @@ import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 
 
-class IncomesModule extends Component {
-    componentDidMount() {
-        this.props.dispatch(incomesActions.fetchIncomes());
-    }
+const IncomesModule = (props) => {
 
-    handleClick = (e) => {
-        this.props.dispatch(incomesActions.openIncomeModal())
+    useEffect( () => {
+        props.dispatch(incomesActions.fetchIncomes('2021','10'));
+    })
+    
+    const handleClick = (e) => {
+        props.dispatch(incomesActions.openIncomeModal())
     }
     
-    render(){
-        return(
-            <div className="IncomesModule">
-                <h1>
-                    Ingresos <Button onClick={this.handleClick} variant="contained" startIcon={<AddIcon />}>Ingreso</Button>
-                </h1>
-                <ItemTableComponent itemsArray={this.props.incomesArray} />  
-                <NewIncomeModal /> 
-            </div>
-        );
-    }
+    return(
+        <div className="IncomesModule">
+            <h1>
+                Ingresos <Button onClick={handleClick} variant="contained" startIcon={<AddIcon />}>Ingreso</Button>
+            </h1>
+            <ItemTableComponent itemsArray={props.incomesArray} />  
+            <NewIncomeModal /> 
+        </div>
+    );
+    
 }
 
 function mapStateToProps(state) {

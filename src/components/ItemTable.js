@@ -63,7 +63,7 @@ const ItemTableComponent = (props) => {
                                     {row.motivo}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.fecha}</StyledTableCell>
-                                <StyledTableCell align="right">{row.total}</StyledTableCell>
+                                <StyledTableCell align="right">$ {row.total}</StyledTableCell>
                                 <StyledTableCell align="right">
                                     <StatusBadgeComponent estado={row.estado}/>       
                                 </StyledTableCell>
