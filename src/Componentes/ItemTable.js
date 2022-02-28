@@ -1,21 +1,49 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
-import { AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
-import firebaseService from '../services/firebaseService';
+import { AiFillPlusCircle,AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
+import firebaseUtils from '../utils/FirebaseUtils'
 
 import StatusBadgeComponent from './StatusBadge.js';
-import InsertModalComponent from '../Componentes/InsertModal';
+import InsertModalComponent from './InsertModal';
+import EditModalComponent from './EditModal';
 
 const ItemTableComponent = (props) => {
 
+    const [createModalOpen,setCreateModalOpen] = useState(false);
+    const [editModalOpen,setEditModalOpen] = useState(false);
+    const [formItem,setFormItem] = useState();
+    const [formItemId,setFormItemId] = useState();
+
+    const closeModal = () => {
+        setCreateModalOpen(false);
+        setEditModalOpen(false);
+    }
+
     const [items, setItems] = useState(async() => {
-        let responseObject = await firebaseService.peticionGet('2022','02',props.tipo).then();
+        let responseObject = await firebaseUtils.peticionGet(props.year,props.month,props.tipo).then();
         if(responseObject)
             setItems(responseObject)
     });
 
+    useEffect(async()=> {
+        let responseObject = await firebaseUtils.peticionGet(props.year,props.month,props.tipo).then();
+        if(responseObject)
+            setItems(responseObject)
+    });
+
+    const deleteItem = (item,id) => {
+        firebaseUtils.peticionDelete(item,props.year,props.month,props.tipo,id)
+    }
+
+    const updateItemModal = (item,id) => {
+        setFormItem(item);
+        setFormItemId(id);
+        setEditModalOpen(true);
+    };
+
     return(
         <div>
+            <h1> {props.tipo} <button className="btn btn-success" onClick={()=>setCreateModalOpen(true)}><AiFillPlusCircle/></button> </h1>
             <Table>
             <thead>
                 <tr>
@@ -35,15 +63,31 @@ const ItemTableComponent = (props) => {
                     <td><StatusBadgeComponent estado={items[i].estado}/></td>
                     <td>
                     <ButtonGroup>
-                    <button className="btn btn-primary" onClick={()=>props.seleccionarCanal(items[i], i, 'Editar',props.tipo)}> <AiFillEdit /></button> {"   "}
-                    <button className="btn btn-danger" onClick={()=>props.seleccionarCanal(items[i], i, 'Eliminar',props.tipo)}><AiFillCloseCircle/></button>
+                    <button className="btn btn-primary" onClick={()=>updateItemModal(items[i],i)}> <AiFillEdit /></button> {"   "}
+                    <button className="btn btn-danger" onClick={()=>deleteItem(items[i],i)}><AiFillCloseCircle/></button>
                     </ButtonGroup>
                     </td>
                 </tr>
                 })}
             </tbody>
             </Table>
-            {/* <InsertModalComponent isOpen={false} title={"Insertar Ingresos"} tipo={props.tipo} handleChange={this.handleChange} closeModal={this.closeModal} /> */}
+            <InsertModalComponent 
+                isOpen={createModalOpen} 
+                title={"Insertar Ingresos"} 
+                tipo={props.tipo} 
+                year={props.year} 
+                month={props.month} 
+                closeModal={closeModal} 
+            />
+            <EditModalComponent 
+                isOpen={editModalOpen} 
+                formItem2={formItem} 
+                formItemId={formItemId} 
+                tipo={props.tipo} 
+                year={props.year} 
+                month={props.month} 
+                closeModal={closeModal} 
+            />
         </div>
         
     )

@@ -16,12 +16,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-/*El mismo modal deberia:
-- Hacer el post
-- Manejar el estado del modal
-
-*/
-
 const InsertModalComponent = (props) => {
 
     const [formItem, setformItem] = useState({
@@ -30,7 +24,7 @@ const InsertModalComponent = (props) => {
         fecha_cierre: '',
         total: '',
         estado: '',
-      })
+      });
     
         
     const handleChange=e=>{
@@ -77,9 +71,10 @@ const InsertModalComponent = (props) => {
                 <label>Estado: </label>
                 <br />
                 <select className="form-control" name="estado" onChange={handleChange} required>
-                  <option value="Estimado" selected="selected">Estimado</option>
-                  <option value="Pendiente">Pendiente</option>
-                  <option value="Pago">Pago</option>
+                    <option value="" selected="selected">Elegir un estado...</option>
+                    <option value="Estimado">Estimado</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Pago">Pago</option>
                 </select>
               </div>
             </ModalBody>

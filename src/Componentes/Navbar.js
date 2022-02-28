@@ -28,10 +28,10 @@ const NavBarComponent = (props) => {
                 Año
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem  onClick={()=>props.selectDate('2021',props.month)}>
+                <DropdownItem  onClick={()=>props.handleDateChange('2021',props.month)}>
                   2021
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate('2022',props.month)}>
+                <DropdownItem onClick={()=>props.handleDateChange('2022',props.month)}>
                   2022
                 </DropdownItem>
                 <DropdownItem divider />
@@ -45,40 +45,40 @@ const NavBarComponent = (props) => {
                     Mes
                 </DropdownToggle>
                 <DropdownMenu right>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'01')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'01')}>
                     Enero
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'02')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'02')}>
                     Febrero
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'03')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'03')}>
                     Marzo
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'04')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'04')}>
                     Abril
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'05')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'05')}>
                     Mayo
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'06')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'06')}>
                     Junio
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'07')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'07')}>
                     Julio
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'08')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'08')}>
                     Agosto
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'09')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'09')}>
                     Septiembre
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'10')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'10')}>
                     Octubre
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'11')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'11')}>
                     Noviembre
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.selectDate(props.year,'12')}>
+                <DropdownItem onClick={()=>props.handleDateChange(props.year,'12')}>
                     Diciembre
                 </DropdownItem>
                 </DropdownMenu>
