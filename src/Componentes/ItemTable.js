@@ -1,13 +1,13 @@
-import { useState,useEffect } from 'react';
+import React, {useState,useEffect} from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
-import { AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
+import {AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 import firebaseUtils from '../utils/FirebaseUtils'
 
 import StatusBadgeComponent from './StatusBadge.js';
 import InsertModalComponent from './InsertModal';
 import EditModalComponent from './EditModal';
 
-const ItemTCTableComponent = (props) => {
+const ItemTableComponent = (props) => {
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
     const [editModalOpen,setEditModalOpen] = useState(false);
@@ -42,13 +42,12 @@ const ItemTCTableComponent = (props) => {
     };
 
     return(
-        <>
-            <Table hover>
+        <div>
+            <Table>
                 <thead>
                     <tr>
-                        <th>Tarjeta</th>
-                        <th>Fecha cierre</th>
-                        <th>Fecha vencimiento</th>
+                        <th>Motivo</th>
+                        <th>Fecha</th>
                         <th>Importe</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -58,30 +57,23 @@ const ItemTCTableComponent = (props) => {
                     {Object.keys(items).map(i=>{
                     return <tr key={i}>
                         <td>{items[i].motivo}</td>
-                        <td>{items[i].fecha_cierre}</td>
                         <td>{items[i].fecha}</td>
                         <td>$ {items[i].total}</td>
                         <td><StatusBadgeComponent estado={items[i].estado}/></td>
                         <td>
-                            <ButtonGroup>
-                                <button className="btn btn-primary" onClick={()=>updateItemModal(items[i],i)}> <AiFillEdit /></button> {"   "}
-                                <button className="btn btn-danger" onClick={()=>deleteItem(items[i],i)}><AiFillCloseCircle/></button>
-                            </ButtonGroup>
+                        <ButtonGroup>
+                        <button className="btn btn-primary" onClick={()=>updateItemModal(items[i],i)}> <AiFillEdit /></button> {"   "}
+                        <button className="btn btn-danger" onClick={()=>deleteItem(items[i],i)}><AiFillCloseCircle/></button>
+                        </ButtonGroup>
                         </td>
                     </tr>
                     })}
-                    <tr><td colSpan="7"><button type="button" className="btn btn-link btn-sm" onClick={()=>setCreateModalOpen(true)}>Nueva tarjeta de credito</button></td></tr>
+                    <tr><td colSpan="7"><button type="button" className="btn btn-link btn-sm" onClick={()=>setCreateModalOpen(true)}>Nuevos {props.tipo}</button></td></tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td><b>Total tarjetas de crédito:</b></td>
-                        <td>$180</td>
-                    </tr>
-                </tfoot>
             </Table>
             <InsertModalComponent 
                 isOpen={createModalOpen} 
-                title={"Insertar gasto de TC"} 
+                title={"Insertar "+props.tipo} 
                 tipo={props.tipo} 
                 year={props.year} 
                 month={props.month} 
@@ -96,8 +88,9 @@ const ItemTCTableComponent = (props) => {
                 month={props.month} 
                 closeModal={closeModal} 
             />
-        </>
+        </div>
+        
     )
 }
 
-export default ItemTCTableComponent;
+export default ItemTableComponent;

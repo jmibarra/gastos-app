@@ -1,5 +1,3 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import firebase from 'firebase';
 
 var firebaseConfig = {
@@ -15,4 +13,4 @@ var firebaseConfig = {
 // Initialize Firebase
 var fireDB=firebase.initializeApp(firebaseConfig);
 
-export default fireDB.database().ref();
+export default fireDB.database().ref();  
