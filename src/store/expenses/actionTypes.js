@@ -1,1 +1,0 @@
-export const EXPENSES_FETCHED = 'expenses.EXPENSES_FETCHED';

@@ -22,8 +22,6 @@ function App() {
         setMonthName(DateUtils.getMonthName(month));
     },[month]);
 
-  /******************************** FUNCIONES *********************************/
-
     return (
       <div className="App">
         <Container fluid={true}>
