@@ -43,7 +43,7 @@ const MonthMetricsComponent = (props) => {
         let responseObject = await firebaseUtils.peticionGet(year,month,type).then();
         let sumaDeItems = 0
         if(responseObject){
-            Object.keys(responseObject).map(i=> {
+            Object.keys(responseObject).map( i=> {
                 sumaDeItems += parseInt(responseObject[i].total)
             })
         }

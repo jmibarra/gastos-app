@@ -23,7 +23,7 @@ const ItemTableComponent = (props) => {
 
     useEffect(()=> {
         fetchData(props.year,props.month,props.tipo)
-    },[items]);
+    },[items,props]);
 
     async function fetchData(year,month,type){
         let responseObject = await firebaseUtils.peticionGet(year,month,type).then();
