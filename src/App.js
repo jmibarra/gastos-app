@@ -10,7 +10,7 @@ import MonthMetricsComponent from "./Componentes/MonthMetrics.js"
 function App() {
 
     const [year, setYear] = useState(DateUtils.getCurrentYear());
-    const [month, setMonth] = useState(DateUtils.getCurrentMonth());
+    const [month, setMonth] = useState(DateUtils.getCurrentMonth);
     const [monthName, setMonthName] = useState('febrero');
 
     const handleDateChange = (year,month) => {

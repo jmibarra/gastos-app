@@ -14,16 +14,8 @@ import firebaseUtils from '../utils/FirebaseUtils'
 
     // };
 
-    // calcularGastosTotales = (gastos) => {
 
-    //     let gastosTotales = 0;
-    //     Object.keys(gastos).map(i=> {
-    //         gastosTotales += parseInt(gastos[i].total);
-    //     })
 
-    //     this.setState({gastos_mes: gastosTotales});
-
-    // };
 
     // calcularGastosTCTotales = (gastos) => {
 
@@ -43,7 +35,21 @@ const MonthMetricsComponent = (props) => {
     const [gastosTCTotales, setgastosTCTotales] = useState(0);
     const [ahorrosTotales, setahorrosTotales] = useState(0);
 
+    useEffect(()=> {
+        //setGastosTotales(fetchTotalsData(props.year,props.month,"gastos"))
+    },[]);
 
+    async function fetchTotalsData(year,month,type){
+        let responseObject = await firebaseUtils.peticionGet(year,month,type).then();
+        let sumaDeItems = 0
+        if(responseObject){
+            Object.keys(responseObject).map(i=> {
+                sumaDeItems += parseInt(responseObject[i].total)
+            })
+        }
+
+        return sumaDeItems;
+    }
 
     return(
         <>
