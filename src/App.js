@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Container, Row, Col} from "reactstrap"
 
-import NavBarComponent from './Componentes/Navbar.js'
+import NavBarComponent from './Componentes/Common/Navbar'
 import ItemTableComponent from './Componentes/ItemTable.js'
 import ItemTCTableComponent from './Componentes/ItemTCTable.js'
 import DateUtils from "./utils/DateUtils.js"
 import MonthMetricsComponent from "./Componentes/MonthMetrics.js"
+import Footer from "./Componentes/Common/Footer"
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
             </Col>
           </Row>
         </Container>
+        <Footer />
       </div>
     );
 }

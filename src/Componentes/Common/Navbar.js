@@ -18,7 +18,7 @@ const NavBarComponent = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" light expand="md" light>
         <NavbarBrand href="/">Gastos {props.monthName} {props.year} </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
