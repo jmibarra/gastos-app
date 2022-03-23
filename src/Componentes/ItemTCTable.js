@@ -3,7 +3,7 @@ import { Table,ButtonGroup } from 'reactstrap';
 import { AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 import firebaseUtils from '../utils/FirebaseUtils'
 
-import StatusBadgeComponent from './StatusBadge.js';
+import StatusBadgeComponent from './Common/StatusBadge.js';
 import InsertModalComponent from './InsertModal';
 import EditModalComponent from './EditModal';
 

@@ -3,7 +3,7 @@ import { Table,ButtonGroup } from 'reactstrap';
 import {AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 import firebaseUtils from '../utils/FirebaseUtils'
 
-import StatusBadgeComponent from './StatusBadge.js';
+import StatusBadgeComponent from './Common/StatusBadge.js';
 import InsertModalComponent from './InsertModal';
 import EditModalComponent from './EditModal';
 
@@ -42,8 +42,8 @@ const ItemTableComponent = (props) => {
     };
 
     return(
-        <div>
-            <Table>
+        <>
+            <Table hover>
                 <thead>
                     <tr>
                         <th>Motivo</th>
@@ -88,7 +88,7 @@ const ItemTableComponent = (props) => {
                 month={props.month} 
                 closeModal={closeModal} 
             />
-        </div>
+        </>
         
     )
 }
