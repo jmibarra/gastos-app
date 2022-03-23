@@ -11,8 +11,6 @@ import {
     InputGroupAddon,
     InputGroupText 
 } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import firebaseUtils from '../utils/FirebaseUtils';
 
 

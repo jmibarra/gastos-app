@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -18,7 +18,7 @@ const NavBarComponent = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md" light>
+      <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Gastos {props.monthName} {props.year} </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
