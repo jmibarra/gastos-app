@@ -1,9 +1,8 @@
 import {useState,useEffect} from 'react'
 import { 
-    Row, 
-    UncontrolledAccordion,
-    AccordionHeader,
-    AccordionItem
+    Col,
+    Container,
+    Row,
 } from "reactstrap"
 import ItemTableComponent from '../ItemTable'
 import ItemTCTableComponent from '../ItemTCTable'
@@ -38,43 +37,26 @@ const DataPage = ({year,month}) => {
 
     return (
         <>
+            <Container>
             <Row className="p-3 bg-dark my-2 rounded">
                 <MonthMetricsComponent incomes={incomes} expenses={expenses} year={year} month={month}/>
             </Row>
-            <Row> 
-                <UncontrolledAccordion
-                    defaultOpen={[
-                    '1',
-                    '2'
-                    ]}
-                    stayOpen
-                >
-                    <AccordionItem>
-                        <AccordionHeader targetId="1">
-                            <h1>Ingresos</h1>
-                        </AccordionHeader>
-                        <AccordionItem accordionId="1">
-                            <div><ItemTableComponent items={incomes} year={year} month={month} type="ingresos"/></div>  
-                        </AccordionItem>
-                    </AccordionItem>
-                    <AccordionItem>
-                        <AccordionHeader targetId="2">
-                            <h1>Gastos</h1>
-                        </AccordionHeader>
-                        <AccordionItem accordionId="2">
-                            <ItemTableComponent items={expenses} year={year} month={month} type="gastos"/>
-                        </AccordionItem>
-                    </AccordionItem>
-                    <AccordionItem>
-                        <AccordionHeader targetId="3">
-                            <h1>Gastos Tarjeta de crédito</h1>
-                        </AccordionHeader>
-                        <AccordionItem accordionId="3">
-                            <ItemTCTableComponent tipo="tc" year={year} month={month}/>
-                        </AccordionItem>
-                    </AccordionItem>
-                </UncontrolledAccordion>
+            <Row xs="2"> 
+                <Col>
+                    <h1>Ingresos</h1>
+                    <ItemTableComponent items={incomes} year={year} month={month} type="ingresos"/>
+                </Col>
+                <Col>
+                    <h1>Gastos</h1>
+                    <ItemTableComponent items={expenses} year={year} month={month} type="gastos"/>
+                </Col>          
             </Row>
+            <Row>
+                <h1>Gastos Tarjeta de crédito</h1>
+                <ItemTCTableComponent tipo="tc" year={year} month={month}/>
+            </Row>
+            </Container>
+            
         </>
     )
 }
