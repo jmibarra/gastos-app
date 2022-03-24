@@ -1,11 +1,11 @@
 import { useState,useEffect } from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
 import { AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
-import firebaseUtils from '../utils/FirebaseUtils'
+import firebaseUtils from '../../utils/FirebaseUtils'
 
-import StatusBadgeComponent from './Common/StatusBadge.js';
-import InsertModalComponent from './InsertModal';
-import EditModalComponent from './EditModal';
+import StatusBadgeComponent from '../Common/StatusBadge.js';
+import InsertTCModalComponent from './Modals/InsertTCModal';
+import EditTCModalComponent from './Modals/EditTCModal';
 
 const ItemTCTableComponent = (props) => {
 
@@ -79,7 +79,7 @@ const ItemTCTableComponent = (props) => {
                     </tr>
                 </tfoot>
             </Table>
-            <InsertModalComponent 
+            <InsertTCModalComponent 
                 isOpen={createModalOpen} 
                 title={"Insertar gasto de TC"} 
                 tipo={props.tipo} 
@@ -87,7 +87,7 @@ const ItemTCTableComponent = (props) => {
                 month={props.month} 
                 closeModal={closeModal} 
             />
-            <EditModalComponent 
+            <EditTCModalComponent 
                 isOpen={editModalOpen} 
                 formItem2={formItem} 
                 formItemId={formItemId} 
