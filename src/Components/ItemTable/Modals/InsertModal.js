@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import firebaseUtils from '../utils/FirebaseUtils'
+import firebaseUtils from '../../../utils/FirebaseUtils';
 import { 
     Modal, 
     ModalBody, 
@@ -9,7 +9,6 @@ import {
     Label, 
     Input,
     InputGroup, 
-    InputGroupAddon,
     InputGroupText 
 } from "reactstrap";
 
@@ -59,10 +58,8 @@ const InsertModalComponent = (props) => {
                 <label>Total: </label>
                 <br />
                 <InputGroup>
-                  <InputGroupAddon addonType="prepend">
                     <InputGroupText>$</InputGroupText>
-                  </InputGroupAddon>
-                  <input type="text" className="form-control" name="total" onChange={handleChange}/>
+                    <input type="text" className="form-control" name="total" onChange={handleChange}/>
                 </InputGroup>
                 <br />
                 <label>Estado: </label>

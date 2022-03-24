@@ -7,10 +7,9 @@ import {
     Label, 
     Input,
     InputGroup,
-    InputGroupAddon,
     InputGroupText 
 } from "reactstrap";
-import firebaseUtils from '../utils/FirebaseUtils';
+import firebaseUtils from "../../../utils/FirebaseUtils";
 
 
 const EditModalComponent = (props) => {
@@ -43,9 +42,7 @@ const EditModalComponent = (props) => {
               <label>Total: </label>
               <br />
               <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>$</InputGroupText>
-                </InputGroupAddon>
+                <InputGroupText>$</InputGroupText>
                 <input type="text" className="form-control" name="total" onChange={props.handleUpdateChange} value={props.formItem && props.formItem.total}/>
               </InputGroup>
               <br />

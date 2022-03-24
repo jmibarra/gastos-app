@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
 import {AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 
-import StatusBadgeComponent from './Common/StatusBadge.js';
-import InsertModalComponent from './InsertModal';
-import EditModalComponent from './EditModal';
-import firebaseUtils from '../utils/FirebaseUtils.js'
+import StatusBadgeComponent from '../Common/StatusBadge.js';
+import InsertModalComponent from './Modals/InsertModal.js';
+import EditModalComponent from './Modals/EditModal.js';
+import firebaseUtils from '../../utils/FirebaseUtils.js'
 
 const ItemTableComponent = ({items,year,month,type}) => {
 
