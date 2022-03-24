@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import { 
     Modal, 
     ModalBody, 
@@ -16,17 +15,8 @@ import firebaseUtils from '../utils/FirebaseUtils';
 
 const EditModalComponent = (props) => {
 
-    const [formItem, setformItem] = useState(props.formItem);
-
-    const handleChange=e=>{
-        setformItem({
-            ...formItem,
-            [e.target.name]: e.target.value
-        })
-    }
-
     const updateItem = () => {
-        firebaseUtils.peticionPut(formItem,props.year,props.month,props.tipo,props.formItemId);
+        firebaseUtils.peticionPut(props.formItem,props.year,props.month,props.tipo,props.formItemId);
         props.closeModal();
     }
 
@@ -37,7 +27,7 @@ const EditModalComponent = (props) => {
             <div className="form-group">
               <label>Motivo: </label>
               <br />
-              <input type="text" className="form-control" name="motivo" onChange={handleChange} value={formItem && formItem.motivo}/>
+              <input type="text" className="form-control" name="motivo" onChange={props.handleUpdateChange} value={props.formItem && props.formItem.motivo}/>
               <br />
               <FormGroup>
                 <Label for="exampleDate">Fecha:</Label>
@@ -46,8 +36,8 @@ const EditModalComponent = (props) => {
                   name="fecha"
                   id="fecha"
                   placeholder="Fecha de gasto"
-                  value={formItem && formItem.fecha}
-                  onChange={handleChange}
+                  value={props.formItem && props.formItem.fecha}
+                  onChange={props.handleUpdateChange}
                 />
               </FormGroup>
               <label>Total: </label>
@@ -56,12 +46,12 @@ const EditModalComponent = (props) => {
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>$</InputGroupText>
                 </InputGroupAddon>
-                <input type="text" className="form-control" name="total" onChange={handleChange} value={formItem && formItem.total}/>
+                <input type="text" className="form-control" name="total" onChange={props.handleUpdateChange} value={props.formItem && props.formItem.total}/>
               </InputGroup>
               <br />
               <label>Estado: </label>
               <br />
-              <select className="form-control" name="estado" onChange={handleChange} value={formItem && formItem.estado}>
+              <select className="form-control" name="estado" onChange={props.handleUpdateChange} value={props.formItem && props.formItem.estado}>
                     <option value="" selected="selected">Elegir un estado...</option>
                     <option value="Estimado">Estimado</option>
                     <option value="Pendiente">Pendiente</option>

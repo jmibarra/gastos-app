@@ -1,13 +1,13 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
 import {AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
-import firebaseUtils from '../utils/FirebaseUtils'
 
 import StatusBadgeComponent from './Common/StatusBadge.js';
 import InsertModalComponent from './InsertModal';
 import EditModalComponent from './EditModal';
+import firebaseUtils from '../utils/FirebaseUtils.js'
 
-const ItemTableComponent = (props) => {
+const ItemTableComponent = ({items,year,month,type}) => {
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
     const [editModalOpen,setEditModalOpen] = useState(false);
@@ -19,20 +19,8 @@ const ItemTableComponent = (props) => {
         setEditModalOpen(false);
     }
 
-    const [items, setItems] = useState([]);
-
-    useEffect(()=> {
-        fetchData(props.year,props.month,props.tipo)
-    },[items,props]);
-
-    async function fetchData(year,month,type){
-        let responseObject = await firebaseUtils.peticionGet(year,month,type).then();
-        if(responseObject)
-            setItems(responseObject)
-    }
-
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,props.year,props.month,props.tipo,id)
+        firebaseUtils.peticionDelete(item,year,month,type,id)
     }
 
     const updateItemModal = (item,id) => {
@@ -40,6 +28,13 @@ const ItemTableComponent = (props) => {
         setFormItemId(id);
         setEditModalOpen(true);
     };
+
+    const handleUpdateChange=e=>{
+        setFormItem({
+            ...formItem,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return(
         <>
@@ -68,24 +63,26 @@ const ItemTableComponent = (props) => {
                         </td>
                     </tr>
                     })}
-                    <tr><td colSpan="7"><button type="button" className="btn btn-link btn-sm" onClick={()=>setCreateModalOpen(true)}>Nuevos {props.tipo}</button></td></tr>
+                    <tr><td colSpan="7"><button type="button" className="btn btn-link btn-sm" onClick={()=>setCreateModalOpen(true)}>Nuevos {type}</button></td></tr>
                 </tbody>
             </Table>
-            <InsertModalComponent 
+             <InsertModalComponent 
                 isOpen={createModalOpen} 
-                title={"Insertar "+props.tipo} 
-                tipo={props.tipo} 
-                year={props.year} 
-                month={props.month} 
+                title={"Insertar "+type} 
+                tipo={type} 
+                year={year} 
+                month={month} 
                 closeModal={closeModal} 
             />
+            
             <EditModalComponent 
                 isOpen={editModalOpen} 
-                formItem2={formItem} 
+                formItem={formItem} 
                 formItemId={formItemId} 
-                tipo={props.tipo} 
-                year={props.year} 
-                month={props.month} 
+                tipo={type} 
+                year={year} 
+                month={month} 
+                handleUpdateChange={handleUpdateChange}
                 closeModal={closeModal} 
             />
         </>
