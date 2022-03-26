@@ -15,6 +15,7 @@ const MonthMetricsComponent = (props) => {
 
     const totalIncomes = getTotalAmount(props.incomes);
     const regularExpenses = getTotalAmount(props.expenses);
+    const creditCardExpenses = getTotalAmount(props.creditcard);
 
     return( 
         <>
@@ -35,9 +36,9 @@ const MonthMetricsComponent = (props) => {
                     </ToastHeader>
                     <ToastBody>
                         <h3> $  {regularExpenses}</h3> <br/>
-                        <h3> $ {/*gastosTCTotales*/} (TC)</h3>
+                        <h3> $ {creditCardExpenses} (TC)</h3>
                         <hr></hr>
-                        <h3> $ {regularExpenses /*+ gastosTCTotales*/} </h3>
+                        <h3> $ {regularExpenses + creditCardExpenses} </h3>
                     </ToastBody>
                 </Toast>
             </Col>
@@ -47,7 +48,7 @@ const MonthMetricsComponent = (props) => {
                         <h3>Sobrante</h3>
                     </ToastHeader>
                     <ToastBody>
-                       <h3> $ {totalIncomes - (regularExpenses /*+ gastosTCTotales*/)} </h3>
+                       <h3> $ {totalIncomes - (regularExpenses + creditCardExpenses)} </h3>
                     </ToastBody>
                 </Toast>
                 <Toast>

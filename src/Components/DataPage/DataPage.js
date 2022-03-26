@@ -49,7 +49,7 @@ const DataPage = ({year,month}) => {
         <>
             <Container>
             <Row className="p-3 bg-dark my-2 rounded">
-                <MonthMetricsComponent incomes={incomes} expenses={expenses} cc-expenses={CCExpenses} year={year} month={month}/>
+                <MonthMetricsComponent incomes={incomes} expenses={expenses} creditcard={CCExpenses} year={year} month={month}/>
             </Row>
             <Row xs="2"> 
                 <Col>
