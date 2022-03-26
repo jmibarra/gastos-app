@@ -8,7 +8,7 @@ import {
 
 } from "reactstrap";
 
-const TCForm = ({handleChange}) => {
+const TCForm = ({handleChange,formItem}) => {
   return (
     <>
         <Form>
@@ -19,6 +19,7 @@ const TCForm = ({handleChange}) => {
                     placeholder="Motivo"
                     type="text"
                     onChange={handleChange}
+                    value={formItem && formItem.motivo}
                     required
                 />
                 <Label for="motivo">
@@ -31,6 +32,7 @@ const TCForm = ({handleChange}) => {
                     name="fecha_cierre"
                     placeholder="date placeholder"
                     type="date"
+                    value={formItem && formItem.fecha_cierre}
                     onChange={handleChange}
                 />
                 <Label for="fecha-cierre">
@@ -43,6 +45,7 @@ const TCForm = ({handleChange}) => {
                     name="fecha"
                     placeholder="date placeholder"
                     type="date"
+                    value={formItem && formItem.fecha}
                     onChange={handleChange}
                 />
                 <Label for="fecha">
@@ -60,6 +63,7 @@ const TCForm = ({handleChange}) => {
                         name="total"
                         type="text"
                         placeholder='Total'
+                        value={formItem && formItem.total}
                         onChange={handleChange}
                     />
                 </InputGroup>
@@ -73,6 +77,7 @@ const TCForm = ({handleChange}) => {
                 id="estado"
                 name="estado"
                 type="select"
+                value={formItem && formItem.estado}
                 onChange={handleChange}
                 >
                     <option>

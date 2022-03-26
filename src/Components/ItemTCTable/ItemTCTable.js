@@ -7,7 +7,7 @@ import StatusBadgeComponent from '../Common/StatusBadge.js';
 import InsertTCModalComponent from './Modals/InsertTCModal';
 import EditTCModalComponent from './Modals/EditTCModal';
 
-const ItemTCTableComponent = (props) => {
+const ItemTCTableComponent = ({items,year,month,type}) => {
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
     const [editModalOpen,setEditModalOpen] = useState(false);
@@ -19,20 +19,8 @@ const ItemTCTableComponent = (props) => {
         setEditModalOpen(false);
     }
 
-    const [items, setItems] = useState([]);
-
-    useEffect(()=> {
-        fetchData(props.year,props.month,props.tipo)
-    },[items,props]);
-
-    async function fetchData(year,month,type){
-        let responseObject = await firebaseUtils.peticionGet(year,month,type).then();
-        if(responseObject)
-            setItems(responseObject)
-    }
-
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,props.year,props.month,props.tipo,id)
+        firebaseUtils.peticionDelete(item,year,month,type,id)
     }
 
     const updateItemModal = (item,id) => {
@@ -40,6 +28,13 @@ const ItemTCTableComponent = (props) => {
         setFormItemId(id);
         setEditModalOpen(true);
     };
+
+    const handleUpdateChange=e=>{
+        setFormItem({
+            ...formItem,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return(
         <>
@@ -82,18 +77,19 @@ const ItemTCTableComponent = (props) => {
             <InsertTCModalComponent 
                 isOpen={createModalOpen} 
                 title={"Insertar gasto de TC"} 
-                tipo={props.tipo} 
-                year={props.year} 
-                month={props.month} 
+                tipo={type} 
+                year={year} 
+                month={month} 
                 closeModal={closeModal} 
             />
             <EditTCModalComponent 
                 isOpen={editModalOpen} 
-                formItem2={formItem} 
+                formItem={formItem} 
                 formItemId={formItemId} 
-                tipo={props.tipo} 
-                year={props.year} 
-                month={props.month} 
+                tipo={type} 
+                year={year} 
+                month={month} 
+                handleChange={handleUpdateChange}
                 closeModal={closeModal} 
             />
         </>

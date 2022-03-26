@@ -13,6 +13,7 @@ const DataPage = ({year,month}) => {
 
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
+    const [CCExpenses, setCCExpenses] = useState([]);
 
     useEffect(()=> {
         fetchIncomesData(year,month);
@@ -21,7 +22,10 @@ const DataPage = ({year,month}) => {
     useEffect(()=> {
         fetchExpensesData(year,month)
     },[expenses,year,month]);
-    
+
+    useEffect(()=> {
+        fetchCCExpensesData(year,month)
+    },[CCExpenses,year,month]);
 
     async function fetchIncomesData(year,month){
         let responseObject = await firebaseUtils.peticionGet(year,month,"ingresos").then();
@@ -35,11 +39,17 @@ const DataPage = ({year,month}) => {
             setExpenses(responseObject)
     }
 
+    async function fetchCCExpensesData(year,month){
+        let responseObject = await firebaseUtils.peticionGet(year,month,"tc").then();
+        if(responseObject)
+            setCCExpenses(responseObject)
+    }
+
     return (
         <>
             <Container>
             <Row className="p-3 bg-dark my-2 rounded">
-                <MonthMetricsComponent incomes={incomes} expenses={expenses} year={year} month={month}/>
+                <MonthMetricsComponent incomes={incomes} expenses={expenses} cc-expenses={CCExpenses} year={year} month={month}/>
             </Row>
             <Row xs="2"> 
                 <Col>
@@ -53,7 +63,7 @@ const DataPage = ({year,month}) => {
             </Row>
             <Row>
                 <h1>Gastos Tarjeta de crédito</h1>
-                <ItemTCTableComponent tipo="tc" year={year} month={month}/>
+                <ItemTCTableComponent items={CCExpenses} year={year} month={month} type="tc"/>
             </Row>
             </Container>
             
