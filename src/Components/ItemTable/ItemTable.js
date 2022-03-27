@@ -82,7 +82,7 @@ const ItemTableComponent = ({items,year,month,type}) => {
                 tipo={type} 
                 year={year} 
                 month={month} 
-                handleUpdateChange={handleUpdateChange}
+                handleChange={handleUpdateChange}
                 closeModal={closeModal} 
             />
         </>
