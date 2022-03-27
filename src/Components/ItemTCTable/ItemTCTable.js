@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
 import { AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 import firebaseUtils from '../../utils/FirebaseUtils'

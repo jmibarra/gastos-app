@@ -3,21 +3,18 @@ import {
     Col,
     Container,
     Row,
-    Button,
     Collapse
 } from "reactstrap"
-import {AiFillSignal } from 'react-icons/ai';
 import ItemTableComponent from '../ItemTable'
 import ItemTCTableComponent from '../ItemTCTable'
 import MonthMetricsComponent from '../MonthMetrics'
 import firebaseUtils from '../../utils/FirebaseUtils.js'
 
-const DataPage = ({year,month}) => {
+const DataPage = ({year,month,metricsOpen}) => {
 
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [CCExpenses, setCCExpenses] = useState([]);
-    const [metricsOpen, setMetricsOpen] = useState(true)
 
     useEffect(()=> {
         fetchIncomesData(year,month);
@@ -52,11 +49,7 @@ const DataPage = ({year,month}) => {
     return (
         <>
             <Container>
-                <Row  p-3 my-2>
-                    <Col md={12}>
-                        <Button outline={metricsOpen} onClick={() => setMetricsOpen(!metricsOpen)}><AiFillSignal /> Metricas</Button>
-                    </Col>
-                </Row>
+
 
                 <Collapse isOpen={metricsOpen}>
                     <Row className="p-3 bg-dark my-2 rounded">

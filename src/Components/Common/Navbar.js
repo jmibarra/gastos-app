@@ -9,7 +9,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button
 } from 'reactstrap';
+import {AiFillSignal } from 'react-icons/ai';
 
 const NavBarComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +86,7 @@ const NavBarComponent = (props) => {
                 </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
+            <Button outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /> Metricas</Button>
         </Collapse>
       </Navbar>
     </div>
