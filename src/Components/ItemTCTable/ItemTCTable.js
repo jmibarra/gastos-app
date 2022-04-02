@@ -43,6 +43,7 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
             <Table hover>
                 <thead>
                     <tr>
+                        <th>icono</th>
                         <th>Tarjeta</th>
                         <th>Fecha cierre</th>
                         <th>Fecha vencimiento</th>
@@ -54,6 +55,13 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
                 <tbody>
                     {Object.keys(items).map(i=>{
                     return <tr key={i}>
+                        <td>
+                            <Cards
+                                expiry="08/23"
+                                name="Juan Manuel Ibarra"
+                                number="5323843298672405"
+                            />
+                        </td>
                         <td>{items[i].motivo}</td>
                         <td>{items[i].fecha_cierre}</td>
                         <td>{items[i].fecha}</td>
@@ -69,20 +77,8 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
                     })}
                     <tr><td colSpan="7"><button type="button" className="btn btn-link btn-sm" onClick={()=>setCreateModalOpen(true)}>Nueva tarjeta de credito</button></td></tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td><b>Total tarjetas de crédito:</b></td>
-                        <td>$180</td>
-                    </tr>
-                </tfoot>
             </Table>
-            <Cards
-                cvc="123"
-                expiry="08/23"
-                focused="name"
-                name="Juan Manuel Ibarra"
-                number="5323843298672405"
-            />
+            
             <InsertTCModalComponent 
                 isOpen={createModalOpen} 
                 title={"Insertar gasto de TC"} 

@@ -11,7 +11,7 @@ import {
   DropdownItem,
   Button
 } from 'reactstrap';
-import {AiFillSignal } from 'react-icons/ai';
+import {AiFillSignal,AiOutlineCreditCard } from 'react-icons/ai';
 
 const NavBarComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,6 +87,7 @@ const NavBarComponent = (props) => {
             </UncontrolledDropdown>
           </Nav>
             <Button outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /> Metricas</Button>
+            <Button outline={true} onClick={props.toogleCreditCardModal}><AiOutlineCreditCard /> Tarjeta de crédito</Button>
         </Collapse>
       </Navbar>
     </div>

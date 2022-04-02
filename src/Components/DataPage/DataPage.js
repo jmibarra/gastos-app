@@ -49,8 +49,6 @@ const DataPage = ({year,month,metricsOpen}) => {
     return (
         <>
             <Container>
-
-
                 <Collapse isOpen={metricsOpen}>
                     <Row className="p-3 bg-dark my-2 rounded">
                         <MonthMetricsComponent incomes={incomes} expenses={expenses} creditcard={CCExpenses} year={year} month={month}/>

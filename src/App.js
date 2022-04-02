@@ -5,6 +5,7 @@ import NavBarComponent from './Components/Common/Navbar'
 import DateUtils from "./utils/DateUtils.js"
 import Footer from "./Components/Common/Footer"
 import DataPage from "./Components/DataPage/DataPage"
+import CreditCardForm from "./Components/creditCards/CreditCardForm"
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
     const [month, setMonth] = useState(DateUtils.getCurrentMonth);
     const [monthName, setMonthName] = useState('febrero');
     const [metricsOpen, setMetricsOpen] = useState(true);
+    const [creditCardModalOpen, setcreditCardModalOpen] = useState(false);
 
     const handleDateChange = (year,month) => {
         setMonth(month);
@@ -26,16 +28,35 @@ function App() {
         setMetricsOpen(!metricsOpen);
     }
 
+    const toogleCreditCardModal = () => {
+        setcreditCardModalOpen(!creditCardModalOpen);
+    }
+
     return (
-      <div className="App">
-        <Container fluid={true}>
-          <Row>
-            <Col><NavBarComponent year={year} month={month} monthName={monthName} handleDateChange={handleDateChange} toogleMetrics={toogleMetrics} metricsOpen={metricsOpen}/></Col>
-          </Row>
-          <DataPage year={year} month={month} metricsOpen={metricsOpen}/>
-        </Container>
-        <Footer />
-      </div>
+        <div className="App">
+            <Container fluid={true}>
+                <Row>
+                    <Col>
+                        <NavBarComponent 
+                            year={year} 
+                            month={month} 
+                            monthName={monthName} 
+                            handleDateChange={handleDateChange} 
+                            toogleMetrics={toogleMetrics} 
+                            metricsOpen={metricsOpen}
+                            toogleCreditCardModal={toogleCreditCardModal}
+                        />
+                    </Col>
+                </Row>
+                <DataPage 
+                    year={year} 
+                    month={month} 
+                    metricsOpen={metricsOpen}
+                />
+                <CreditCardForm creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
+            </Container>
+            <Footer />
+        </div>
     );
 }
 
