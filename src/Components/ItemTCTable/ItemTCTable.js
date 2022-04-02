@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
 import { AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 import firebaseUtils from '../../utils/FirebaseUtils'
+import Cards from 'react-credit-cards';
+import 'react-credit-cards/es/styles-compiled.css'
 
 import StatusBadgeComponent from '../Common/StatusBadge.js';
 import InsertTCModalComponent from './Modals/InsertTCModal';
@@ -74,6 +76,13 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
                     </tr>
                 </tfoot>
             </Table>
+            <Cards
+                cvc="123"
+                expiry="08/23"
+                focused="name"
+                name="Juan Manuel Ibarra"
+                number="5323843298672405"
+            />
             <InsertTCModalComponent 
                 isOpen={createModalOpen} 
                 title={"Insertar gasto de TC"} 
