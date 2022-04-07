@@ -30,28 +30,28 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
     };
 
     //function to handle  input and update the state of variable
-  const handleInputChange = (e) => {
-    const { id } = e.target;
+    const handleInputChange = (e) => {
+        const { name, id } = e.target;
 
-    if (id === "cardHolder") {
-      var ele = document.getElementById(id);
-      //if user enters any invalid characters it gets replaced
-      ele.value = ele.value.replace(
-        /[}"`~_=.\->\]|<?+*/,\d;\[:{\\!@#\/'$%^&*()]/g,
-        ""
-      );
-      setFormData({
-        ...formData,
-        [e.target.name]: ele.value
-        })
+        if (id === "cardHolder") {
+            var ele = document.getElementById(id);
+            //if user enters any invalid characters it gets replaced
+            ele.value = ele.value.replace(
+                /[}"`~_=.\->\]|<?+*/,\d;\[:{\\!@#\/'$%^&*()]/g,
+                ""
+            );
+            setFormData({
+                ...formData,
+                [name]: ele.value
+            })
 
-    } else{
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
-    }
-  };
+        } else{
+            setFormData({
+                ...formData,
+                [name]: e.target.value
+            })
+        }
+    };
 
     const addSpace = (e) => {
         const { value, id } = e.target;
@@ -60,47 +60,19 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
           ele.value = ele.value.replace(/\W/gi, "").replace(/(.{4})/g, "$1 ");
     };
 
-    const removeSpecial = (e) => {
-        var invalidChars = ["-", "+", "e", "E", " ", "."];
-        if (invalidChars.includes(e.key)) {
-          e.preventDefault();
-        }
-      };
-
     const  validateInput = (e) => {
-        const { name, value, maxLength, id } = e.target;
-        var temp, ele;
+        const { name, value} = e.target;
     
-        if (id === "cvv") {
-          if (value.length > maxLength) {
-            temp = value.slice(0, maxLength);
-            const num = temp;
-            ele = document.getElementById(id);
-            ele.value = temp;
-            setFormData({
-                ...formData,
-                [e.target.name]: ele.value
-              })
-          } else {
-            setFormData({
-                ...formData,
-                [e.target.name]: value
-              })
-          }
-        }
-        //works when function is invoked by cardNumber input
-        else {
-          ele = document.getElementById(id);
           //if user enters any invalid characters it gets replaced
-          ele.value = ele.value.replace(
+          let newValue = value.replace(
             /[A-Za-z}"`~_=.\->\]|<?+*/,;\[:{\\!@#\/'$%^&*()]/g,
             ""
           );
           setFormData({
             ...formData,
-            [e.target.name]: ele.value
+            [name]: newValue
           })
-        }
+        
       };
 
     const insertCreditCard = () => {
@@ -127,22 +99,21 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
                     <div className="card">
                         <form className="payment-form">
                             <div className="form-group">
-                            <label htmlFor="cardNumber" className="card-label">
-                                Número
-                            </label>
-                            <input
-                                type="text"
-                                onChange={validateInput}
-                                value={formData.number}
-                                onKeyDown={removeSpecial}
-                                onPaste={(e) => e.preventDefault()}
-                                onKeyPress={addSpace}
-                                onFocus={handleInputFocus}
-                                name="number"
-                                maxLength="19"
-                                id="cardNumber"
-                                className="form-control form-control-lg"
-                            />
+                                <label htmlFor="cardNumber" className="card-label">
+                                    Número
+                                </label>
+                                <input
+                                    type="text"
+                                    onChange={validateInput}
+                                    value={formData.number}
+                                    onPaste={(e) => e.preventDefault()}
+                                    onKeyPress={addSpace}
+                                    onFocus={handleInputFocus}
+                                    name="number"
+                                    maxLength="19"
+                                    id="cardNumber"
+                                    className="form-control form-control-lg"
+                                />
                             </div>
                             <div className="form-group">
                             <label htmlFor="cardHolder" className="card-label">
@@ -162,70 +133,67 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
                                 className="form-control form-control-lg"
                             />
                             </div>
-                            <div className="date-cvv-box">
                             <div className="expiry-class">
                                 <div className="form-group card-month ">
-                                <label htmlFor="cardMonth" className="card-label">
-                                    Vencimiento
-                                </label>
-
-                                <select
-                                    id="cardMonth"
-                                    data-ref="cardDate"
-                                    value={formData.expiry}
-                                    name="expiry"
-                                    onChange={handleInputChange}
-                                    onFocus={handleInputFocus}
-                                    className="form-control form-control-lg"
-                                >
-                                    <option value="" defaultChecked="true">
-                                    Mes
-                                    </option>
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
-                                    <option value="05">05</option>
-                                    <option value="06">06</option>
-                                    <option value="07">07</option>
-                                    <option value="08">08</option>
-                                    <option value="09">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
+                                    <label htmlFor="cardMonth" className="card-label">
+                                        Vencimiento
+                                    </label>
+                                    <select
+                                        id="cardMonth"
+                                        data-ref="cardDate"
+                                        value={formData.expiry}
+                                        name="expiry"
+                                        onChange={handleInputChange}
+                                        onFocus={handleInputFocus}
+                                        className="form-control form-control-lg"
+                                    >
+                                        <option value="" defaultChecked="true">
+                                        Mes
+                                        </option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
                                 </div>
                                 <div className="form-group card-year">
-                                <select
-                                    id="cardYear"
-                                    data-ref="cardDate"
-                                    value={formData.expiryyear}
-                                    name="expiryyear"
-                                    onChange={handleInputChange}
-                                    onFocus={handleInputFocus}
-                                    className="form-control form-control-lg"
-                                >
-                                    <option value="" defaultChecked="true">
-                                    Año
-                                    </option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                    <option value="2027">2027</option>
-                                    <option value="2028">2028</option>
-                                    <option value="2029">2029</option>
-                                    <option value="2030">2030</option>
-                                    <option value="2031">2031</option>
-                                </select>
+                                    <select
+                                        id="cardYear"
+                                        data-ref="cardDate"
+                                        value={formData.expiryyear}
+                                        name="expiryyear"
+                                        onChange={handleInputChange}
+                                        onFocus={handleInputFocus}
+                                        className="form-control form-control-lg"
+                                    >
+                                        <option value="" defaultChecked="true">
+                                        Año
+                                        </option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                    </select>
                                 </div>
                             </div>
-                            </div>
                         </form>
-        </div>
+                    </div>
                 </ModalBody>
                 <ModalFooter>
                     <button className="btn btn-primary" onClick={() => insertCreditCard() }>Crear</button>{"   "}
