@@ -29,19 +29,19 @@ const DataPage = ({year,month,metricsOpen}) => {
     },[CCExpenses,year,month]);
 
     async function fetchIncomesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"ingresos").then();
+        const responseObject = await firebaseUtils.peticionGet(year,month,"ingresos");
         if(responseObject)
             setIncomes(responseObject)
     }
 
     async function fetchExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"gastos").then();
+        let responseObject = await firebaseUtils.peticionGet(year,month,"gastos");
         if(responseObject)
             setExpenses(responseObject)
     }
 
     async function fetchCCExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"tc").then();
+        let responseObject = await firebaseUtils.peticionGet(year,month,"tc");
         if(responseObject)
             setCCExpenses(responseObject)
     }
