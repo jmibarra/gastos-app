@@ -31,13 +31,15 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
 
     //function to handle  input and update the state of variable
     const handleInputChange = (e) => {
-        const { name, id } = e.target;
+        const { name, id, value } = e.target;
+
+        
 
         if (id === "cardHolder") {
             var ele = document.getElementById(id);
             //if user enters any invalid characters it gets replaced
             ele.value = ele.value.replace(
-                /[}"`~_=.\->\]|<?+*/,\d;\[:{\\!@#\/'$%^&*()]/g,
+                /[}"`~_=.\->\]|<?+*/,\d;[:{\\!@#/'$%^&*()]/g, 
                 ""
             );
             setFormData({
@@ -48,7 +50,7 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
         } else{
             setFormData({
                 ...formData,
-                [name]: e.target.value
+                [name]: value
             })
         }
     };
@@ -65,7 +67,7 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
     
           //if user enters any invalid characters it gets replaced
           let newValue = value.replace(
-            /[A-Za-z}"`~_=.\->\]|<?+*/,;\[:{\\!@#\/'$%^&*()]/g,
+            /[A-Za-z}"`~_=.\->\]|<?+*/,;[:{\\!@#/'$%^&*()]/g,
             ""
           );
           setFormData({
@@ -89,8 +91,7 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
                             locale={{ valid: "Expira" }}
                             placeholders={{ name: "ALIAS TC" }}
                             cvc={formData.cvc}
-                            expiry={formData.expiry}
-                            expiryyear={formData.expiryyear}
+                            expiry={formData.expiry+"/"+formData.expiryyear}
                             focused={formData.focus}
                             name={formData.alias}
                             number={formData.number}

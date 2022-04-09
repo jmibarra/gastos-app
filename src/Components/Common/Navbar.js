@@ -22,9 +22,9 @@ const NavBarComponent = (props) => {
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Gastos {props.monthName} {props.year} </NavbarBrand>
-        <NavbarToggler onClick={toggle} />
+        <NavbarToggler className="me-2" onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="navbar navbar-light"  navbar>
+          <Nav className="me-auto" navbar>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Año
@@ -86,8 +86,8 @@ const NavBarComponent = (props) => {
                 </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-            <Button outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /> Metricas</Button>
             <Button outline={true} onClick={props.toogleCreditCardModal}><AiOutlineCreditCard /> Tarjeta de crédito</Button>
+            <Button outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /> Metricas</Button>
         </Collapse>
       </Navbar>
     </div>
