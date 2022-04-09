@@ -29,7 +29,7 @@ const NavBarComponent = (props) => {
               <DropdownToggle nav caret>
                 Año
               </DropdownToggle>
-              <DropdownMenu right>
+              <DropdownMenu end>
                 <DropdownItem  onClick={()=>props.handleDateChange('2021',props.month)}>
                   2021
                 </DropdownItem>
@@ -46,7 +46,7 @@ const NavBarComponent = (props) => {
                 <DropdownToggle nav caret>
                     Mes
                 </DropdownToggle>
-                <DropdownMenu right>
+                <DropdownMenu end>
                 <DropdownItem onClick={()=>props.handleDateChange(props.year,'01')}>
                     Enero
                 </DropdownItem>

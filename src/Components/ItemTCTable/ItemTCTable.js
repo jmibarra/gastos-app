@@ -60,6 +60,7 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
                                 expiry="08/23"
                                 name="Juan Manuel Ibarra"
                                 number="5323843298672405"
+                                cvc="323"
                             />
                         </td>
                         <td>{items[i].motivo}</td>
