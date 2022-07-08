@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
 import { AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 import firebaseUtils from '../../utils/FirebaseUtils'
@@ -8,13 +8,17 @@ import 'react-credit-cards/es/styles-compiled.css'
 import StatusBadgeComponent from '../Common/StatusBadge.js';
 import InsertTCModalComponent from './Modals/InsertTCModal';
 import EditTCModalComponent from './Modals/EditTCModal';
+import { DateContext } from '../../contexts/Date';
 
-const ItemTCTableComponent = ({items,year,month,type}) => {
+const ItemTCTableComponent = ({items,type}) => {
+
+    const { state } = useContext(DateContext);
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
     const [editModalOpen,setEditModalOpen] = useState(false);
     const [formItem,setFormItem] = useState();
     const [formItemId,setFormItemId] = useState();
+
 
     const closeModal = () => {
         setCreateModalOpen(false);
@@ -22,7 +26,7 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
     }
 
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,year,month,type,id)
+        firebaseUtils.peticionDelete(item,state.year,state.month,type,id)
     }
 
     const updateItemModal = (item,id) => {
@@ -84,8 +88,8 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
                 isOpen={createModalOpen} 
                 title={"Insertar gasto de TC"} 
                 tipo={type} 
-                year={year} 
-                month={month} 
+                year={state.year} 
+                month={state.month} 
                 closeModal={closeModal} 
             />
             <EditTCModalComponent 
@@ -93,8 +97,8 @@ const ItemTCTableComponent = ({items,year,month,type}) => {
                 formItem={formItem} 
                 formItemId={formItemId} 
                 tipo={type} 
-                year={year} 
-                month={month} 
+                year={state.year} 
+                month={state.month} 
                 handleChange={handleUpdateChange}
                 closeModal={closeModal} 
             />

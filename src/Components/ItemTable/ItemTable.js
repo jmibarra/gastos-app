@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { Table,ButtonGroup } from 'reactstrap';
 import {AiFillEdit,AiFillCloseCircle } from 'react-icons/ai';
 
@@ -6,8 +6,11 @@ import StatusBadgeComponent from '../Common/StatusBadge.js';
 import InsertModalComponent from './Modals/InsertModal.js';
 import EditModalComponent from './Modals/EditModal.js';
 import firebaseUtils from '../../utils/FirebaseUtils.js'
+import { DateContext } from '../../contexts/Date.js';
 
-const ItemTableComponent = ({items,year,month,type}) => {
+const ItemTableComponent = ({items,type}) => {
+
+    const { state } = useContext(DateContext);
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
     const [editModalOpen,setEditModalOpen] = useState(false);
@@ -20,7 +23,7 @@ const ItemTableComponent = ({items,year,month,type}) => {
     }
 
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,year,month,type,id)
+        firebaseUtils.peticionDelete(item,state.year,state.month,type,id)
     }
 
     const updateItemModal = (item,id) => {
@@ -70,8 +73,8 @@ const ItemTableComponent = ({items,year,month,type}) => {
                 isOpen={createModalOpen} 
                 title={"Insertar "+type} 
                 tipo={type} 
-                year={year} 
-                month={month} 
+                year={state.year} 
+                month={state.month} 
                 closeModal={closeModal} 
             />
             
@@ -80,8 +83,8 @@ const ItemTableComponent = ({items,year,month,type}) => {
                 formItem={formItem} 
                 formItemId={formItemId} 
                 tipo={type} 
-                year={year} 
-                month={month} 
+                year={state.year} 
+                month={state.month} 
                 handleChange={handleUpdateChange}
                 closeModal={closeModal} 
             />

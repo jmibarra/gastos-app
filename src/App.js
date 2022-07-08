@@ -1,5 +1,9 @@
+import { DateProvider } from "./contexts/Date"
 import { useState, useEffect } from "react"
-import { Container, Row, Col} from "reactstrap"
+import { Container, Row,Collapse} from "reactstrap"
+import MonthMetricsComponent from './Components/MonthMetrics'
+
+
 
 import NavBarComponent from './Components/Common/Navbar'
 import DateUtils from "./utils/DateUtils.js"
@@ -33,30 +37,35 @@ function App() {
     }
 
     return (
+        <DateProvider>
         <div className="App">
             <Container fluid={true}>
                 <Row>
-                    <Col>
-                        <NavBarComponent 
-                            year={year} 
-                            month={month} 
-                            monthName={monthName} 
-                            handleDateChange={handleDateChange} 
-                            toogleMetrics={toogleMetrics} 
-                            metricsOpen={metricsOpen}
-                            toogleCreditCardModal={toogleCreditCardModal}
-                        />
-                    </Col>
+                    <NavBarComponent 
+                        handleDateChange={handleDateChange} 
+                        toogleMetrics={toogleMetrics} 
+                        metricsOpen={metricsOpen}
+                        toogleCreditCardModal={toogleCreditCardModal}
+                    />
                 </Row>
-                <DataPage 
-                    year={year} 
-                    month={month} 
-                    metricsOpen={metricsOpen}
-                />
+                <Row>
+                    <Collapse isOpen={metricsOpen}>
+                        <Row className="p-3 bg-dark my-2 rounded">
+                            <MonthMetricsComponent/>
+                        </Row>
+                    </Collapse>
+                </Row>
+                <Row>
+                    <DataPage/>
+                </Row>
+                <Row>
+                    <Footer />
+                </Row>
                 <CreditCardForm creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
             </Container>
-            <Footer />
+            
         </div>
+        </DateProvider>
     );
 }
 

@@ -1,9 +1,10 @@
 class DateUtils{
 
-    static getMonthName = (mes) => {
+    static getMonthName = (month) => {
+
         let monthNames = [ "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" ];
     
-        let monthName = monthNames[parseInt(mes,10)-1] //Al ser un array enero es el 0 por eso al numero de mes se le resta 1.
+        let monthName = monthNames[parseInt(month,10)-1] //Al ser un array enero es el 0 por eso al numero de mes se le resta 1.
     
         return monthName
     }

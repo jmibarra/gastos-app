@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -12,16 +12,19 @@ import {
   Button
 } from 'reactstrap';
 import {AiFillSignal,AiOutlineCreditCard } from 'react-icons/ai';
+import { DateContext } from '../../contexts/Date';
 
 const NavBarComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
+  const { state, setDate } = useContext(DateContext)
+
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Gastos {props.monthName} {props.year} </NavbarBrand>
+        <NavbarBrand href="/">Gastos {state.month_name} {state.year} </NavbarBrand>
         <NavbarToggler className="me-2" onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
@@ -30,10 +33,10 @@ const NavBarComponent = (props) => {
                 Año
               </DropdownToggle>
               <DropdownMenu end>
-                <DropdownItem  onClick={()=>props.handleDateChange('2021',props.month)}>
+                <DropdownItem  onClick={()=>setDate('2021',state.month)}>
                   2021
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange('2022',props.month)}>
+                <DropdownItem onClick={()=>setDate('2022',state.month)}>
                   2022
                 </DropdownItem>
                 <DropdownItem divider />
@@ -47,40 +50,40 @@ const NavBarComponent = (props) => {
                     Mes
                 </DropdownToggle>
                 <DropdownMenu end>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'01')}>
+                <DropdownItem onClick={()=>setDate(state.year,'01')}>
                     Enero
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'02')}>
+                <DropdownItem onClick={()=>setDate(state.year,'02')}>
                     Febrero
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'03')}>
+                <DropdownItem onClick={()=>setDate(state.year,'03')}>
                     Marzo
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'04')}>
+                <DropdownItem onClick={()=>setDate(state.year,'04')}>
                     Abril
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'05')}>
+                <DropdownItem onClick={()=>setDate(state.year,'05')}>
                     Mayo
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'06')}>
+                <DropdownItem onClick={()=>setDate(state.year,'06')}>
                     Junio
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'07')}>
+                <DropdownItem onClick={()=>setDate(state.year,'07')}>
                     Julio
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'08')}>
+                <DropdownItem onClick={()=>setDate(state.year,'08')}>
                     Agosto
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'09')}>
+                <DropdownItem onClick={()=>setDate(state.year,'09')}>
                     Septiembre
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'10')}>
+                <DropdownItem onClick={()=>setDate(state.year,'10')}>
                     Octubre
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'11')}>
+                <DropdownItem onClick={()=>setDate(state.year,'11')}>
                     Noviembre
                 </DropdownItem>
-                <DropdownItem onClick={()=>props.handleDateChange(props.year,'12')}>
+                <DropdownItem onClick={()=>setDate(state.year,'12')}>
                     Diciembre
                 </DropdownItem>
                 </DropdownMenu>

@@ -1,32 +1,33 @@
-import {useState,useEffect} from 'react'
+import {useState,useEffect, useContext} from 'react'
 import { 
     Col,
     Container,
     Row,
-    Collapse
 } from "reactstrap"
 import ItemTableComponent from '../ItemTable'
 import ItemTCTableComponent from '../ItemTCTable'
-import MonthMetricsComponent from '../MonthMetrics'
 import firebaseUtils from '../../utils/FirebaseUtils.js'
+import { DateContext } from '../../contexts/Date'
 
-const DataPage = ({year,month,metricsOpen}) => {
+const DataPage = () => {
 
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [CCExpenses, setCCExpenses] = useState([]);
 
-    useEffect(()=> {
-        fetchIncomesData(year,month);
-    },[incomes,year,month]);
+    const { state } = useContext(DateContext);
 
     useEffect(()=> {
-        fetchExpensesData(year,month)
-    },[expenses,year,month]);
+        fetchIncomesData(state.year,state.month);
+    },[incomes,state.year,state.month]);
 
     useEffect(()=> {
-        fetchCCExpensesData(year,month)
-    },[CCExpenses,year,month]);
+        fetchExpensesData(state.year,state.month)
+    },[expenses,state.year,state.month]);
+
+    useEffect(()=> {
+        fetchCCExpensesData(state.year,state.month)
+    },[CCExpenses,state.year,state.month]);
 
     async function fetchIncomesData(year,month){
         const responseObject = await firebaseUtils.peticionGet(year,month,"ingresos");
@@ -49,24 +50,19 @@ const DataPage = ({year,month,metricsOpen}) => {
     return (
         <>
             <Container>
-                <Collapse isOpen={metricsOpen}>
-                    <Row className="p-3 bg-dark my-2 rounded">
-                        <MonthMetricsComponent incomes={incomes} expenses={expenses} creditcard={CCExpenses} year={year} month={month}/>
-                    </Row>
-                </Collapse>
                 <Row xs="2"> 
                     <Col>
                         <h1>Ingresos</h1>
-                        <ItemTableComponent items={incomes} year={year} month={month} type="ingresos"/>
+                        <ItemTableComponent items={incomes} type="ingresos"/>
                     </Col>
                     <Col>
                         <h1>Gastos</h1>
-                        <ItemTableComponent items={expenses} year={year} month={month} type="gastos"/>
+                        <ItemTableComponent items={expenses} type="gastos"/>
                     </Col>          
                 </Row>
                 <Row>
                     <h1>Gastos Tarjeta de crédito</h1>
-                    <ItemTCTableComponent items={CCExpenses} year={year} month={month} type="tc"/>
+                    <ItemTCTableComponent items={CCExpenses} type="tc"/>
                 </Row>
             </Container>
             

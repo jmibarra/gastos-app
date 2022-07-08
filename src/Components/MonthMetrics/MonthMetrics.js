@@ -1,6 +1,15 @@
+import { useContext, useEffect, useState } from "react";
+import { DateContext } from "../../contexts/Date";
+
 import { Col,Toast, ToastBody, ToastHeader} from "reactstrap"
+import firebaseUtils from "../../utils/FirebaseUtils";
 
 const MonthMetricsComponent = (props) => {
+
+    const { state } = useContext(DateContext);
+    const [incomes, setIncomes] = useState([]);
+    const [expenses, setExpenses] = useState([]);
+    const [CCExpenses, setCCExpenses] = useState([]);
     
     const getTotalAmount = (incomes) => {
 
@@ -13,9 +22,39 @@ const MonthMetricsComponent = (props) => {
 
     };
 
-    const totalIncomes = getTotalAmount(props.incomes);
-    const regularExpenses = getTotalAmount(props.expenses);
-    const creditCardExpenses = getTotalAmount(props.creditcard);
+    const totalIncomes = getTotalAmount(incomes);
+    const regularExpenses = getTotalAmount(expenses);
+    const creditCardExpenses = getTotalAmount(CCExpenses);
+
+    useEffect(()=> {
+        fetchIncomesData(state.year,state.month);
+    },[incomes,state.year,state.month]);
+
+    useEffect(()=> {
+        fetchExpensesData(state.year,state.month)
+    },[expenses,state.year,state.month]);
+
+    useEffect(()=> {
+        fetchCCExpensesData(state.year,state.month)
+    },[CCExpenses,state.year,state.month]);
+
+    async function fetchIncomesData(year,month){
+        const responseObject = await firebaseUtils.peticionGet(year,month,"ingresos");
+        if(responseObject)
+            setIncomes(responseObject)
+    }
+
+    async function fetchExpensesData(year,month){
+        let responseObject = await firebaseUtils.peticionGet(year,month,"gastos");
+        if(responseObject)
+            setExpenses(responseObject)
+    }
+
+    async function fetchCCExpensesData(year,month){
+        let responseObject = await firebaseUtils.peticionGet(year,month,"tc");
+        if(responseObject)
+            setCCExpenses(responseObject)
+    }
 
     return( 
         <>
