@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { DateContext } from "../../contexts/Date";
 
-import { Col,Toast, ToastBody, ToastHeader} from "reactstrap"
+import { Col,Collapse,Row,Toast, ToastBody, ToastHeader} from "reactstrap"
 import firebaseUtils from "../../utils/FirebaseUtils";
 
 const MonthMetricsComponent = (props) => {
@@ -14,11 +14,11 @@ const MonthMetricsComponent = (props) => {
     const getTotalAmount = (incomes) => {
 
         let totalIncomes = 0;
-        Object.keys(incomes).map(i=> {
+        Object.keys(incomes).map(i => {
             totalIncomes += parseInt(incomes[i].total);
         })
 
-        return totalIncomes;
+        return totalIncomes; 
 
     };
 
@@ -57,49 +57,51 @@ const MonthMetricsComponent = (props) => {
     }
 
     return( 
-        <>
-            <Col xs="6" sm="4">
-                <Toast>
-                    <ToastHeader>
-                        <h3>Ingresos</h3>
-                    </ToastHeader>
-                    <ToastBody>
-                        <h3>$ {totalIncomes}</h3>
-                    </ToastBody>
-                </Toast>
-            </Col>
-            <Col xs="6" sm="4">
-                <Toast>
-                    <ToastHeader>
-                        <h3> Gastos </h3>
-                    </ToastHeader>
-                    <ToastBody>
-                        <h3> $  {regularExpenses}</h3> <br/>
-                        <h3> $ {creditCardExpenses} (TC)</h3>
-                        <hr></hr>
-                        <h3> $ {regularExpenses + creditCardExpenses} </h3>
-                    </ToastBody>
-                </Toast>
-            </Col>
-            <Col xs="6" sm="4">
-                <Toast>
-                    <ToastHeader>
-                        <h3>Sobrante</h3>
-                    </ToastHeader>
-                    <ToastBody>
-                       <h3> $ {totalIncomes - (regularExpenses + creditCardExpenses)} </h3>
-                    </ToastBody>
-                </Toast>
-                <Toast>
-                    <ToastHeader>
-                        <h3>Ahorros</h3>
-                    </ToastHeader>
-                    <ToastBody>
-                       <h3> $ </h3>
-                    </ToastBody>
-                </Toast>
-            </Col>  
-        </>
+        <Collapse isOpen={props.metricsOpen}>
+            <Row className="p-3 bg-dark my-2 rounded">
+                <Col xs="6" sm="4">
+                    <Toast>
+                        <ToastHeader>
+                            <h3>Ingresos</h3>
+                        </ToastHeader>
+                        <ToastBody>
+                            <h3>$ {totalIncomes}</h3>
+                        </ToastBody>
+                    </Toast>
+                </Col>
+                <Col xs="6" sm="4">
+                    <Toast>
+                        <ToastHeader>
+                            <h3> Gastos </h3>
+                        </ToastHeader>
+                        <ToastBody>
+                            <h3> $  {regularExpenses}</h3> <br/>
+                            <h3> $ {creditCardExpenses} (TC)</h3>
+                            <hr></hr>
+                            <h3> $ {regularExpenses + creditCardExpenses} </h3>
+                        </ToastBody>
+                    </Toast>
+                </Col>
+                <Col xs="6" sm="4">
+                    <Toast>
+                        <ToastHeader>
+                            <h3>Sobrante</h3>
+                        </ToastHeader>
+                        <ToastBody>
+                        <h3> $ {totalIncomes - (regularExpenses + creditCardExpenses)} </h3>
+                        </ToastBody>
+                    </Toast>
+                    <Toast>
+                        <ToastHeader>
+                            <h3>Ahorros</h3>
+                        </ToastHeader>
+                        <ToastBody>
+                        <h3> $ </h3>
+                        </ToastBody>
+                    </Toast>
+                </Col>  
+            </Row>
+        </Collapse>
     );
 }
 
