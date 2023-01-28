@@ -14,7 +14,7 @@ const InsertModalComponent = (props) => {
         fecha: '',
         fecha_cierre: '',
         total: '',
-        estado: '',
+        estado: 'Estimado',
       });
     
         

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { DateContext } from "../../contexts/Date";
 
 import { Col,Collapse,Row,Toast, ToastBody, ToastHeader} from "reactstrap"
+import { AiFillCreditCard,AiFillDollarCircle } from 'react-icons/ai';
 import firebaseUtils from "../../utils/FirebaseUtils";
 
 const MonthMetricsComponent = (props) => {
@@ -65,7 +66,7 @@ const MonthMetricsComponent = (props) => {
                             <h3>Ingresos</h3>
                         </ToastHeader>
                         <ToastBody>
-                            <h3>$ {totalIncomes}</h3>
+                            <h3><AiFillDollarCircle/> {totalIncomes}</h3>
                         </ToastBody>
                     </Toast>
                 </Col>
@@ -75,10 +76,10 @@ const MonthMetricsComponent = (props) => {
                             <h3> Gastos </h3>
                         </ToastHeader>
                         <ToastBody>
-                            <h3> $  {regularExpenses}</h3> <br/>
-                            <h3> $ {creditCardExpenses} (TC)</h3>
+                            <h3> <AiFillDollarCircle/>  {regularExpenses}</h3> <br/>
+                            <h3><AiFillCreditCard/> {creditCardExpenses} </h3>
                             <hr></hr>
-                            <h3> $ {regularExpenses + creditCardExpenses} </h3>
+                            <h3> <AiFillDollarCircle/> {regularExpenses + creditCardExpenses} </h3>
                         </ToastBody>
                     </Toast>
                 </Col>
@@ -88,7 +89,7 @@ const MonthMetricsComponent = (props) => {
                             <h3>Sobrante</h3>
                         </ToastHeader>
                         <ToastBody>
-                        <h3> $ {totalIncomes - (regularExpenses + creditCardExpenses)} </h3>
+                        <h3> <AiFillDollarCircle/>{totalIncomes - (regularExpenses + creditCardExpenses)} </h3>
                         </ToastBody>
                     </Toast>
                     <Toast>
@@ -96,7 +97,7 @@ const MonthMetricsComponent = (props) => {
                             <h3>Ahorros</h3>
                         </ToastHeader>
                         <ToastBody>
-                        <h3> $ </h3>
+                        <h3> <AiFillDollarCircle/> </h3>
                         </ToastBody>
                     </Toast>
                 </Col>  

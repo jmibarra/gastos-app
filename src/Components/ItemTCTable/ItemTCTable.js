@@ -47,7 +47,6 @@ const ItemTCTableComponent = ({items,type}) => {
             <Table hover>
                 <thead>
                     <tr>
-                        <th>icono</th>
                         <th>Tarjeta</th>
                         <th>Fecha cierre</th>
                         <th>Fecha vencimiento</th>
@@ -67,7 +66,6 @@ const ItemTCTableComponent = ({items,type}) => {
                                 cvc="323"
                             />
                         </td>
-                        <td>{items[i].motivo}</td>
                         <td>{items[i].fecha_cierre}</td>
                         <td>{items[i].fecha}</td>
                         <td>$ {items[i].total}</td>

@@ -59,10 +59,10 @@ const ItemTableComponent = ({items,type}) => {
                         <td>$ {items[i].total}</td>
                         <td><StatusBadgeComponent estado={items[i].estado}/></td>
                         <td>
-                        <ButtonGroup>
-                        <button className="btn btn-primary" onClick={()=>updateItemModal(items[i],i)}> <AiFillEdit /></button> {"   "}
-                        <button className="btn btn-danger" onClick={()=>deleteItem(items[i],i)}><AiFillCloseCircle/></button>
-                        </ButtonGroup>
+                            <ButtonGroup>
+                                <button className="btn btn-primary" onClick={()=>updateItemModal(items[i],i)}> <AiFillEdit /></button> {"   "}
+                                <button className="btn btn-danger" onClick={()=>deleteItem(items[i],i)}><AiFillCloseCircle/></button>
+                            </ButtonGroup>
                         </td>
                     </tr>
                     })}
