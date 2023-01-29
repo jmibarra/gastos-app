@@ -12,7 +12,8 @@ import {
     Input,
     Toast,
     ToastBody,
-    ToastHeader
+    ToastHeader,
+    Alert
   } from "reactstrap";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -21,12 +22,12 @@ import { auth } from '../../firebase';
 
 const LoginComponent = () => {
 
-
-
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoggedin, setLoggedin] = React.useState(false);
+    const [isLoggedin, setLoggedin] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
        
     const onLogin = (e) => {
         e.preventDefault();
@@ -34,12 +35,15 @@ const LoginComponent = () => {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
+            setLoggedin(true);
             navigate("/home")
             console.log(user);
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            setError(true);
+            setErrorMessage(error.message);
             console.log(errorCode, errorMessage)
         });
        
@@ -96,6 +100,12 @@ const LoginComponent = () => {
                                 </Toast>
                             </div>
                             </>
+                        )}
+
+                        {error && (
+                            <Alert color="danger">
+                                {errorMessage}  
+                            </Alert>
                         )}
 
                         {!isLoggedin && (
