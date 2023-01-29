@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 import { SET_DATE } from "../actions/date";
 import { dateReducer,initialState } from "../reducers/date";
 

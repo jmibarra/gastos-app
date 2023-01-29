@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DateContext } from "../../contexts/Date";
 
 import { Col,Collapse,Row,Toast, ToastBody, ToastHeader} from "reactstrap"
@@ -20,7 +20,6 @@ const MonthMetricsComponent = (props) => {
         })
 
         return totalIncomes; 
-
     };
 
     const totalIncomes = getTotalAmount(incomes);
