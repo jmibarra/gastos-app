@@ -11,6 +11,7 @@ import CreditCardForm from "./Components/creditCards/CreditCardForm"
 import { BrowserRouter as Router} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 import LoginComponent from "./Components/Login"
+import SignupComponent from "./Components/Signup"
 
 function App() {
 
@@ -55,7 +56,7 @@ function App() {
                             </div>
                             </DateProvider>
                         }/>
-                        <Route path="/signup" element={<h1>Signup</h1>}/>
+                        <Route path="/signup" element={<SignupComponent/>}/>
                         <Route path="/login" element={<LoginComponent/>}/>  
                     </Routes>                  
                 </section>
