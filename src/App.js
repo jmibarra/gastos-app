@@ -12,6 +12,7 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 import LoginComponent from "./Components/Login"
 import SignupComponent from "./Components/Signup"
+import { SessionProvider } from "./contexts/Session"
 
 function App() {
 
@@ -27,41 +28,45 @@ function App() {
     }
 
     return (
-        <Router>
-            <div>
-                <section>                              
-                    <Routes>                                                                        
-                        <Route path="/" element={ //Componentizar esto para que el enrutamiento quede mas prolijo
-                            <DateProvider>
-                            <div className="App">
-                                <Container fluid={true}>
-                                    <Row>
-                                        <NavBarComponent 
-                                            toogleMetrics={toogleMetrics} 
-                                            metricsOpen={metricsOpen}
-                                            toogleCreditCardModal={toogleCreditCardModal}
-                                        />
-                                    </Row>
-                                    <Row>
-                                        <MonthMetricsComponent metricsOpen={metricsOpen}/>
-                                    </Row>
-                                    <Row>
-                                        <DataPage/>
-                                    </Row>
-                                    <Row>
-                                        <Footer />
-                                    </Row>
-                                </Container>
-                                <CreditCardForm creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
-                            </div>
-                            </DateProvider>
-                        }/>
-                        <Route path="/signup" element={<SignupComponent/>}/>
-                        <Route path="/login" element={<LoginComponent/>}/>  
-                    </Routes>                  
-                </section>
-            </div>
-        </Router>
+        <div>
+            <section>                                                                                                       
+                <DateProvider>
+                    <SessionProvider>
+                    <div className="App">
+                        <Container fluid={true}>
+                            <Row>
+                                <NavBarComponent 
+                                    toogleMetrics={toogleMetrics} 
+                                    metricsOpen={metricsOpen}
+                                    toogleCreditCardModal={toogleCreditCardModal}
+                                />
+                            </Row>
+                            <Router>
+                                <Routes>
+                                    <Route path="/" element={ //Componentizar esto para que el enrutamiento quede mas prolijo  
+                                        <>
+                                            <Row>
+                                                <MonthMetricsComponent metricsOpen={metricsOpen}/>
+                                            </Row>
+                                            <Row>
+                                                <DataPage/>
+                                            </Row>
+                                        </>
+                                    }/>  
+                                    <Route path="/signup" element={<SignupComponent/>}/>
+                                    <Route path="/login" element={<LoginComponent/>}/>  
+                                </Routes>  
+                            </Router>
+                            <Row>
+                                <Footer />
+                            </Row>
+                        </Container>
+                        <CreditCardForm creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
+                    </div>
+                    </SessionProvider>
+                </DateProvider>           
+            </section>
+        </div>
     );
 }
 
