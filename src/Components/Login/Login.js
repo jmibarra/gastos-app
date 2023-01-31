@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import {
     Container,
     Row,
@@ -19,15 +19,17 @@ import {
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase';
+import { SessionContext } from '../../contexts/Session';
 
 const LoginComponent = () => {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoggedin, setLoggedin] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+    const { sessionState, login, logout} = useContext(SessionContext)
        
     const onLogin = (e) => {
         e.preventDefault();
@@ -35,8 +37,8 @@ const LoginComponent = () => {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            setLoggedin(true);
-            navigate("/home?param=1")
+            login(user);
+            //navigate("/")
             console.log(user);
         })
         .catch((error) => {
@@ -88,7 +90,7 @@ const LoginComponent = () => {
                     </Card>
                     <Card className="mt-5">
                         <CardBody>
-                        {isLoggedin && (
+                        {sessionState.loggedIn && (
                             <>
                             <div>User is logged in on the system.</div>
                             <div className="p-3 bg-success my-2 rounded">
@@ -108,7 +110,7 @@ const LoginComponent = () => {
                             </Alert>
                         )}
 
-                        {!isLoggedin && (
+                        {!sessionState.loggedIn && (
                             <div>
                             Please login with your credentials. <br /> Look at
                             https://reqres.in/ for api help.

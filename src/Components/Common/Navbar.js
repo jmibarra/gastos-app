@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import Avatar from 'react-avatar';
 import {
   Collapse,
   Navbar,
@@ -97,14 +96,7 @@ const NavBarComponent = (props) => {
             <Button outline={true} onClick={props.toogleCreditCardModal}><AiOutlineCreditCard /> Tarjeta de crédito</Button>
             <Button outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /> Metricas</Button>
             {sessionState.loggedIn && (
-                            <p>
-                                Logueado 
-                            </p>
-                        )}
-                        {!sessionState.loggedIn && (
-                            <p>
-                                No Logueado 
-                            </p>
+                            <Avatar name="Juan Ibarra" round={true} size="60" />
                         )}
             {sessionState.userId}
         </Collapse>
