@@ -36,7 +36,7 @@ const LoginComponent = () => {
             // Signed in
             const user = userCredential.user;
             setLoggedin(true);
-            //navigate("/home")
+            navigate("/home?param=1")
             console.log(user);
         })
         .catch((error) => {

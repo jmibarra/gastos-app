@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 import {
   Collapse,
   Navbar,
@@ -13,13 +15,16 @@ import {
 } from 'reactstrap';
 import {AiFillSignal,AiOutlineCreditCard } from 'react-icons/ai';
 import { DateContext } from '../../contexts/Date';
+import { SessionContext } from '../../contexts/Session';
 
 const NavBarComponent = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+    const toggle = () => setIsOpen(!isOpen);
 
-  const { state, setDate } = useContext(DateContext)
+    const { state, setDate } = useContext(DateContext)
+  
+    const { sessionState, login, logout} = useContext(SessionContext)
 
   return (
     <div>
@@ -91,6 +96,17 @@ const NavBarComponent = (props) => {
           </Nav>
             <Button outline={true} onClick={props.toogleCreditCardModal}><AiOutlineCreditCard /> Tarjeta de crédito</Button>
             <Button outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /> Metricas</Button>
+            {sessionState.loggedIn && (
+                            <p>
+                                Logueado 
+                            </p>
+                        )}
+                        {!sessionState.loggedIn && (
+                            <p>
+                                No Logueado 
+                            </p>
+                        )}
+            {sessionState.userId}
         </Collapse>
       </Navbar>
     </div>
