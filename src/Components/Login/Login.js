@@ -18,7 +18,7 @@ import {
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { NavLink, useNavigate } from 'react-router-dom'
-import { auth } from '../../firebase';
+import firebase from '../../firebase';
 import { SessionContext } from '../../contexts/Session';
 
 const LoginComponent = () => {
@@ -33,7 +33,7 @@ const LoginComponent = () => {
        
     const onLogin = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(firebase.auth, email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;

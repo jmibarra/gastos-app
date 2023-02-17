@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
-import { auth } from '../../firebase';
+import firebase from '../../firebase';
 
 const SignupComponent = () => {
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const SignupComponent = () => {
     const onSubmit = async (e) => {
       e.preventDefault()
      
-      await createUserWithEmailAndPassword(auth, email, password)
+      await createUserWithEmailAndPassword(firebase.auth, email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;

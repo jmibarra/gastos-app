@@ -1,47 +1,73 @@
-import firebase from 'firebase/compat/app';
+import firebase from '../firebase'
+import { getDatabase, ref, get, set, remove, push } from 'firebase/database';
+import 'firebase/compat/database';
 
-class FirebaseUtils{
+class FirebaseUtils {
+  constructor() {
+    // Crea una instancia de la base de datos de Firebase
+    this.database = getDatabase();
+  }
 
-    //Construyo la petición para el post en firebase indicando el año, el mes y el tipo de item(Gasto o ingreso)
-    peticionPost=(formItem,año,mes,tipo)=>{
-        firebase.child(tipo).child(año).child(mes).push(formItem,
-        error=>{
-            if(error)console.log(error)
-        });
+  // Agrega un elemento a la base de datos de Firebase
+  peticionPost = (formItem, año, mes, tipo) => {
+    // Obtiene una referencia a la ubicación en la base de datos donde se va a agregar el elemento
+    const dbRef = ref(this.database, `${tipo}/${año}/${mes}`);
+    // Agrega el elemento a la base de datos
+    push(dbRef, formItem).then(() => {
+      console.log('Item agregado exitosamente');
+    }).catch((error) => {
+      console.log('Error al agregar item', error);
+    });
+  };
+
+  // Actualiza un elemento existente en la base de datos de Firebase
+  peticionPut = (formItem, año, mes, tipo, id) => {
+    // Obtiene una referencia al elemento que se va a actualizar
+    const itemRef = ref(this.database, `${tipo}/${año}/${mes}/${id}`);
+    // Actualiza el elemento en la base de datos
+    set(itemRef, formItem)
+      .then(() => {
+        console.log("Item actualizado correctamente");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  // Elimina un elemento existente en la base de datos de Firebase
+  peticionDelete = (formItem, año, mes, tipo, id) => {
+    // Solicita la confirmación del usuario para eliminar el elemento
+    if (
+      window.confirm(
+        `Estás seguro que deseas eliminar el elemento ${
+          formItem && formItem.motivo
+        }?`
+      )
+    ) {
+      // Obtiene una referencia al elemento que se va a eliminar
+      const dbRef = ref(this.database, `${tipo}/${año}/${mes}/${id}`);
+      // Elimina el elemento de la base de datos
+      remove(dbRef).catch((error) => {
+        console.log(error);
+      });
     }
+  };
 
-    peticionPut=(formItem,año,mes,tipo,id)=>{
-        firebase.child(tipo).child(año).child(mes).child(id).set(
-        formItem,
-        error=>{
-            if(error)console.log(error)
-        });
+  // Obtiene los elementos existentes en la base de datos de Firebase
+  peticionGet = async (año, mes, tipo) => {
+    // Inicializa la respuesta como un arreglo vacío
+    let response = [];
+    // Obtiene los datos de la ubicación especificada en la base de datos
+    const snapshot = await get(ref(this.database, `${tipo}/${año}/${mes}`));
+    // Si los datos existen, los asigna a la respuesta
+    if (snapshot.exists()) {
+      response = snapshot.val();
     }
-
-    peticionDelete=(formItem,año,mes,tipo,id)=>{
-        if(window.confirm(`Estás seguro que deseas eliminar el elemento ${formItem && formItem.motivo}?`))
-        {
-        firebase.child(tipo).child(año).child(mes).child(id).remove(
-        error=>{
-            if(error)console.log(error)
-        });
-        }
-    }
-
-    peticionGet = async (año,mes,tipo) => {
-
-        let response = []
-        await firebase.child(tipo).child(año).child(mes).once("value", (item) => {
-            if (item.val() !== null) {  
-                response = item.val();
-            }
-        });
-
-        return response
-    
-    };
+    // Devuelve la respuesta
+    return response;
+  };
 }
 
+// Crea una instancia de la clase FirebaseUtils y la exporta
 const firebaseUtils = new FirebaseUtils();
-
 export default firebaseUtils;
