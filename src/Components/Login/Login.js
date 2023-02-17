@@ -16,12 +16,16 @@ import {
     Alert
   } from "reactstrap";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { NavLink, useNavigate } from 'react-router-dom'
 import firebase from '../../firebase';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+import { NavLink, useNavigate } from 'react-router-dom'
+
 import { SessionContext } from '../../contexts/Session';
 
 const LoginComponent = () => {
+
+    const auth = getAuth();
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -33,7 +37,7 @@ const LoginComponent = () => {
        
     const onLogin = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(firebase.auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;

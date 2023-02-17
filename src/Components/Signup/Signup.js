@@ -1,10 +1,12 @@
+import firebase from '../../firebase';
 import React, {useState} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
-import firebase from '../../firebase';
+import {  createUserWithEmailAndPassword, getAuth  } from 'firebase/auth';
 
 const SignupComponent = () => {
     const navigate = useNavigate();
+
+    const auth = getAuth();
  
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
@@ -12,7 +14,7 @@ const SignupComponent = () => {
     const onSubmit = async (e) => {
       e.preventDefault()
      
-      await createUserWithEmailAndPassword(firebase.auth, email, password)
+      await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
