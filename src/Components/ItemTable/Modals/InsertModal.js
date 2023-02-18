@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
+
 import firebaseUtils from '../../../utils/FirebaseUtils';
 import { 
     Modal, 
@@ -7,7 +8,13 @@ import {
     ModalFooter,
 } from "reactstrap";
 import Form from "./Form/Form.js"
+
+import { SessionContext } from '../../../contexts/Session';
+
+
 const InsertModalComponent = (props) => {
+
+    const { sessionState} = useContext(SessionContext)
 
     const [formItem, setformItem] = useState({
         motivo: '',
@@ -15,6 +22,7 @@ const InsertModalComponent = (props) => {
         fecha_cierre: '',
         total: '',
         estado: 'Estimado',
+        userUID: sessionState.user.uid
       });
     
         
