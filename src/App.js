@@ -2,6 +2,8 @@ import { DateProvider } from "./contexts/Date"
 import React, { useState } from "react"
 import { Container, Row} from "reactstrap"
 
+import { BrowserRouter as Router} from 'react-router-dom';
+
 
 import NavBarComponent from './Components/Common/Navbar'
 import Footer from "./Components/Common/Footer"
@@ -40,7 +42,9 @@ function App() {
                                         toogleCreditCardModal={toogleCreditCardModal}
                                     />
                                 </Row>
-                                    <MainLayout metricsOpen={metricsOpen}/>
+                                    <Router>
+                                        <MainLayout metricsOpen={metricsOpen}/>
+                                    </Router>
                                 <Row>
                                     <Footer />
                                 </Row>

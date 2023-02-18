@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
     Container,
     Row,
@@ -16,7 +16,7 @@ import {
     Alert
   } from "reactstrap";
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 import { useNavigate } from 'react-router-dom'
 
@@ -33,6 +33,23 @@ const LoginComponent = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const { sessionState, login} = useContext(SessionContext)
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              login(user);
+              navigate("/")
+            } else {
+              // User is signed out
+              // ...
+              console.log("user is logged out")
+              
+            }
+          });
+         
+    }, [])
        
     const onLogin = (e) => {
         e.preventDefault();
@@ -40,6 +57,7 @@ const LoginComponent = () => {
         .then((userCredential) => {
             // Signed in
             login(userCredential.user);
+            //localStorage.setItem('user', JSON.stringify(userCredential.user))
             navigate("/")
         })
         .catch((error) => {

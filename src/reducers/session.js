@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT } from "../actions/session";
+import { LOG_IN,LOG_OUT } from "../actions/session";
 
 export const initialState = {
     loggedIn: false,
@@ -12,6 +12,11 @@ export const sessionReducer = (state, action) => {
                 user: action.payload.user,
                 loggedIn: action.payload.loggedIn
             };
+        }
+        case LOG_OUT: {
+            return {
+                
+            }
         }
         default:
             return state

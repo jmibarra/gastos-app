@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 
-import { BrowserRouter as Router} from 'react-router-dom';
-import {Routes, Route,Navigate} from 'react-router-dom';
+import {Routes, Route,useNavigate} from 'react-router-dom';
 
 import LoginComponent from "../Login"
 import SignupComponent from "../Signup"
@@ -10,16 +9,37 @@ import DataPage from "../DataPage/DataPage"
 
 import { SessionContext } from '../../contexts/Session';
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import { Row} from "reactstrap"
+import NotFoundPage from '../Common/NotFoundPage';
 
 const MainLayout = (props) => {
 
-    const { sessionState} = useContext(SessionContext)        
+    const {login} = useContext(SessionContext)   
+    const auth = getAuth();
+    const navigate = useNavigate();
+    
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              login(user);
+            } else {
+              // User is signed out
+              // ...
+              console.log("user is logged out")
+              navigate("/login")
+            }
+          });
+         
+    }, [])
 
     return (
-        <Router>
+        
             <Routes>
-                <Route path="/" element={ sessionState.loggedIn ? (
+                <Route path="/" element={
                     <>
                         <Row>
                             <MonthMetricsComponent metricsOpen={props.metricsOpen}/>
@@ -28,12 +48,12 @@ const MainLayout = (props) => {
                             <DataPage/>
                         </Row>
                     </>
-                    ) : <Navigate replace to={"/login"} />
+                    
                 }/>  
                 <Route path="/signup" element={<SignupComponent/>}/>
-                <Route path="/login" element={<LoginComponent/>}/>  
+                <Route path="/login" element={<LoginComponent/>}/> 
+                <Route path='*' element={<NotFoundPage />}/> 
             </Routes>  
-        </Router>
   )
 }
 
