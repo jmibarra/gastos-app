@@ -10,12 +10,12 @@ export const SessionProvider = ({ children }) => {
     
     const [sessionState,dispatch] = useReducer(sessionReducer,initialState);
 
-    const login = (userId) => {
-        dispatch({type:LOG_IN, payload: {loggedIn:true, userId: userId}})
+    const login = (user) => {
+        dispatch({type:LOG_IN, payload: {loggedIn:true, user: user}})
     }
 
-    const logout = (userId) => {
-        dispatch({type:LOG_OUT, payload: {loggedIn:false, userId: ""}})
+    const logout = () => {
+        dispatch({type:LOG_OUT, payload: {loggedIn:false, user: {}}})
     }
 
     return <Provider value={{ sessionState, login,logout}}> {children}</Provider>

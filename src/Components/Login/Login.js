@@ -16,10 +16,9 @@ import {
     Alert
   } from "reactstrap";
 
-import firebase from '../../firebase';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { SessionContext } from '../../contexts/Session';
 
@@ -42,8 +41,7 @@ const LoginComponent = () => {
             // Signed in
             const user = userCredential.user;
             login(user);
-            //navigate("/")
-            console.log(user);
+            navigate("/")
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -116,8 +114,7 @@ const LoginComponent = () => {
 
                         {!sessionState.loggedIn && (
                             <div>
-                            Please login with your credentials. <br /> Look at
-                            https://reqres.in/ for api help.
+                                El usuario se loguea correctamente!
                             </div>
                         )}
                         </CardBody>

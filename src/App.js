@@ -32,37 +32,37 @@ function App() {
             <section>                                                                                                       
                 <DateProvider>
                     <SessionProvider>
-                    <div className="App">
-                        <Container fluid={true}>
-                            <Row>
-                                <NavBarComponent 
-                                    toogleMetrics={toogleMetrics} 
-                                    metricsOpen={metricsOpen}
-                                    toogleCreditCardModal={toogleCreditCardModal}
-                                />
-                            </Row>
-                            <Router>
-                                <Routes>
-                                    <Route path="/" element={ //Componentizar esto para que el enrutamiento quede mas prolijo  
-                                        <>
-                                            <Row>
-                                                <MonthMetricsComponent metricsOpen={metricsOpen}/>
-                                            </Row>
-                                            <Row>
-                                                <DataPage/>
-                                            </Row>
-                                        </>
-                                    }/>  
-                                    <Route path="/signup" element={<SignupComponent/>}/>
-                                    <Route path="/login" element={<LoginComponent/>}/>  
-                                </Routes>  
-                            </Router>
-                            <Row>
-                                <Footer />
-                            </Row>
-                        </Container>
-                        <CreditCardForm creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
-                    </div>
+                        <div className="App">
+                            <Container fluid={true}>
+                                <Row>
+                                    <NavBarComponent 
+                                        toogleMetrics={toogleMetrics} 
+                                        metricsOpen={metricsOpen}
+                                        toogleCreditCardModal={toogleCreditCardModal}
+                                    />
+                                </Row>
+                                <Router>
+                                    <Routes>
+                                        <Route path="/" element={ //Componentizar esto para que el enrutamiento quede mas prolijo  
+                                            <>
+                                                <Row>
+                                                    <MonthMetricsComponent metricsOpen={metricsOpen}/>
+                                                </Row>
+                                                <Row>
+                                                    <DataPage/>
+                                                </Row>
+                                            </>
+                                        }/>  
+                                        <Route path="/signup" element={<SignupComponent/>}/>
+                                        <Route path="/login" element={<LoginComponent/>}/>  
+                                    </Routes>  
+                                </Router>
+                                <Row>
+                                    <Footer />
+                                </Row>
+                            </Container>
+                            <CreditCardForm creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
+                        </div>
                     </SessionProvider>
                 </DateProvider>           
             </section>
