@@ -32,15 +32,14 @@ const LoginComponent = () => {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const { sessionState, login, logout} = useContext(SessionContext)
+    const { sessionState, login} = useContext(SessionContext)
        
     const onLogin = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
-            const user = userCredential.user;
-            login(user);
+            login(userCredential.user);
             navigate("/")
         })
         .catch((error) => {

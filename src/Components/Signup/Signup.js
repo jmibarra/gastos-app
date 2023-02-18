@@ -1,4 +1,3 @@
-import firebase from '../../firebase';
 import React, {useState} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {  createUserWithEmailAndPassword, getAuth  } from 'firebase/auth';

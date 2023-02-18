@@ -13,13 +13,13 @@ const MonthMetricsComponent = (props) => {
     const [CCExpenses, setCCExpenses] = useState([]);
     
     const getTotalAmount = (incomes) => {
-
         let totalIncomes = 0;
-        Object.keys(incomes).map(i => {
-            totalIncomes += parseInt(incomes[i].total);
-        })
-
-        return totalIncomes; 
+        if (Object.keys(incomes).length > 0) {
+            Object.keys(incomes).map(i => {
+                totalIncomes += parseInt(incomes[i].total);
+            })
+        }
+        return totalIncomes;
     };
 
     const totalIncomes = getTotalAmount(incomes);
