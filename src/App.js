@@ -2,7 +2,7 @@ import { DateProvider } from "./contexts/Date"
 import React, { useState } from "react"
 import { Container, Row} from "reactstrap"
 
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter, BrowserRouter as Router} from 'react-router-dom';
 
 
 import NavBarComponent from './Components/Common/Navbar'
@@ -42,9 +42,11 @@ function App() {
                                         toogleCreditCardModal={toogleCreditCardModal}
                                     />
                                 </Row>
-                                    <Router>
-                                        <MainLayout metricsOpen={metricsOpen}/>
-                                    </Router>
+                                    <BrowserRouter basename={process.env.PUBLIC_URL}>
+                                        <Router>
+                                            <MainLayout metricsOpen={metricsOpen}/>
+                                        </Router>
+                                    </BrowserRouter>
                                 <Row>
                                     <Footer />
                                 </Row>
