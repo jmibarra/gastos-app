@@ -16,7 +16,6 @@ import MainLayout from "./Components/MainLayout/MainLayout"
 
 function App() {
 
-    
     const [creditCardModalOpen, setcreditCardModalOpen] = useState(false);
     const [metricsOpen, setMetricsOpen] = useState(true);
 
@@ -30,22 +29,23 @@ function App() {
 
     return (
         <div>
-            <section>                                                                                                       
+            <section style={{ minHeight: "100vh" }}>                                                                                                       
                 <DateProvider>
                     <SessionProvider>
-                        <div className="App">
+                        <div className="App" style={{ paddingBottom: "5rem" }}>
                             <Container fluid={true}>
                                 <Row>
                                     <NavBarComponent 
                                         toogleMetrics={toogleMetrics} 
                                         metricsOpen={metricsOpen}
                                         toogleCreditCardModal={toogleCreditCardModal}
+                                        style={{ height: "5rem", backgroundColor: "#F8F9FA" }}
                                     />
                                 </Row>
                                     <BrowserRouter basename={process.env.PUBLIC_URL}>
-                                            <MainLayout metricsOpen={metricsOpen}/>
+                                            <MainLayout metricsOpen={metricsOpen} style={{ paddingTop: "2rem" }}/>
                                     </BrowserRouter>
-                                <Row>
+                                <Row style={{ height: "5rem", backgroundColor: "#F8F9FA" }}>
                                     <Footer />
                                 </Row>
                             </Container>

@@ -3,6 +3,7 @@ import {
     Col,
     Container,
     Row,
+    Button
 } from "reactstrap"
 import ItemTableComponent from '../ItemTable'
 import ItemTCTableComponent from '../ItemTCTable'
@@ -52,24 +53,36 @@ const DataPage = () => {
 
     return (
         <>
-        {sessionState.loggedIn && (
-            <Container>
-                <Row xs="2"> 
+            {sessionState.loggedIn && (
+                <Container>
+                    <Row xs="2"> 
+                        <Col>
+                            <h1>Ingresos</h1>
+                            <ItemTableComponent items={incomes} type="ingresos"/>
+                        </Col>
+                        <Col>
+                            <h1>Gastos</h1>
+                            <ItemTableComponent items={expenses} type="gastos"/>
+                        </Col>          
+                    </Row>
+                    {/* <Row>
+                        <h1>Gastos Tarjeta de crédito</h1>
+                        <ItemTCTableComponent items={CCExpenses} type="tc"/>
+                    </Row> */}
+                </Container>
+            )}
+            {!sessionState.loggedIn && (
+                <Row className="text-center mt-5">
                     <Col>
-                        <h1>Ingresos</h1>
-                        <ItemTableComponent items={incomes} type="ingresos"/>
+                        <h1 className="mb-4">Bienvenido a la aplicación de gastos</h1>
+                        <p className="mb-4">Por favor, inicie sesión o regístrese para acceder a la aplicación.</p>
+                        <div className="d-flex justify-content-center">
+                        <Button className="mx-3" color="primary" href="/login">Iniciar sesión</Button>
+                        <Button className="mx-3" color="secondary" href="/signup">Registrarse</Button>
+                        </div>
                     </Col>
-                    <Col>
-                        <h1>Gastos</h1>
-                        <ItemTableComponent items={expenses} type="gastos"/>
-                    </Col>          
-                </Row>
-                {/* <Row>
-                    <h1>Gastos Tarjeta de crédito</h1>
-                    <ItemTCTableComponent items={CCExpenses} type="tc"/>
-                </Row> */}
-            </Container>
-        )}
+                    </Row>
+            )}
         </>
     )
 }

@@ -68,7 +68,7 @@ const SignupComponent = () => {
     }
 
     return(
-        <Container>
+        <Container style={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
             <Row>
                 <Col>
                     <Card>
