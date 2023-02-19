@@ -8,6 +8,7 @@ import ItemTableComponent from '../ItemTable'
 import ItemTCTableComponent from '../ItemTCTable'
 import firebaseUtils from '../../utils/FirebaseUtils.js'
 import { DateContext } from '../../contexts/Date'
+import { SessionContext } from '../../contexts/Session'
 
 const DataPage = () => {
 
@@ -16,6 +17,8 @@ const DataPage = () => {
     const [CCExpenses, setCCExpenses] = useState([]);
 
     const { state } = useContext(DateContext);
+
+    const { sessionState} = useContext(SessionContext)
 
     useEffect(()=> {
         fetchIncomesData(state.year,state.month);
@@ -49,6 +52,7 @@ const DataPage = () => {
 
     return (
         <>
+        {sessionState.loggedIn && (
             <Container>
                 <Row xs="2"> 
                     <Col>
@@ -65,7 +69,7 @@ const DataPage = () => {
                     <ItemTCTableComponent items={CCExpenses} type="tc"/>
                 </Row>
             </Container>
-            
+        )}
         </>
     )
 }

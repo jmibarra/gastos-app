@@ -14,7 +14,7 @@ import { SessionContext } from '../../../contexts/Session';
 
 const InsertModalComponent = (props) => {
 
-    const { sessionState} = useContext(SessionContext)
+    const { sessionState } = useContext(SessionContext)
 
     const [formItem, setformItem] = useState({
         motivo: '',
@@ -22,7 +22,7 @@ const InsertModalComponent = (props) => {
         fecha_cierre: '',
         total: '',
         estado: 'Estimado',
-        userUID: sessionState.user.uid
+        userUID: sessionState.loggedIn ? sessionState.user.uid : ""
       });
     
         

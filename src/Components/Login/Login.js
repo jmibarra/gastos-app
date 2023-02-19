@@ -10,9 +10,6 @@ import {
     FormGroup,
     Label,
     Input,
-    Toast,
-    ToastBody,
-    ToastHeader,
     Alert
   } from "reactstrap";
 
@@ -30,6 +27,7 @@ const LoginComponent = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const [errorCode, setErrorCode] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const { sessionState, login} = useContext(SessionContext)
@@ -42,8 +40,6 @@ const LoginComponent = () => {
               login(user);
               navigate("/")
             } else {
-              // User is signed out
-              // ...
               console.log("user is logged out")
               
             }
@@ -61,11 +57,9 @@ const LoginComponent = () => {
             navigate("/")
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
             setError(true);
             setErrorMessage(error.message);
-            console.log(errorCode, errorMessage)
+            setErrorCode(error.code)
         });
        
     }
@@ -107,35 +101,18 @@ const LoginComponent = () => {
                             </Form>
                         </CardBody>
                     </Card>
-                    <Card className="mt-5">
-                        <CardBody>
-                        {sessionState.loggedIn && (
-                            <>
-                            <div>User is logged in on the system.</div>
-                            <div className="p-3 bg-success my-2 rounded">
-                                <Toast>
-                                <ToastHeader>Reactstrap</ToastHeader>
-                                <ToastBody>
-                                    This is a toast on a success background — check it out!
-                                </ToastBody>
-                                </Toast>
-                            </div>
-                            </>
-                        )}
+                    {error && (
+                        <Card className="mt-5">
+                            <CardBody>
+                                <Alert color="danger">
+                                    { errorCode === "auth/user-not-found" ? 
+                                        (<p>El usuario ingresado no existe, puede registrarte <a href='/signup'>aquí</a></p>) : 
+                                        errorMessage}
+                                </Alert>
+                            </CardBody>
+                        </Card>
+                    )}
 
-                        {error && (
-                            <Alert color="danger">
-                                {errorMessage}  
-                            </Alert>
-                        )}
-
-                        {!sessionState.loggedIn && (
-                            <div>
-                                El usuario se loguea correctamente!
-                            </div>
-                        )}
-                        </CardBody>
-                    </Card>
                 </Col>
             </Row>
         </Container>

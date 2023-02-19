@@ -4,6 +4,7 @@ import { DateContext } from "../../contexts/Date";
 import { Col,Collapse,Row,Toast, ToastBody, ToastHeader} from "reactstrap"
 import { AiFillCreditCard,AiFillDollarCircle } from 'react-icons/ai';
 import firebaseUtils from "../../utils/FirebaseUtils";
+import { SessionContext } from "../../contexts/Session";
 
 const MonthMetricsComponent = (props) => {
 
@@ -11,6 +12,8 @@ const MonthMetricsComponent = (props) => {
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [CCExpenses, setCCExpenses] = useState([]);
+
+    const { sessionState} = useContext(SessionContext)
     
     const getTotalAmount = (incomes) => {
         let totalIncomes = 0;
@@ -57,51 +60,55 @@ const MonthMetricsComponent = (props) => {
     }
 
     return( 
-        <Collapse isOpen={props.metricsOpen}>
-            <Row className="p-3 bg-dark my-2 rounded">
-                <Col xs="6" sm="4">
-                    <Toast>
-                        <ToastHeader>
-                            <h3>Ingresos</h3>
-                        </ToastHeader>
-                        <ToastBody>
-                            <h3><AiFillDollarCircle/> {totalIncomes}</h3>
-                        </ToastBody>
-                    </Toast>
-                </Col>
-                <Col xs="6" sm="4">
-                    <Toast>
-                        <ToastHeader>
-                            <h3> Gastos </h3>
-                        </ToastHeader>
-                        <ToastBody>
-                            <h3> <AiFillDollarCircle/>  {regularExpenses}</h3> <br/>
-                            <h3><AiFillCreditCard/> {creditCardExpenses} </h3>
-                            <hr></hr>
-                            <h3> <AiFillDollarCircle/> {regularExpenses + creditCardExpenses} </h3>
-                        </ToastBody>
-                    </Toast>
-                </Col>
-                <Col xs="6" sm="4">
-                    <Toast>
-                        <ToastHeader>
-                            <h3>Sobrante</h3>
-                        </ToastHeader>
-                        <ToastBody>
-                        <h3> <AiFillDollarCircle/>{totalIncomes - (regularExpenses + creditCardExpenses)} </h3>
-                        </ToastBody>
-                    </Toast>
-                    <Toast>
-                        <ToastHeader>
-                            <h3>Ahorros</h3>
-                        </ToastHeader>
-                        <ToastBody>
-                        <h3> <AiFillDollarCircle/> </h3>
-                        </ToastBody>
-                    </Toast>
-                </Col>  
-            </Row>
-        </Collapse>
+        <>
+        {sessionState.loggedIn && (
+            <Collapse isOpen={props.metricsOpen}>
+                <Row className="p-3 bg-dark my-2 rounded">
+                    <Col xs="6" sm="4">
+                        <Toast>
+                            <ToastHeader>
+                                <h3>Ingresos</h3>
+                            </ToastHeader>
+                            <ToastBody>
+                                <h3><AiFillDollarCircle/> {totalIncomes}</h3>
+                            </ToastBody>
+                        </Toast>
+                    </Col>
+                    <Col xs="6" sm="4">
+                        <Toast>
+                            <ToastHeader>
+                                <h3> Gastos </h3>
+                            </ToastHeader>
+                            <ToastBody>
+                                <h3> <AiFillDollarCircle/>  {regularExpenses}</h3> <br/>
+                                <h3><AiFillCreditCard/> {creditCardExpenses} </h3>
+                                <hr></hr>
+                                <h3> <AiFillDollarCircle/> {regularExpenses + creditCardExpenses} </h3>
+                            </ToastBody>
+                        </Toast>
+                    </Col>
+                    <Col xs="6" sm="4">
+                        <Toast>
+                            <ToastHeader>
+                                <h3>Sobrante</h3>
+                            </ToastHeader>
+                            <ToastBody>
+                            <h3> <AiFillDollarCircle/>{totalIncomes - (regularExpenses + creditCardExpenses)} </h3>
+                            </ToastBody>
+                        </Toast>
+                        <Toast>
+                            <ToastHeader>
+                                <h3>Ahorros</h3>
+                            </ToastHeader>
+                            <ToastBody>
+                            <h3> <AiFillDollarCircle/> </h3>
+                            </ToastBody>
+                        </Toast>
+                    </Col>  
+                </Row>
+            </Collapse>
+        )}
+        </>
     );
 }
 
