@@ -1,91 +1,140 @@
-import React, {useState} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword, getAuth  } from 'firebase/auth';
+import React, {useState, useEffect, useContext} from 'react';
+import {
+    Container,
+    Row,
+    Col,
+    Card,
+    CardBody,
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Toast,
+    ToastBody,
+    ToastHeader,
+    Alert
+} from "reactstrap";
+import { getAuth, createUserWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import { SessionContext } from '../../contexts/Session';
 
 const SignupComponent = () => {
-    const navigate = useNavigate();
 
     const auth = getAuth();
- 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('');
- 
-    const onSubmit = async (e) => {
-      e.preventDefault()
-     
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
-            navigate("/login")
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-            // ..
-        });
- 
-   
-    }
- 
-  return (
-    <main >        
-        <section>
-            <div>
-                <div>                  
-                    <h1> FocusApp </h1>                                                                            
-                    <form>                                                                                            
-                        <div>
-                            <label htmlFor="email-address">
-                                Email address
-                            </label>
-                            <input
-                                type="email"
-                                label="Email address"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}  
-                                required                                    
-                                placeholder="Email address"                                
-                            />
-                        </div>
+    const navigate = useNavigate();
 
-                        <div>
-                            <label htmlFor="password">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                label="Create password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)} 
-                                required                                 
-                                placeholder="Password"              
-                            />
-                        </div>                                             
-                        
-                        <button
-                            type="submit" 
-                            onClick={onSubmit}                        
-                        >  
-                            Sign up                                
-                        </button>
-                                                                     
-                    </form>
-                   
-                    <p>
-                        Already have an account?{' '}
-                        <NavLink to="/login" >
-                            Sign in
-                        </NavLink>
-                    </p>                   
-                </div>
-            </div>
-        </section>
-    </main>
-  )
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    
+    const { login } = useContext(SessionContext);
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              login(user);
+              navigate("/")
+            } else {
+              console.log("user is logged out") 
+            }
+          });
+         
+    }, [])
+
+    const onSignup = (e) => {
+        e.preventDefault();
+        if (password === confirmPassword) {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed up
+                    login(userCredential.user);
+                    setSuccessMessage("Account created successfully!");
+                    navigate("/");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setError(true);
+                    setErrorMessage(errorMessage);
+                });
+        } else {
+            setError(true);
+            setErrorMessage("Passwords do not match!");
+        }
+    }
+
+    return(
+        <Container>
+            <Row>
+                <Col>
+                    <Card>
+                        <CardBody>
+                            {successMessage && 
+                                <Toast className="mb-4">
+                                    <ToastHeader>
+                                        Success
+                                    </ToastHeader>
+                                    <ToastBody>
+                                        {successMessage}
+                                    </ToastBody>
+                                </Toast>
+                            }
+                            <Form onSubmit={onSignup}>
+                                <FormGroup className="pb-2 mr-sm-2 mb-sm-0">
+                                    <Label for="exampleEmail" className="mr-sm-2">
+                                        Email
+                                    </Label>
+                                    <Input
+                                        type="email"
+                                        name="email"
+                                        id="exampleEmail"
+                                        placeholder="something@idk.cool"
+                                        onChange={(ev) => setEmail(ev.currentTarget.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="pb-2 mr-sm-2 mb-sm-0">
+                                    <Label for="examplePassword" className="mr-sm-2">
+                                        Password
+                                    </Label>
+                                    <Input
+                                        type="password"
+                                        name="password"
+                                        id="examplePassword"
+                                        placeholder="don't tell!"
+                                        onChange={(ev) => setPassword(ev.currentTarget.value)}
+                                    />
+                                </FormGroup>
+                                <FormGroup className="pb-2 mr-sm-2 mb-sm-0">
+                                    <Label for="exampleConfirmPassword" className="mr-sm-2">
+                                        Confirm Password
+                                    </Label>
+                                    <Input
+                                        type="password"
+                                        name="confirmPassword"
+                                        id="exampleConfirmPassword"
+                                        placeholder="confirm password"
+                                        onChange={(ev) => setConfirmPassword(ev.currentTarget.value)}
+                                    />
+                                </FormGroup>
+                                <Button type="submit" color="primary">
+                                    Signup
+                                </Button>
+                            </Form>
+                            {error && 
+                                <Alert color="danger" className="mt-3">
+                                    {errorMessage}
+                                </Alert>
+                            }
+                        </CardBody>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
+    )
 }
 
 export default SignupComponent
