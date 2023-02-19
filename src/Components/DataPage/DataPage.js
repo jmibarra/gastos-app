@@ -64,10 +64,10 @@ const DataPage = () => {
                         <ItemTableComponent items={expenses} type="gastos"/>
                     </Col>          
                 </Row>
-                <Row>
+                {/* <Row>
                     <h1>Gastos Tarjeta de crédito</h1>
                     <ItemTCTableComponent items={CCExpenses} type="tc"/>
-                </Row>
+                </Row> */}
             </Container>
         )}
         </>
