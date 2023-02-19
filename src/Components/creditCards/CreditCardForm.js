@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Cards from "react-credit-cards";
 import "./css/credit-card.css";
 import "./css/form-style.css";
 import { 
@@ -87,15 +86,6 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
                 <ModalHeader>Crear nueva tarjeta</ModalHeader>
                 <ModalBody>
                     <div className="credit-card ">
-                        <Cards
-                            locale={{ valid: "Expira" }}
-                            placeholders={{ name: "ALIAS TC" }}
-                            cvc={formData.cvc}
-                            expiry={formData.expiry+"/"+formData.expiryyear}
-                            focused={formData.focus}
-                            name={formData.alias}
-                            number={formData.number}
-                        />
                     </div>
                     <div className="card">
                         <form className="payment-form">
