@@ -14,9 +14,8 @@ export const sessionReducer = (state, action) => {
             };
         }
         case LOG_OUT: {
-            return {
-                
-            }
+            return initialState;
+            
         }
         default:
             return state
