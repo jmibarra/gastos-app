@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/gastos-app/precache-manifest.2809273593e06da1775d985790c31a7d.js"
+  "/gastos-app/precache-manifest.105dc84bf14524139c5667a20c5858d3.js"
 );
 
 workbox.clientsClaim();
