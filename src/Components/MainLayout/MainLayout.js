@@ -30,7 +30,7 @@ const MainLayout = (props) => {
               // User is signed out
               // ...
               console.log("user is logged out")
-              //navigate("/login")
+              navigate("/login")
             }
           });
          

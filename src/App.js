@@ -43,9 +43,7 @@ function App() {
                                     />
                                 </Row>
                                     <BrowserRouter basename={process.env.PUBLIC_URL}>
-                                        <Router>
                                             <MainLayout metricsOpen={metricsOpen}/>
-                                        </Router>
                                     </BrowserRouter>
                                 <Row>
                                     <Footer />
