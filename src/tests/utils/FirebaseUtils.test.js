@@ -70,8 +70,3 @@ test('Agregar elemento a la base de datos', async () => {
       { id: '2', motivo: 'Transporte', monto: 50 },
     ]);
   });
-
-
-
-  
-  
