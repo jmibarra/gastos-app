@@ -11,8 +11,8 @@ beforeAll(async () => {
     const formItem1 = { id: '1', motivo: 'Comida', monto: 100 }
     const formItem2 = { id: '2', motivo: 'Transporte', monto: 50 }
 
-    await firebaseUtils.peticionPost(formItem1, 1900, 2, 'gastos', 'TestUser'+uniqueId);
-    await firebaseUtils.peticionPost(formItem2, 1900, 2, 'gastos', 'TestUser'+uniqueId);
+    await firebaseUtils.peticionPost(formItem1, 1900, 2, 'testItemsGeneral', 'TestUser'+uniqueId);
+    await firebaseUtils.peticionPost(formItem2, 1900, 2, 'testItemsGeneral', 'TestUser'+uniqueId);
 });
 
 afterAll(async () => {
@@ -62,10 +62,10 @@ test('Agregar elemento a la base de datos', async () => {
   test('debe obtener los gastos de febrero de 1900', async () => {
   
     // Llamamos al método peticionGet para obtener los datos de la base de datos
-    const data = await firebaseUtils.peticionGet('1900', '2', 'gastos', 'TestUser'+uniqueId);
+    const data = await firebaseUtils.peticionGet('1900', '2', 'testItemsGeneral', 'TestUser'+uniqueId);
   
     // Verificamos que se devuelvan los datos esperados
-    expect(data).toEqual([
+    expect(Object.values(data)).toEqual([
       { id: '1', motivo: 'Comida', monto: 100 },
       { id: '2', motivo: 'Transporte', monto: 50 },
     ]);
