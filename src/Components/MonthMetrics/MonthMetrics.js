@@ -42,19 +42,19 @@ const MonthMetricsComponent = (props) => {
     },[CCExpenses,state.year,state.month]);
 
     async function fetchIncomesData(year,month){
-        const responseObject = await firebaseUtils.peticionGet(year,month,"ingresos");
+        const responseObject = await firebaseUtils.peticionGet(year,month,"ingresos",sessionState.loggedIn ? sessionState.user.uid : "");
         if(responseObject)
             setIncomes(responseObject)
     }
 
     async function fetchExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"gastos");
+        let responseObject = await firebaseUtils.peticionGet(year,month,"gastos",sessionState.loggedIn ? sessionState.user.uid : "");
         if(responseObject)
             setExpenses(responseObject)
     }
 
     async function fetchCCExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"tc");
+        let responseObject = await firebaseUtils.peticionGet(year,month,"tc",sessionState.loggedIn ? sessionState.user.uid : "");
         if(responseObject)
             setCCExpenses(responseObject)
     }

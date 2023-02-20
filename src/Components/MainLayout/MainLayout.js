@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 
-import {Routes, Route,useNavigate} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 
 import LoginComponent from "../Login"
 import SignupComponent from "../Signup"
@@ -18,7 +18,6 @@ const MainLayout = (props) => {
 
     const {login} = useContext(SessionContext)   
     const auth = getAuth();
-    const navigate = useNavigate();
     
     useEffect(()=>{
         onAuthStateChanged(auth, (user) => {
@@ -34,24 +33,22 @@ const MainLayout = (props) => {
     }, [])
 
     return (
-        
-            <Routes>
-                <Route path="/" element={
-                    <>
-                        <Row>
-                            <MonthMetricsComponent metricsOpen={props.metricsOpen}/>
-                        </Row>
-                        <Row>
-                            <DataPage/>
-                        </Row>
-                    </>
-                    
-                }/>  
-                <Route path="/signup" element={<SignupComponent/>}/>
-                <Route path="/login" element={<LoginComponent/>}/> 
-                <Route path='*' element={<NotFoundPage />}/> 
-            </Routes>  
-  )
+        <Routes>
+            <Route path="/" element={
+                <>
+                    <Row>
+                        <MonthMetricsComponent metricsOpen={props.metricsOpen}/>
+                    </Row>
+                    <Row>
+                        <DataPage/>
+                    </Row>
+                </>
+            }/>  
+            <Route path="/signup" element={<SignupComponent/>}/>
+            <Route path="/login" element={<LoginComponent/>}/> 
+            <Route path='*' element={<NotFoundPage />}/> 
+        </Routes>  
+    )
 }
 
 export default MainLayout

@@ -10,8 +10,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button,
-  Dropdown
+  Button
 } from 'reactstrap';
 import {AiFillSignal,AiOutlineCreditCard } from 'react-icons/ai';
 import { DateContext } from '../../contexts/Date';

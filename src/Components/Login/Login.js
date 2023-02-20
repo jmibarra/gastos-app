@@ -30,7 +30,7 @@ const LoginComponent = () => {
     const [errorCode, setErrorCode] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const { sessionState, login} = useContext(SessionContext)
+    const { login} = useContext(SessionContext)
 
     useEffect(()=>{
         onAuthStateChanged(auth, (user) => {

@@ -56,7 +56,6 @@ const SignupComponent = () => {
                     navigate("/");
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
                     setError(true);
                     setErrorMessage(errorMessage);

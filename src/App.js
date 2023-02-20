@@ -2,7 +2,7 @@ import { DateProvider } from "./contexts/Date"
 import React, { useState } from "react"
 import { Container, Row} from "reactstrap"
 
-import { BrowserRouter, BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 
 
 import NavBarComponent from './Components/Common/Navbar'

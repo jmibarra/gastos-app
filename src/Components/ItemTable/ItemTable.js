@@ -7,10 +7,14 @@ import InsertModalComponent from './Modals/InsertModal.js';
 import EditModalComponent from './Modals/EditModal.js';
 import firebaseUtils from '../../utils/FirebaseUtils.js'
 import { DateContext } from '../../contexts/Date.js';
+import { SessionContext } from '../../contexts/Session.js';
+
 
 const ItemTableComponent = ({items,type}) => {
 
     const { state } = useContext(DateContext);
+
+    const { sessionState } = useContext(SessionContext)
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
     const [editModalOpen,setEditModalOpen] = useState(false);
@@ -23,7 +27,7 @@ const ItemTableComponent = ({items,type}) => {
     }
 
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,state.year,state.month,type,id)
+        firebaseUtils.peticionDelete(item,state.year,state.month,type,id,sessionState.loggedIn ? sessionState.user.uid : "")
     }
 
     const updateItemModal = (item,id) => {

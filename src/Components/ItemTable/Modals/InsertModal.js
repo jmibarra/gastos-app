@@ -34,7 +34,7 @@ const InsertModalComponent = (props) => {
     }
         
     const doPost = () => {
-        firebaseUtils.peticionPost(formItem,props.year,props.month,props.tipo)
+        firebaseUtils.peticionPost(formItem,props.year,props.month,props.tipo,sessionState.loggedIn ? sessionState.user.uid : "")
         props.closeModal();
         
     }

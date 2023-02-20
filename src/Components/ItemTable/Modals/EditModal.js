@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { 
     Modal, 
     ModalBody, 
@@ -7,12 +7,15 @@ import {
 } from "reactstrap";
 import Form from "./Form/Form.js"
 import firebaseUtils from "../../../utils/FirebaseUtils";
+import { SessionContext } from '../../../contexts/Session.js';
 
 
 const EditModalComponent = (props) => {
 
+    const { sessionState } = useContext(SessionContext)
+
     const updateItem = () => {
-        firebaseUtils.peticionPut(props.formItem,props.year,props.month,props.tipo,props.formItemId);
+        firebaseUtils.peticionPut(props.formItem,props.year,props.month,props.tipo,props.formItemId,sessionState.loggedIn ? sessionState.user.uid : "");
         props.closeModal();
     }
 
