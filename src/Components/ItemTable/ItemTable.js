@@ -51,6 +51,7 @@ const ItemTableComponent = ({items,type}) => {
                         <th>Motivo</th>
                         <th>Fecha</th>
                         <th>Importe</th>
+                        <th>Categoria</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -61,6 +62,7 @@ const ItemTableComponent = ({items,type}) => {
                         <td>{items[i].motivo}</td>
                         <td>{items[i].fecha}</td>
                         <td>$ {items[i].total}</td>
+                        <td>{items[i].categoria}</td>
                         <td><StatusBadgeComponent estado={items[i].estado}/></td>
                         <td>
                             <ButtonGroup>
