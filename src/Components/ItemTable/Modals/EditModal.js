@@ -23,7 +23,7 @@ const EditModalComponent = (props) => {
         <Modal isOpen={props.isOpen}>
             <ModalHeader>Editar Registro</ModalHeader>
             <ModalBody>
-                <Form handleChange={props.handleChange} formItem={props.formItem} />
+                <Form handleChange={props.handleChange} formItem={props.formItem} type={props.tipo}/>
             </ModalBody>
             <ModalFooter>
                 <button className="btn btn-primary" onClick={()=>updateItem()}>Editar</button>{"   "}

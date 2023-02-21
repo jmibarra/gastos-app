@@ -44,7 +44,7 @@ const InsertModalComponent = (props) => {
         <Modal isOpen={props.isOpen}>
             <ModalHeader>{props.title}</ModalHeader>
             <ModalBody>
-                <Form handleChange={handleChange}/>
+                <Form handleChange={handleChange} type={props.tipo}/>
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-primary" onClick={()=>doPost(props.tipo)}>Insertar</button>{"   "}

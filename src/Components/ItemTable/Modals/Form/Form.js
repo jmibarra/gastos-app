@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import ItemCategorySelector from '../ItemCategorySelector';
 
-const TCForm = ({handleChange,formItem}) => {
+const TCForm = ({handleChange,formItem, type}) => {
   return (
     <>
         <Form>
@@ -58,12 +58,13 @@ const TCForm = ({handleChange,formItem}) => {
                 </InputGroup>
 
             </FormGroup>
-            <FormGroup>
+            {type==="gastos" && (<FormGroup>
                 <Label for="category">
                     Categoría
                 </Label>
                 <ItemCategorySelector formItem={formItem} handleChange={handleChange}/>
             </FormGroup>
+            )}
             <FormGroup>
                 <Label for="estado">
                     Estado
