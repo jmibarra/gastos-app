@@ -3,14 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconManager from '../../../utils/IconManager';
 
 const ItemCategorySelector = (props) => {
-  const [categorias, setCategorias] = useState([
-    { id: 1, nombre: 'Comida' },
-    { id: 2, nombre: 'Transporte'},
-    { id: 3, nombre: 'Entretenimiento'},
-    { id: 4, nombre: 'Ropa' },
-  ]);
 
-  const [iconName, setIconName] = useState("faList");
+  const [iconName, setIconName] = useState(props.formItem && props.formItem.categoria);
 
   const icon = IconManager.icons[iconName];
 
@@ -34,10 +28,10 @@ const ItemCategorySelector = (props) => {
           value={props.formItem && props.formItem.categoria}
           onChange={handleCategoriaSeleccionada}
         >
-          <option value="">Seleccione una opción</option>
-          {categorias.map((categoria) => (
-            <option key={categoria.id} value={categoria.nombre}>
-              {categoria.nombre}
+          { !props.formItem && (<option value="">Seleccione una opción</option>)}
+          {Object.keys(IconManager.icons).map((categoria) => (
+            <option key={categoria} value={categoria}>
+              {categoria}
             </option>
           ))}
         </select>

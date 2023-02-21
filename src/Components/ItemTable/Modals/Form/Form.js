@@ -86,7 +86,6 @@ const ItemForm = ({handleChange,formItem, type}) => {
                         Pago
                     </option>
                 </Input>
-
             </FormGroup>
         </Form>
     </>

@@ -10,10 +10,7 @@ const ItemCategoryRender = (props) => {
     const iconColor = IconManager.iconColor[props.category]
 
     return (
-        <Badge
-            color={iconColor}
-            pill
-        >
+        <Badge color={iconColor} pill>
             <FontAwesomeIcon icon={icon} /> {props.category}
         </Badge>
     );

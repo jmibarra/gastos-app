@@ -21,7 +21,7 @@ const InsertModalComponent = (props) => {
         fecha: '',
         fecha_cierre: '',
         total: '',
-        categoria: 'Seleccione una opción',
+        categoria: '',
         estado: 'Estimado',
         userUID: sessionState.loggedIn ? sessionState.user.uid : ""
       });
