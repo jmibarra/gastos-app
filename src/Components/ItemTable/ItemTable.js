@@ -8,6 +8,7 @@ import EditModalComponent from './Modals/EditModal.js';
 import firebaseUtils from '../../utils/FirebaseUtils.js'
 import { DateContext } from '../../contexts/Date.js';
 import { SessionContext } from '../../contexts/Session.js';
+import ItemCategoryRender from './TableElements/ItemCategoryRender.js';
 
 
 const ItemTableComponent = ({items,type}) => {
@@ -62,7 +63,7 @@ const ItemTableComponent = ({items,type}) => {
                         <td>{items[i].motivo}</td>
                         <td>{items[i].fecha}</td>
                         <td>$ {items[i].total}</td>
-                        <td>{items[i].categoria}</td>
+                        <td><ItemCategoryRender category={items[i].categoria}/></td>
                         <td><StatusBadgeComponent estado={items[i].estado}/></td>
                         <td>
                             <ButtonGroup>

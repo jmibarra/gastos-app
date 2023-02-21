@@ -8,7 +8,7 @@ import {
     InputGroupText 
 
 } from "reactstrap";
-import ItemCategory from '../../../Common/ItemCategory';
+import ItemCategorySelector from '../ItemCategorySelector';
 
 const TCForm = ({handleChange,formItem}) => {
   return (
@@ -62,7 +62,7 @@ const TCForm = ({handleChange,formItem}) => {
                 <Label for="category">
                     Categoría
                 </Label>
-                <ItemCategory formItem={formItem} handleChange={handleChange}/>
+                <ItemCategorySelector formItem={formItem} handleChange={handleChange}/>
             </FormGroup>
             <FormGroup>
                 <Label for="estado">

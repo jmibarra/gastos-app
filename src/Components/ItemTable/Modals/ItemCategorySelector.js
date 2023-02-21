@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils, faCar, faFilm, faTshirt, faList } from '@fortawesome/free-solid-svg-icons';
 
-const ItemCategory = (props) => {
+const ItemCategorySelector = (props) => {
   const [categorias, setCategorias] = useState([
     { id: 1, nombre: 'Comida', icono: faUtensils },
     { id: 2, nombre: 'Transporte', icono: faCar },
@@ -52,4 +52,4 @@ const ItemCategory = (props) => {
   );
 };
 
-export default ItemCategory;
+export default ItemCategorySelector;
