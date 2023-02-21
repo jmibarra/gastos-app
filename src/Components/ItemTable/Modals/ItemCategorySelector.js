@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUtensils, faCar, faFilm, faTshirt, faList } from '@fortawesome/free-solid-svg-icons';
+import IconManager from '../../../utils/IconManager';
 
 const ItemCategorySelector = (props) => {
   const [categorias, setCategorias] = useState([
-    { id: 1, nombre: 'Comida', icono: faUtensils },
-    { id: 2, nombre: 'Transporte', icono: faCar },
-    { id: 3, nombre: 'Entretenimiento', icono: faFilm },
-    { id: 4, nombre: 'Ropa', icono: faTshirt },
+    { id: 1, nombre: 'Comida' },
+    { id: 2, nombre: 'Transporte'},
+    { id: 3, nombre: 'Entretenimiento'},
+    { id: 4, nombre: 'Ropa' },
   ]);
 
   const [iconName, setIconName] = useState("faList");
 
-  const icon = {
-    'Comida': faUtensils,
-    'Transporte': faCar,
-    'Entretenimiento': faFilm,
-    'Ropa':faTshirt,
-    'faList': faList
-  }[iconName];
+  const icon = IconManager.icons[iconName];
 
   const handleCategoriaSeleccionada = (event) => {
     setIconName(event.target.value);

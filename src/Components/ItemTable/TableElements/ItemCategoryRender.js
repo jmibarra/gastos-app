@@ -1,25 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUtensils, faCar, faFilm, faTshirt, faList } from '@fortawesome/free-solid-svg-icons';
 import { Badge } from 'reactstrap';
+import IconManager from '../../../utils/IconManager';
 
 const ItemCategoryRender = (props) => {
 
-    const icon = {
-        'Comida': faUtensils,
-        'Transporte': faCar,
-        'Entretenimiento': faFilm,
-        'Ropa': faTshirt,
-        'Lista': faList
-    }[props.category];
+    const icon = IconManager.icons[props.category];
 
-    const iconColor = {
-        'Comida': "primary",
-        'Transporte': "",
-        'Entretenimiento': "success",
-        'Ropa': "danger",
-        'Lista': "warning"
-    }[props.category];
+    const iconColor = IconManager.iconColor[props.category]
 
     return (
         <Badge

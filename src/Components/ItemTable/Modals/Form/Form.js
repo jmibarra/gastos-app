@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 import ItemCategorySelector from '../ItemCategorySelector';
 
-const TCForm = ({handleChange,formItem, type}) => {
+const ItemForm = ({handleChange,formItem, type}) => {
   return (
     <>
         <Form>
@@ -93,4 +93,4 @@ const TCForm = ({handleChange,formItem, type}) => {
   )
 }
 
-export default TCForm
+export default ItemForm
