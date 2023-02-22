@@ -1,13 +1,13 @@
 {
   "main.css": "/gastos-app/static/css/main.8e5f01b9.chunk.css",
-  "main.js": "/gastos-app/static/js/main.aa668078.chunk.js",
-  "main.js.map": "/gastos-app/static/js/main.aa668078.chunk.js.map",
+  "main.js": "/gastos-app/static/js/main.136c9c51.chunk.js",
+  "main.js.map": "/gastos-app/static/js/main.136c9c51.chunk.js.map",
   "static/js/1.e45b596c.chunk.js": "/gastos-app/static/js/1.e45b596c.chunk.js",
   "static/js/1.e45b596c.chunk.js.map": "/gastos-app/static/js/1.e45b596c.chunk.js.map",
   "runtime~main.js": "/gastos-app/static/js/runtime~main.32d67753.js",
   "runtime~main.js.map": "/gastos-app/static/js/runtime~main.32d67753.js.map",
   "static/css/main.8e5f01b9.chunk.css.map": "/gastos-app/static/css/main.8e5f01b9.chunk.css.map",
   "index.html": "/gastos-app/index.html",
-  "precache-manifest.cfa9baa65bb33d0030a946f48d7b624f.js": "/gastos-app/precache-manifest.cfa9baa65bb33d0030a946f48d7b624f.js",
+  "precache-manifest.fd0b3ea5f569bc0d4bbcd6c2e3d38cb6.js": "/gastos-app/precache-manifest.fd0b3ea5f569bc0d4bbcd6c2e3d38cb6.js",
   "service-worker.js": "/gastos-app/service-worker.js"
 }
