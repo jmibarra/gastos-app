@@ -77,8 +77,8 @@ const DataPage = () => {
                         <h1 className="mb-4">Bienvenido a la aplicación de gastos</h1>
                         <p className="mb-4">Por favor, inicie sesión o regístrese para acceder a la aplicación.</p>
                         <div className="d-flex justify-content-center">
-                        <Button className="mx-3" color="primary" href="/login">Iniciar sesión</Button>
-                        <Button className="mx-3" color="secondary" href="/signup">Registrarse</Button>
+                        <Button className="mx-3" color="primary" href="/gastos-app/login">Iniciar sesión</Button>
+                        <Button className="mx-3" color="secondary" href="/gastos-app/signup">Registrarse</Button>
                         </div>
                     </Col>
                     </Row>

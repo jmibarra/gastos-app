@@ -13,13 +13,13 @@ const Footer = () => {
             <div className="col-12 col-md-6 d-flex justify-content-md-end">
               <ul className="list-inline mb-0">
                 <li className="list-inline-item">
-                  <a href="/">Inicio</a>
+                  <a href="/gastos-app/">Inicio</a>
                 </li>
                 <li className="list-inline-item">
-                  <a href="/about">Acerca de</a>
+                  <a href="/gastos-app/about">Acerca de</a>
                 </li>
                 <li className="list-inline-item">
-                  <a href="/contact">Contacto</a>
+                  <a href="/gastos-app/contact">Contacto</a>
                 </li>
               </ul>
             </div>

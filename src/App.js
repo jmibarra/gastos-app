@@ -42,9 +42,9 @@ function App() {
                                         style={{ height: "5rem", backgroundColor: "#F8F9FA" }}
                                     />
                                 </Row>
-                                    <BrowserRouter basename={process.env.PUBLIC_URL}>
+                                <BrowserRouter basename="/gastos-app" >
                                             <MainLayout metricsOpen={metricsOpen} style={{ paddingTop: "2rem" }}/>
-                                    </BrowserRouter>
+                                </BrowserRouter>
                                 <Row style={{ height: "5rem", backgroundColor: "#F8F9FA" }}>
                                     <Footer />
                                 </Row>
