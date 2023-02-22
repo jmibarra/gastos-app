@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "c3bfa423138005a74647",
+    "revision": "6ad63260a46cf75e1101",
     "url": "/gastos-app/static/css/main.8e5f01b9.chunk.css"
   },
   {
-    "revision": "c3bfa423138005a74647",
-    "url": "/gastos-app/static/js/main.c3bfa423.chunk.js"
+    "revision": "6ad63260a46cf75e1101",
+    "url": "/gastos-app/static/js/main.6ad63260.chunk.js"
   },
   {
     "revision": "2b3b19197480248c6d74",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/gastos-app/static/js/runtime~main.32d67753.js"
   },
   {
-    "revision": "67ea9f33ca6a85659c01ac5ddc5dc1e0",
+    "revision": "5250d75aa1e107167563f5eda1d1fd4f",
     "url": "/gastos-app/index.html"
   }
 ];
