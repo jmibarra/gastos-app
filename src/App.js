@@ -2,7 +2,7 @@ import { DateProvider } from "./contexts/Date"
 import React, { useState } from "react"
 import { Container, Row} from "reactstrap"
 
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter, Navigate} from 'react-router-dom';
 
 
 import NavBarComponent from './Components/Common/Navbar'
@@ -26,6 +26,8 @@ function App() {
     const toogleCreditCardModal = () => {
         setcreditCardModalOpen(!creditCardModalOpen);
     }
+
+
 
     return (
         <div>

@@ -10,16 +10,18 @@ import ItemTCTableComponent from '../ItemTCTable'
 import firebaseUtils from '../../utils/FirebaseUtils.js'
 import { DateContext } from '../../contexts/Date'
 import { SessionContext } from '../../contexts/Session'
+import { useNavigate } from 'react-router-dom'
 
 const DataPage = () => {
+    
 
     const [incomes, setIncomes] = useState([]);
     const [expenses, setExpenses] = useState([]);
     const [CCExpenses, setCCExpenses] = useState([]);
 
     const { state } = useContext(DateContext);
-
     const { sessionState } = useContext(SessionContext)
+    const navigate = useNavigate();
 
     useEffect(()=> {
         fetchIncomesData(state.year,state.month);
@@ -51,6 +53,15 @@ const DataPage = () => {
             setCCExpenses(responseObject)
     }
 
+    const navigateToLogin = () => {
+        navigate("/login")
+    } 
+
+    const navigateToSignup = () => {
+        navigate("/signup")
+    } 
+
+    
     return (
         <>
             {sessionState.loggedIn && (
@@ -77,8 +88,8 @@ const DataPage = () => {
                         <h1 className="mb-4">Bienvenido a la aplicación de gastos</h1>
                         <p className="mb-4">Por favor, inicie sesión o regístrese para acceder a la aplicación.</p>
                         <div className="d-flex justify-content-center">
-                        <Button className="mx-3" color="primary" href="/gastos-app/login">Iniciar sesión</Button>
-                        <Button className="mx-3" color="secondary" href="/gastos-app/signup">Registrarse</Button>
+                        <Button className="mx-3" color="primary" onClick={navigateToLogin}>Iniciar sesión</Button>
+                        <Button className="mx-3" color="secondary" onClick={navigateToSignup}>Registrarse</Button>
                         </div>
                     </Col>
                     </Row>
