@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "https://jmibarra.github.io/gastos-app/precache-manifest.a924a0d13ec091a0459ff3021ffd9d87.js"
+  "/gastos-app/precache-manifest.18931dd5b9e6462caaf909611e43e5c3.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("https://jmibarra.github.io/gastos-app/index.html", {
+workbox.routing.registerNavigationRoute("/gastos-app/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
