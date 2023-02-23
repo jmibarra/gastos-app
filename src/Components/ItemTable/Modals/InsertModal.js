@@ -35,7 +35,7 @@ const InsertModalComponent = (props) => {
     }
         
     const doPost = () => {
-        firebaseUtils.peticionPost(formItem,props.year,props.month,props.tipo,sessionState.loggedIn ? sessionState.user.uid : "")
+        firebaseUtils.peticionPost(formItem,props.year,props.month,props.type,sessionState.loggedIn ? sessionState.user.uid : "")
         props.closeModal();
         
     }
@@ -44,10 +44,10 @@ const InsertModalComponent = (props) => {
         <Modal isOpen={props.isOpen}>
             <ModalHeader>{props.title}</ModalHeader>
             <ModalBody>
-                <Form handleChange={handleChange} type={props.tipo}/>
+                <Form handleChange={handleChange} type={props.type}/>
             </ModalBody>
             <ModalFooter>
-              <button className="btn btn-primary" onClick={()=>doPost(props.tipo)}>Insertar</button>{"   "}
+              <button className="btn btn-primary" onClick={()=>doPost(props.type)}>Insertar</button>{"   "}
               <button className="btn btn-danger" onClick={()=>props.closeModal()}>Cancelar</button>
             </ModalFooter>
         </Modal>

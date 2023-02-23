@@ -15,7 +15,7 @@ const EditModalComponent = (props) => {
     const { sessionState } = useContext(SessionContext)
 
     const updateItem = () => {
-        firebaseUtils.peticionPut(props.formItem,props.year,props.month,props.tipo,props.formItemId,sessionState.loggedIn ? sessionState.user.uid : "");
+        firebaseUtils.peticionPut(props.formItem,props.year,props.month,props.type,props.formItemId,sessionState.loggedIn ? sessionState.user.uid : "");
         props.closeModal();
     }
 
@@ -23,7 +23,7 @@ const EditModalComponent = (props) => {
         <Modal isOpen={props.isOpen}>
             <ModalHeader>Editar Registro</ModalHeader>
             <ModalBody>
-                <Form handleChange={props.handleChange} formItem={props.formItem} type={props.tipo}/>
+                <Form handleChange={props.handleChange} formItem={props.formItem} type={props.type}/>
             </ModalBody>
             <ModalFooter>
                 <button className="btn btn-primary" onClick={()=>updateItem()}>Editar</button>{"   "}

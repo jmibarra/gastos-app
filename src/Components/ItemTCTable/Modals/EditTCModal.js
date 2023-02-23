@@ -15,7 +15,7 @@ const EditTCModalComponent = (props) => {
     const { sessionState} = useContext(SessionContext)
 
     const updateItem = () => {
-        firebaseUtils.peticionPut(props.formItem,props.year,props.month,props.tipo,props.formItemId,sessionState.loggedIn ? sessionState.user.uid : "");
+        firebaseUtils.peticionPut(props.formItem,props.year,props.month,props.type,props.formItemId,sessionState.loggedIn ? sessionState.user.uid : "");
         props.closeModal();
     }
 

@@ -32,7 +32,7 @@ const InsertTCModalComponent = (props) => {
     }
         
     const doPost = () => {
-        firebaseUtils.peticionPost(formItem,props.year,props.month,props.tipo,sessionState.loggedIn ? sessionState.user.uid : "")
+        firebaseUtils.peticionPost(formItem,props.year,props.month,props.type,sessionState.loggedIn ? sessionState.user.uid : "")
         props.closeModal();
         
     }
@@ -44,7 +44,7 @@ const InsertTCModalComponent = (props) => {
                 <TCForm handleChange={handleChange} />
             </ModalBody>
             <ModalFooter>
-              <button className="btn btn-primary" onClick={()=>doPost(props.tipo)}>Insertar</button>{"   "}
+              <button className="btn btn-primary" onClick={()=>doPost(props.type)}>Insertar</button>{"   "}
               <button className="btn btn-danger" onClick={()=>props.closeModal()}>Cancelar</button>
             </ModalFooter>
         </Modal>

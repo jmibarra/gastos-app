@@ -79,7 +79,7 @@ const ItemTableComponent = ({items,type}) => {
              <InsertModalComponent 
                 isOpen={createModalOpen} 
                 title={"Insertar "+type} 
-                tipo={type} 
+                type={type} 
                 year={state.year} 
                 month={state.month} 
                 closeModal={closeModal} 
@@ -89,7 +89,7 @@ const ItemTableComponent = ({items,type}) => {
                 isOpen={editModalOpen} 
                 formItem={formItem} 
                 formItemId={formItemId} 
-                tipo={type} 
+                type={type} 
                 year={state.year} 
                 month={state.month} 
                 handleChange={handleUpdateChange}

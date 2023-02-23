@@ -48,7 +48,7 @@ const DataPage = () => {
     }
 
     async function fetchCCExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"tc",sessionState.loggedIn ? sessionState.user.uid : "");
+        let responseObject = await firebaseUtils.peticionGet(year,month,"tc_gasto",sessionState.loggedIn ? sessionState.user.uid : "");
         if(responseObject)
             setCCExpenses(responseObject)
     }
@@ -78,7 +78,7 @@ const DataPage = () => {
                     </Row>
                     <Row>
                         <h1>Gastos Tarjeta de crédito</h1>
-                        <ItemTCTableComponent items={CCExpenses} type="tc"/>
+                        <ItemTCTableComponent items={CCExpenses} type="tc_gasto"/>
                     </Row>
                 </Container>
             )}

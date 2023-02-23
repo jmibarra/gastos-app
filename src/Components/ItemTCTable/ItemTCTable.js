@@ -80,7 +80,7 @@ const ItemTCTableComponent = ({items,type}) => {
             <InsertTCModalComponent 
                 isOpen={createModalOpen} 
                 title={"Insertar gasto de TC"} 
-                tipo={type} 
+                type={type} 
                 year={state.year} 
                 month={state.month} 
                 closeModal={closeModal} 
@@ -89,7 +89,7 @@ const ItemTCTableComponent = ({items,type}) => {
                 isOpen={editModalOpen} 
                 formItem={formItem} 
                 formItemId={formItemId} 
-                tipo={type} 
+                type={type} 
                 year={state.year} 
                 month={state.month} 
                 handleChange={handleUpdateChange}
