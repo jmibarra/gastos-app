@@ -37,13 +37,17 @@ const SignupComponent = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
               login(user);
-              navigate("/")
+              navigateTo("")
             } else {
               console.log("user is logged out") 
             }
           });
          
     }, [])
+
+    const navigateTo = (path) => {
+        navigate("/"+path)
+    } 
 
     const onSignup = (e) => {
         e.preventDefault();
@@ -122,6 +126,7 @@ const SignupComponent = () => {
                                 <Button type="submit" color="primary">
                                     Signup
                                 </Button>
+                                <Button color="link" onClick={ () => navigateTo("login")}>Ya tengo cuenta!</Button>
                             </Form>
                             {error && 
                                 <Alert color="danger" className="mt-3">

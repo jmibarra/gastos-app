@@ -2,7 +2,7 @@ import { DateProvider } from "./contexts/Date"
 import React, { useState } from "react"
 import { Container, Row} from "reactstrap"
 
-import { BrowserRouter, Navigate} from 'react-router-dom';
+
 
 
 import NavBarComponent from './Components/Common/Navbar'
@@ -26,9 +26,6 @@ function App() {
     const toogleCreditCardModal = () => {
         setcreditCardModalOpen(!creditCardModalOpen);
     }
-
-
-
     return (
         <div>
             <section style={{ minHeight: "100vh" }}>                                                                                                       
@@ -44,9 +41,7 @@ function App() {
                                         style={{ height: "5rem", backgroundColor: "#F8F9FA" }}
                                     />
                                 </Row>
-                                <BrowserRouter basename="/gastos-app" >
-                                            <MainLayout metricsOpen={metricsOpen} style={{ paddingTop: "2rem" }}/>
-                                </BrowserRouter>
+                                    <MainLayout metricsOpen={metricsOpen} style={{ paddingTop: "2rem" }}/>
                                 <Row style={{ height: "5rem", backgroundColor: "#F8F9FA" }}>
                                     <Footer />
                                 </Row>

@@ -30,6 +30,10 @@ const LoginComponent = () => {
     const [errorCode, setErrorCode] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
+    const navigateTo = (path) => {
+        navigate("/"+path)
+    } 
+
     const { login} = useContext(SessionContext)
 
     useEffect(()=>{
@@ -38,7 +42,7 @@ const LoginComponent = () => {
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/firebase.User
               login(user);
-              navigate("/")
+              navigateTo("")
             } else {
               console.log("user is logged out")
               
@@ -106,7 +110,7 @@ const LoginComponent = () => {
                             <CardBody>
                                 <Alert color="danger">
                                     { errorCode === "auth/user-not-found" ? 
-                                        (<p>El usuario ingresado no existe, puede registrarte <a href='/signup'>aquí</a></p>) : 
+                                        (<p>El usuario ingresado no existe, puede registrarte <Button color="link" onClick={ () => navigateTo("signup")}>aquí</Button></p>) : 
                                         errorMessage}
                                 </Alert>
                             </CardBody>

@@ -31,7 +31,7 @@ const NavBarComponent = (props) => {
         <Navbar color="light" light expand="md">
             {sessionState.loggedIn && (
             <>
-                <NavbarBrand href="/">Gastos {state.month_name} {state.year} </NavbarBrand>
+                <NavbarBrand>Gastos {state.month_name} {state.year} </NavbarBrand>
                 <NavbarToggler className="me-2" onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
@@ -99,15 +99,11 @@ const NavBarComponent = (props) => {
                     <Button outline={true} onClick={props.toogleCreditCardModal}><AiOutlineCreditCard /></Button>
                     <Button style={{ marginRight: '10px' }} outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /></Button>
                     <AvatarDropdown className="avatar"/>
-
-                    
                 </Collapse>
             </>)}
             {!sessionState.loggedIn && (
             <>
                 <NavbarBrand>Gastos</NavbarBrand>
-                <Avatar name="" round={true} size="50" />
-
             </>
             )}
         </Navbar>
