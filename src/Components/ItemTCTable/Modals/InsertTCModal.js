@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import firebaseUtils from '../../../utils/FirebaseUtils';
 import { 
     Modal, 
@@ -8,7 +8,11 @@ import {
 } from "reactstrap";
 import TCForm from './Form/TCForm';
 
+import { SessionContext } from '../../../contexts/Session';
+
 const InsertTCModalComponent = (props) => {
+
+    const { sessionState } = useContext(SessionContext)
 
     const [formItem, setformItem] = useState({
         motivo: '',
@@ -16,6 +20,7 @@ const InsertTCModalComponent = (props) => {
         fecha_cierre: '',
         total: '',
         estado: 'Estimado',
+        userUID: sessionState.loggedIn ? sessionState.user.uid : ""
       });
     
         
@@ -27,7 +32,7 @@ const InsertTCModalComponent = (props) => {
     }
         
     const doPost = () => {
-        firebaseUtils.peticionPost(formItem,props.year,props.month,props.tipo)
+        firebaseUtils.peticionPost(formItem,props.year,props.month,props.tipo,sessionState.loggedIn ? sessionState.user.uid : "")
         props.closeModal();
         
     }

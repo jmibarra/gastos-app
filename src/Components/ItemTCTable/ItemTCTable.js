@@ -7,10 +7,12 @@ import StatusBadgeComponent from '../Common/StatusBadge.js';
 import InsertTCModalComponent from './Modals/InsertTCModal';
 import EditTCModalComponent from './Modals/EditTCModal';
 import { DateContext } from '../../contexts/Date';
+import { SessionContext } from '../../contexts/Session';
 
 const ItemTCTableComponent = ({items,type}) => {
 
     const { state } = useContext(DateContext);
+    const { sessionState } = useContext(SessionContext)
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
     const [editModalOpen,setEditModalOpen] = useState(false);
@@ -24,7 +26,7 @@ const ItemTCTableComponent = ({items,type}) => {
     }
 
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,state.year,state.month,type,id)
+        firebaseUtils.peticionDelete(item,state.year,state.month,type,id,sessionState.loggedIn ? sessionState.user.uid : "")
     }
 
     const updateItemModal = (item,id) => {
@@ -57,6 +59,7 @@ const ItemTCTableComponent = ({items,type}) => {
                     {Object.keys(items).map(i=>{
                     return <tr key={i}>
                         <td>
+                            {items[i].motivo}
                         </td>
                         <td>{items[i].fecha_cierre}</td>
                         <td>{items[i].fecha}</td>
