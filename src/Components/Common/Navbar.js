@@ -18,13 +18,13 @@ import { SessionContext } from '../../contexts/Session';
 import AvatarDropdown from './AvatarDropdow';
 
 const NavBarComponent = (props) => {
+
+    const { state, setDate } = useContext(DateContext)
+    const { sessionState} = useContext(SessionContext)
+    
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
-
-    const { state, setDate } = useContext(DateContext)
-  
-    const { sessionState} = useContext(SessionContext)
 
   return (
     <div>   
@@ -96,15 +96,17 @@ const NavBarComponent = (props) => {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </Nav>
-                    <Button outline={true} onClick={props.toogleCreditCardModal}><AiOutlineCreditCard /> Tarjeta de crédito</Button>
-                    <Button outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /> Metricas</Button>
-                    <AvatarDropdown/>
+                    <Button outline={true} onClick={props.toogleCreditCardModal}><AiOutlineCreditCard /></Button>
+                    <Button style={{ marginRight: '10px' }} outline={props.metricsOpen} onClick={props.toogleMetrics}><AiFillSignal /></Button>
+                    <AvatarDropdown className="avatar"/>
+
+                    
                 </Collapse>
             </>)}
             {!sessionState.loggedIn && (
             <>
-                <NavbarBrand href="/">Gastos</NavbarBrand>
-                <Avatar name="" round={true} size="60" />
+                <NavbarBrand>Gastos</NavbarBrand>
+                <Avatar name="" round={true} size="50" />
 
             </>
             )}

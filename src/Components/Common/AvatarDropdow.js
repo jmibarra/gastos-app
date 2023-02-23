@@ -32,7 +32,7 @@ const AvatarDropdown = () => {
     return (
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle tag="span">
-                <Avatar name={sessionState.user.email} round={true} size="60" />
+                <Avatar name={sessionState.user.email} round={true} size="50" />
             </DropdownToggle>
             <DropdownMenu end>
                 <DropdownItem onClick={handleLogout}>

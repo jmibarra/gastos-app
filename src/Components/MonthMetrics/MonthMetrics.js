@@ -54,7 +54,7 @@ const MonthMetricsComponent = (props) => {
     }
 
     async function fetchCCExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"tc",sessionState.loggedIn ? sessionState.user.uid : "");
+        let responseObject = await firebaseUtils.peticionGet(year,month,"tc_gasto",sessionState.loggedIn ? sessionState.user.uid : "");
         if(responseObject)
             setCCExpenses(responseObject)
     }
