@@ -8,29 +8,14 @@ class FirebaseUtils {
         this.database = getDatabase();
     }
 
-    // Obtiene los elementos existentes en la base de datos de Firebase
-    //Deprecada
-    peticionGet = async (año, mes, tipo, userUID) => {
+    peticionGet = async (dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
         // Inicializa la respuesta como un arreglo vacío
         let response = [];
         // Obtiene los datos de la ubicación especificada en la base de datos
-        const snapshot = await get(ref(this.database, `${userUID}/${tipo}/${año}/${mes}`));
+        const snapshot = await get(ref(this.database, dataStructure));
         // Si los datos existen, los asigna a la respuesta
         if (snapshot.exists()) {
-        response = snapshot.val();
-        }
-        // Devuelve la respuesta
-        return response;
-    };
-
-    peticionGet2 = async (dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
-        // Inicializa la respuesta como un arreglo vacío
-        let response = [];
-        // Obtiene los datos de la ubicación especificada en la base de datos
-        const snapshot = await get(ref(this.database, `${dataStructure}`));
-        // Si los datos existen, los asigna a la respuesta
-        if (snapshot.exists()) {
-        response = snapshot.val();
+            response = snapshot.val();
         }
         // Devuelve la respuesta
         return response;

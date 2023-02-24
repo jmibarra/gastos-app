@@ -66,7 +66,8 @@ describe('Metodo Post', () => {
 describe('Metodo Get', () => {
     test('debe obtener los gastos de febrero de 1900', async () => {
         // Llamamos al método peticionGet para obtener los datos de la base de datos
-        const data = await firebaseUtils.peticionGet('1900', '2', 'testItemsGeneral', 'TestUser'+uniqueId);
+        
+        const data = await firebaseUtils.peticionGet("TestUser"+uniqueId+"/testItemsGeneral/1900/2");
 
         // Verificamos que se devuelvan los datos esperados
         expect(Object.values(data)).toEqual([
@@ -108,7 +109,7 @@ describe('Metodo Get', () => {
 //             await expect(removeRef).resolves.toEqual(undefined);
         
 //             // Verifica que el objeto ya no esté en la base de datos
-//             const getSnapshot = firebaseUtils.peticionGet(año, mes, tipo, uniqueId);
+//             const getSnapshot = firebaseUtils.peticionGet(año, mes, tipo, uniqueId); //Reemplazar por nuevo llamado
 //             expect(getSnapshot).toEqual({});
 //         });
 //     });

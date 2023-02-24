@@ -39,19 +39,20 @@ const DataPage = () => {
     },[CCExpenses,state.year,state.month]);
 
     async function fetchIncomesData(year,month){
-        const responseObject = await firebaseUtils.peticionGet(year,month,"ingresos",sessionState.loggedIn ? sessionState.user.uid : "");
+        let responseObject = await firebaseUtils.peticionGet((sessionState.loggedIn ? sessionState.user.uid : "")+"/ingresos/"+year+"/"+month);
+
         if(responseObject)
             setIncomes(responseObject)
     }
 
     async function fetchExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"gastos",sessionState.loggedIn ? sessionState.user.uid : "");
+        let responseObject = await firebaseUtils.peticionGet((sessionState.loggedIn ? sessionState.user.uid : "")+"/gastos/"+year+"/"+month);
         if(responseObject)
             setExpenses(responseObject)
     }
 
     async function fetchCCExpensesData(year,month){
-        let responseObject = await firebaseUtils.peticionGet(year,month,"tc_gasto",sessionState.loggedIn ? sessionState.user.uid : "");
+        let responseObject = await firebaseUtils.peticionGet((sessionState.loggedIn ? sessionState.user.uid : "")+"/tc_gasto/"+year+"/"+month);
         if(responseObject)
             setCCExpenses(responseObject)
     }
