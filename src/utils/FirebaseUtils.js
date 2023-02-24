@@ -3,26 +3,71 @@ import { getDatabase, ref, get, set, remove, push } from 'firebase/database';
 import 'firebase/compat/database';
 
 class FirebaseUtils {
-  constructor() {
-    // Crea una instancia de la base de datos de Firebase
-    this.database = getDatabase();
-  }
+    constructor() {
+        // Crea una instancia de la base de datos de Firebase
+        this.database = getDatabase();
+    }
 
-  // Agrega un elemento a la base de datos de Firebase
-  peticionPost = (formItem, año, mes, tipo,userUID) => {
+    // Obtiene los elementos existentes en la base de datos de Firebase
+    //Deprecada
+    peticionGet = async (año, mes, tipo, userUID) => {
+        // Inicializa la respuesta como un arreglo vacío
+        let response = [];
+        // Obtiene los datos de la ubicación especificada en la base de datos
+        const snapshot = await get(ref(this.database, `${userUID}/${tipo}/${año}/${mes}`));
+        // Si los datos existen, los asigna a la respuesta
+        if (snapshot.exists()) {
+        response = snapshot.val();
+        }
+        // Devuelve la respuesta
+        return response;
+    };
 
-    if(formItem.motivo === '')
-        return
+    peticionGet2 = async (dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
+        // Inicializa la respuesta como un arreglo vacío
+        let response = [];
+        // Obtiene los datos de la ubicación especificada en la base de datos
+        const snapshot = await get(ref(this.database, `${dataStructure}`));
+        // Si los datos existen, los asigna a la respuesta
+        if (snapshot.exists()) {
+        response = snapshot.val();
+        }
+        // Devuelve la respuesta
+        return response;
+    };
 
-    // Obtiene una referencia a la ubicación en la base de datos donde se va a agregar el elemento
-    const dbRef = ref(this.database, `${userUID}/${tipo}/${año}/${mes}`);
-    // Agrega el elemento a la base de datos
-    push(dbRef, formItem).then(() => {
-      console.log('Item agregado exitosamente');
-    }).catch((error) => {
-      console.log('Error al agregar item', error);
-    });
-  };
+    // Agrega un elemento a la base de datos de Firebase
+    //Deprecada reemplazar y luego eliminar
+    peticionPost = (formItem, año, mes, tipo,userUID) => {
+
+        if(formItem.motivo === '')
+            return
+
+        // Obtiene una referencia a la ubicación en la base de datos donde se va a agregar el elemento
+        const dbRef = ref(this.database, `${userUID}/${tipo}/${año}/${mes}`);
+        // Agrega el elemento a la base de datos
+        push(dbRef, formItem).then(() => {
+        console.log('Item agregado exitosamente');
+        }).catch((error) => {
+        console.log('Error al agregar item', error);
+        });
+    };
+
+    // Agrega un elemento a la base de datos de Firebase
+    peticionPost2 = (formItem, dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
+
+        if(formItem.motivo === '')
+            return
+
+        // Obtiene una referencia a la ubicación en la base de datos donde se va a agregar el elemento
+        const dbRef = ref(this.database, `${dataStructure}`);
+        // Agrega el elemento a la base de datos
+        push(dbRef, formItem).then(() => {
+        console.log('Item agregado exitosamente');
+        }).catch((error) => {
+        console.log('Error al agregar item', error);
+        });
+    };
 
   // Actualiza un elemento existente en la base de datos de Firebase
   peticionPut = (formItem, año, mes, tipo, id, userUID) => {
@@ -55,20 +100,6 @@ class FirebaseUtils {
         console.log(error);
       });
     }
-  };
-
-  // Obtiene los elementos existentes en la base de datos de Firebase
-  peticionGet = async (año, mes, tipo, userUID) => {
-    // Inicializa la respuesta como un arreglo vacío
-    let response = [];
-    // Obtiene los datos de la ubicación especificada en la base de datos
-    const snapshot = await get(ref(this.database, `${userUID}/${tipo}/${año}/${mes}`));
-    // Si los datos existen, los asigna a la respuesta
-    if (snapshot.exists()) {
-      response = snapshot.val();
-    }
-    // Devuelve la respuesta
-    return response;
   };
 }
 

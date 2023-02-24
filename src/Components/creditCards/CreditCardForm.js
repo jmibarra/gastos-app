@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import "./css/credit-card.css";
 import "./css/form-style.css";
+import Cards from "react-credit-cards-2"
+import 'react-credit-cards-2/es/styles-compiled.css';
 import { 
     Modal, 
     ModalBody, 
     ModalHeader, 
     ModalFooter,
 } from "reactstrap";
+import firebaseUtils from '../../utils/FirebaseUtils';
+import { SessionContext } from '../../contexts/Session';
 
 const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
+
+    const { sessionState } = useContext(SessionContext)
 
     const [formData,setFormData] = useState(
         {
@@ -17,22 +23,25 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
             focus: "",
             alias: "",
             cvc:"",
-            number: ""
+            number: "",
+            status: "Activa"
         }
     )
 
-    const handleInputFocus = (e) => {
-        setFormData({
-            ...formData,
-            focus: e.target.name
-          })
-    };
+    // const handleInputFocus = (e) => {
+    //     setFormData({
+    //         ...formData,
+    //         focus: e.target.name
+    //       })
+    // };
+
+    const handleInputFocus = (evt) => {
+        setFormData((prev) => ({ ...prev, focus: evt.target.name }));
+    }
 
     //function to handle  input and update the state of variable
     const handleInputChange = (e) => {
         const { name, id, value } = e.target;
-
-        
 
         if (id === "cardHolder") {
             var ele = document.getElementById(id);
@@ -78,6 +87,9 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
 
     const insertCreditCard = () => {
         console.log(formData)
+        firebaseUtils.peticionPost2(formData,`${sessionState.loggedIn ? sessionState.user.uid : ""}/tc`)
+        toogleCreditCardModal()
+
     }
     
     return (
@@ -86,6 +98,15 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
                 <ModalHeader>Crear nueva tarjeta</ModalHeader>
                 <ModalBody>
                     <div className="credit-card ">
+                        <Cards
+                                locale={{ valid: "Expira" }}
+                                placeholders={{ name: "ALIAS TC" }}
+                                cvc={formData.cvc}
+                                expiry={formData.expiry+"/"+formData.expiryyear}
+                                focused={formData.focus}
+                                name={formData.alias}
+                                number={formData.number}
+                            />
                     </div>
                     <div className="card">
                         <form className="payment-form">
@@ -115,7 +136,7 @@ const CreditCardForm = ({creditCardModalOpen,toogleCreditCardModal}) => {
                                 name="alias"
                                 spellCheck="false"
                                 value={formData.alias}
-                                maxLength="20"
+                                maxLength="25"
                                 autoComplete="off"
                                 onPaste={(e) => e.preventDefault()}
                                 onChange={handleInputChange}
