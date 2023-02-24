@@ -123,7 +123,7 @@ select {
   }
   
   .card {
-    max-width: 570px;
+    padding-top: "1rem" !important;
     margin: auto;
   
     z-index: 1;

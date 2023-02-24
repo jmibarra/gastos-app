@@ -3,7 +3,10 @@ import {
     Col,
     Container,
     Row,
-    Button
+    Button,
+    Card,
+    CardBody,
+    CardTitle
 } from "reactstrap"
 import ItemTableComponent from '../ItemTable'
 import ItemTCTableComponent from '../ItemTCTable'
@@ -65,21 +68,25 @@ const DataPage = () => {
     return (
         <>
             {sessionState.loggedIn && (
-                <Container>
-                    <Row xs="2"> 
-                        <Col>
-                            <h1>Ingresos</h1>
+                <Container style={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h3">Ingresos</CardTitle>
                             <ItemTableComponent items={incomes} type="ingresos"/>
-                        </Col>
-                        <Col>
-                            <h1>Gastos</h1>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h3">Gastos</CardTitle>
                             <ItemTableComponent items={expenses} type="gastos"/>
-                        </Col>          
-                    </Row>
-                    <Row>
-                        <h1>Gastos Tarjeta de crédito</h1>
-                        <ItemTCTableComponent items={CCExpenses} type="tc_gasto"/>
-                    </Row>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h3">Gastos Tarjeta de crédito</CardTitle>
+                            <ItemTCTableComponent items={CCExpenses} type="tc_gasto"/>
+                        </CardBody>
+                    </Card>                 
                 </Container>
             )}
             {!sessionState.loggedIn && (
