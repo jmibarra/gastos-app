@@ -28,7 +28,7 @@ const CreditCardModal = ({creditCardModalOpen,toogleCreditCardModal}) => {
     )
 
     const insertCreditCard = () => {
-        firebaseUtils.peticionPost2(formData,`${sessionState.loggedIn ? sessionState.user.uid : ""}/tc`)
+        firebaseUtils.peticionPost(formData,`(${sessionState.loggedIn ? sessionState.user.uid : ""})/tc`)
         toogleCreditCardModal()
 
     }

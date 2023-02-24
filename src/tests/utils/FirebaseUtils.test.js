@@ -11,8 +11,8 @@ beforeAll(async () => {
     const formItem1 = { id: '1', motivo: 'Comida', monto: 100 }
     const formItem2 = { id: '2', motivo: 'Transporte', monto: 50 }
 
-    firebaseUtils.peticionPost(formItem1, 1900, 2, 'testItemsGeneral', 'TestUser'+uniqueId);
-    firebaseUtils.peticionPost(formItem2, 1900, 2, 'testItemsGeneral', 'TestUser'+uniqueId);
+    firebaseUtils.peticionPost(formItem1,'TestUser'+uniqueId+"/testItemsGeneral/1900/2")
+    firebaseUtils.peticionPost(formItem2,'TestUser'+uniqueId+"/testItemsGeneral/1900/2")
 });
 
 afterAll(async () => {
@@ -31,7 +31,7 @@ describe('Metodo Post', () => {
         };
   
         // Llama al método peticionPost para agregar el elemento a la base de datos
-        await firebaseUtils.peticionPost(formItem, 1900, 2, 'gastos', 'TestUser'+uniqueId);
+        await firebaseUtils.peticionPost(formItem,'TestUser'+uniqueId+"/gastos/1900/2")
     
         // Obtiene los datos de la ubicación especificada en la base de datos
         const snapshot = await get(ref(firebaseUtils.database, 'TestUser'+uniqueId+'/gastos/1900/2'));
@@ -50,7 +50,7 @@ describe('Metodo Post', () => {
         };
 
         // Llama al método peticionPost para agregar el elemento a la base de datos
-        await firebaseUtils.peticionPost(formItem, 1900, 2, 'testManejoErrores', 'TestUser'+uniqueId);
+        await firebaseUtils.peticionPost(formItem,'TestUser'+uniqueId+"/testManejoErrores/1900/2")
     
         // Obtiene los datos de la ubicación especificada en la base de datos
         const snapshot = await get(ref(firebaseUtils.database, 'TestUser'+uniqueId+'/testManejoErrores/1900/2'));

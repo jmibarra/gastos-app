@@ -32,9 +32,8 @@ const InsertTCModalComponent = (props) => {
     }
         
     const doPost = () => {
-        firebaseUtils.peticionPost(formItem,props.year,props.month,props.type,sessionState.loggedIn ? sessionState.user.uid : "")
+        firebaseUtils.peticionPost(formItem,`${sessionState.loggedIn ? sessionState.user.uid : ""}/${props.type}/${props.year}/${props.month}`)
         props.closeModal();
-        
     }
 
     return(

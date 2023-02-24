@@ -22,24 +22,7 @@ class FirebaseUtils {
     };
 
     // Agrega un elemento a la base de datos de Firebase
-    //Deprecada reemplazar y luego eliminar
-    peticionPost = (formItem, año, mes, tipo,userUID) => {
-
-        if(formItem.motivo === '')
-            return
-
-        // Obtiene una referencia a la ubicación en la base de datos donde se va a agregar el elemento
-        const dbRef = ref(this.database, `${userUID}/${tipo}/${año}/${mes}`);
-        // Agrega el elemento a la base de datos
-        push(dbRef, formItem).then(() => {
-        console.log('Item agregado exitosamente');
-        }).catch((error) => {
-        console.log('Error al agregar item', error);
-        });
-    };
-
-    // Agrega un elemento a la base de datos de Firebase
-    peticionPost2 = (formItem, dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
+    peticionPost = (formItem, dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
 
         if(formItem.motivo === '')
             return
