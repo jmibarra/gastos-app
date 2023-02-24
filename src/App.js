@@ -2,17 +2,12 @@ import { DateProvider } from "./contexts/Date"
 import React, { useState } from "react"
 import { Container, Row} from "reactstrap"
 
-
-
-
 import NavBarComponent from './Components/Common/Navbar'
 import Footer from "./Components/Common/Footer"
 
-import CreditCardForm from "./Components/creditCards/CreditCardForm"
-
-
 import { SessionProvider } from "./contexts/Session"
 import MainLayout from "./Components/MainLayout/MainLayout"
+import CreditCardModal from "./Components/creditCards/CreditCardModal"
 
 function App() {
 
@@ -46,7 +41,7 @@ function App() {
                                     <Footer />
                                 </Row>
                             </Container>
-                            <CreditCardForm creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
+                            <CreditCardModal creditCardModalOpen={creditCardModalOpen} toogleCreditCardModal={toogleCreditCardModal} />
                         </div>
                     </SessionProvider>
                 </DateProvider>           
