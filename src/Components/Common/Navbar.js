@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import Avatar from 'react-avatar';
 import {
   Collapse,
   Navbar,

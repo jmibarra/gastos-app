@@ -1,4 +1,4 @@
-import { faUtensils, faCar, faFilm, faTshirt, faFileInvoiceDollar, faList, faStore, faHouseChimney, faLaptop, faPlane, faPlaneDeparture, faBox } from '@fortawesome/free-solid-svg-icons';
+import { faUtensils, faCar, faFilm, faTshirt, faFileInvoiceDollar, faList, faStore, faHouseChimney, faLaptop, faPlaneDeparture, faBox } from '@fortawesome/free-solid-svg-icons';
 
 class IconManager {
     static icons = {

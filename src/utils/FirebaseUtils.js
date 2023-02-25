@@ -38,9 +38,9 @@ class FirebaseUtils {
     };
 
   // Actualiza un elemento existente en la base de datos de Firebase
-  peticionPut = (formItem, año, mes, tipo, id, userUID) => {
+  peticionPut = (formItem, dataStructure) => {
     // Obtiene una referencia al elemento que se va a actualizar
-    const itemRef = ref(this.database, `${userUID}/${tipo}/${año}/${mes}/${id}`);
+    const itemRef = ref(this.database, dataStructure);
     // Actualiza el elemento en la base de datos
     set(itemRef, formItem)
       .then(() => {
