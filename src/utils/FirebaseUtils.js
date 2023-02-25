@@ -1,5 +1,5 @@
 import firebase from '../firebase'
-import { getDatabase, ref, get, set, remove, push } from 'firebase/database';
+import { getDatabase, ref, get, set, remove, push, orderByChild, equalTo, query, child } from 'firebase/database';
 import 'firebase/compat/database';
 
 class FirebaseUtils {
@@ -8,22 +8,29 @@ class FirebaseUtils {
         this.database = getDatabase();
     }
 
-    peticionGet = async (dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
-        // Inicializa la respuesta como un arreglo vacío
-        let response = [];
-        // Obtiene los datos de la ubicación especificada en la base de datos
-        const snapshot = await get(ref(this.database, dataStructure));
-        // Si los datos existen, los asigna a la respuesta
-        if (snapshot.exists()) {
-            response = snapshot.val();
+    peticionGet = async (dataStructure,config = null) => { 
+        const itemRef = ref(this.database);
+        const pathRef = child(itemRef, dataStructure);
+    
+        let peticionesQuery = query(pathRef);
+    
+        if (config) {
+            if (config.orderBy && config.equalTo) {
+                peticionesQuery = orderByChild(peticionesQuery, config.orderBy).equalTo(config.equalTo).once('value');
+            }
         }
-        // Devuelve la respuesta
-        return response;
+    
+        const snapshot = await get(peticionesQuery);
+        
+        if (snapshot.exists()) {
+            return snapshot.val();
+        } else {
+            return [];
+        }
     };
 
     // Agrega un elemento a la base de datos de Firebase
-    peticionPost = (formItem, dataStructure) => { //Renombrar quitando el 2 al terminar de migrar
-
+    peticionPost = (formItem, dataStructure) => {
         if(formItem.motivo === '')
             return
 
@@ -31,9 +38,9 @@ class FirebaseUtils {
         const dbRef = ref(this.database, dataStructure);
         // Agrega el elemento a la base de datos
         push(dbRef, formItem).then(() => {
-        console.log('Item agregado exitosamente');
+            console.log('Item agregado exitosamente');
         }).catch((error) => {
-        console.log('Error al agregar item', error);
+            console.log('Error al agregar item', error);
         });
     };
 

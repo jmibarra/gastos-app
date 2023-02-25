@@ -19,11 +19,9 @@ const InsertModalComponent = (props) => {
     const [formItem, setformItem] = useState({
         motivo: '',
         fecha: '',
-        fecha_cierre: '',
         total: '',
         categoria: '',
         estado: 'Estimado',
-        userUID: sessionState.loggedIn ? sessionState.user.uid : ""
       });
     
         

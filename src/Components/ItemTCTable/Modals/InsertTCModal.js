@@ -15,14 +15,12 @@ const InsertTCModalComponent = (props) => {
     const { sessionState } = useContext(SessionContext)
 
     const [formItem, setformItem] = useState({
-        motivo: '',
+        tarjeta: '',
         fecha: '',
         fecha_cierre: '',
         total: '',
         estado: 'Estimado',
-        userUID: sessionState.loggedIn ? sessionState.user.uid : ""
       });
-    
         
     const handleChange=e=>{
         setformItem({
