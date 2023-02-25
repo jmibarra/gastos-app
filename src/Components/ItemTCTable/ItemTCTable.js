@@ -26,7 +26,7 @@ const ItemTCTableComponent = ({items,type}) => {
     }
 
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,state.year,state.month,type,id,sessionState.loggedIn ? sessionState.user.uid : "")
+        firebaseUtils.peticionDelete(item,`${sessionState.loggedIn ? sessionState.user.uid : ""}/${type}/${state.year}/${state.month}/${id}`)
     }
 
     const updateItemModal = (item,id) => {

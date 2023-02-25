@@ -28,7 +28,7 @@ class FirebaseUtils {
             return
 
         // Obtiene una referencia a la ubicación en la base de datos donde se va a agregar el elemento
-        const dbRef = ref(this.database, `${dataStructure}`);
+        const dbRef = ref(this.database, dataStructure);
         // Agrega el elemento a la base de datos
         push(dbRef, formItem).then(() => {
         console.log('Item agregado exitosamente');
@@ -52,7 +52,7 @@ class FirebaseUtils {
   };
 
   // Elimina un elemento existente en la base de datos de Firebase
-  peticionDelete = (formItem, año, mes, tipo, id,userUID) => {
+  peticionDelete = (formItem,dataStructure) => {
     // Solicita la confirmación del usuario para eliminar el elemento
     if (
       window.confirm(
@@ -62,7 +62,7 @@ class FirebaseUtils {
       )
     ) {
       // Obtiene una referencia al elemento que se va a eliminar
-      const dbRef = ref(this.database, `${userUID}/${tipo}/${año}/${mes}/${id}`);
+      const dbRef = ref(this.database, dataStructure);
       // Elimina el elemento de la base de datos
       remove(dbRef).catch((error) => {
         console.log(error);
