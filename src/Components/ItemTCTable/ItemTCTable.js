@@ -68,7 +68,7 @@ const ItemTCTableComponent = ({items,type}) => {
                     {Object.keys(items).map(i=>{
                     return <tr key={i}>
                         <td>
-                            {items[i].motivo}
+                            {items[i].tarjeta}
                         </td>
                         <td>{items[i].fecha_cierre}</td>
                         <td>{items[i].fecha}</td>

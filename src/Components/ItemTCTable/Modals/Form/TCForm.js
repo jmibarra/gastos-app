@@ -21,10 +21,8 @@ const TCForm = ({handleChange,formItem}) => {
     },[]);
 
     async function fetchCreditCardsData(){
-        let responseObject = await firebaseUtils.peticionGet((sessionState.loggedIn ? sessionState.user.uid : "")+"/tc", {
-            orderBy: "status",
-            equalTo: 'Activa'
-        });
+        let responseObject = await firebaseUtils.peticionGet((sessionState.loggedIn ? sessionState.user.uid : "")+"/tc"); 
+        // {orderBy: "status",equalTo: 'Activa'}
         if(responseObject)
             setCreditCards(responseObject)
     }
