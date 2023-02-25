@@ -26,7 +26,16 @@ const ItemTCTableComponent = ({items,type}) => {
     }
 
     const deleteItem = (item,id) => {
-        firebaseUtils.peticionDelete(item,`${sessionState.loggedIn ? sessionState.user.uid : ""}/${type}/${state.year}/${state.month}/${id}`)
+        // Solicita la confirmación del usuario para eliminar el elemento
+        if(
+            window.confirm(
+                `Estás seguro que deseas eliminar el elemento ${
+                    item && item.motivo
+                }?`
+            )
+        ){
+            firebaseUtils.peticionDelete(`${sessionState.loggedIn ? sessionState.user.uid : ""}/${type}/${state.year}/${state.month}/${id}`)
+        }
     }
 
     const updateItemModal = (item,id) => {

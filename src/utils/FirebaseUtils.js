@@ -52,22 +52,13 @@ class FirebaseUtils {
   };
 
   // Elimina un elemento existente en la base de datos de Firebase
-  peticionDelete = (formItem,dataStructure) => {
-    // Solicita la confirmación del usuario para eliminar el elemento
-    if (
-      window.confirm(
-        `Estás seguro que deseas eliminar el elemento ${
-          formItem && formItem.motivo
-        }?`
-      )
-    ) {
-      // Obtiene una referencia al elemento que se va a eliminar
-      const dbRef = ref(this.database, dataStructure);
-      // Elimina el elemento de la base de datos
-      remove(dbRef).catch((error) => {
-        console.log(error);
-      });
-    }
+  peticionDelete = (dataStructure) => {
+        // Obtiene una referencia al elemento que se va a eliminar
+        const dbRef = ref(this.database, dataStructure);
+        // Elimina el elemento de la base de datos
+        remove(dbRef).catch((error) => {
+            console.log(error);
+        });
   };
 }
 
