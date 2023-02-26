@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SessionContext } from '../../contexts/Session';
 import firebaseUtils from '../../utils/FirebaseUtils';
+import TCPopover from './TCPopover';
 
 const TCViewer = ({creditCardId}) => {
 
@@ -13,14 +14,12 @@ const TCViewer = ({creditCardId}) => {
 
     async function fetchCreditCardsData(){
         let responseObject = await firebaseUtils.peticionGet((sessionState.loggedIn ? sessionState.user.uid : "")+"/tc/"+creditCardId); 
-        // {orderBy: "status",equalTo: 'Activa'}
         if(responseObject)
             setCreditCard(responseObject)
     }
 
     return (
-        <div>{creditCard.alias}</div>
-       
+        <TCPopover creditCard={creditCard} creditCardId={creditCardId}/>
     )
 }
 
