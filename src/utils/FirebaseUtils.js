@@ -1,5 +1,5 @@
 import firebase from '../firebase'
-import { getDatabase, ref, get, set, remove, push, orderByChild, equalTo, query, child } from 'firebase/database';
+import { getDatabase, ref, get, set, remove, push, orderByChild, equalTo, query } from 'firebase/database';
 import 'firebase/compat/database';
 
 class FirebaseUtils {
@@ -8,24 +8,27 @@ class FirebaseUtils {
         this.database = getDatabase();
     }
 
-    peticionGet = async (dataStructure,config = null) => { 
-        const itemRef = ref(this.database);
-        const pathRef = child(itemRef, dataStructure);
-    
-        let peticionesQuery = query(pathRef);
-    
+    peticionGet = async (dataStructure,config = null) => {   
         if (config) {
             if (config.orderBy && config.equalTo) {
-                peticionesQuery = orderByChild(peticionesQuery, config.orderBy).equalTo(config.equalTo).once('value');
+                const getRef = query(ref(getDatabase(), dataStructure), orderByChild(config.orderBy), equalTo(config.equalTo));
+                const snapshot = await get(getRef);
+                if (snapshot.exists()) {
+                    console.log(snapshot.val())
+                    return snapshot.val();
+                } else {
+                    return [];
+                }
+
             }
-        }
-    
-        const snapshot = await get(peticionesQuery);
-        
-        if (snapshot.exists()) {
-            return snapshot.val();
-        } else {
-            return [];
+        }else{
+            const itemRef = ref(this.database,dataStructure);
+            const snapshot = await get(itemRef);
+            if (snapshot.exists()) {
+                return snapshot.val();
+            } else {
+                return [];
+            }
         }
     };
 

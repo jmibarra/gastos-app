@@ -8,6 +8,7 @@ import InsertTCModalComponent from './Modals/InsertTCModal';
 import EditTCModalComponent from './Modals/EditTCModal';
 import { DateContext } from '../../contexts/Date';
 import { SessionContext } from '../../contexts/Session';
+import TCViewer from './TCViewer';
 
 const ItemTCTableComponent = ({items,type}) => {
 
@@ -68,7 +69,7 @@ const ItemTCTableComponent = ({items,type}) => {
                     {Object.keys(items).map(i=>{
                     return <tr key={i}>
                         <td>
-                            {items[i].tarjeta}
+                            <TCViewer creditCardId={items[i].tarjeta} />
                         </td>
                         <td>{items[i].fecha_cierre}</td>
                         <td>{items[i].fecha}</td>
