@@ -73,7 +73,7 @@ const ItemTableComponent = ({items,type}) => {
                         <td>{items[i].fecha}</td>
                         <td>$ {items[i].total}</td>
                         {type==="gastos" && (<td><ItemCategoryRender category={items[i].categoria}/></td>)}
-                        <td><StatusBadgeComponent estado={items[i].estado}/></td>
+                        <td><StatusBadgeComponent status={items[i].estado}/></td>
                         <td>
                             <ButtonGroup>
                                 <button className="btn btn-primary" onClick={()=>updateItemModal(items[i],i)}> <AiFillEdit /></button>

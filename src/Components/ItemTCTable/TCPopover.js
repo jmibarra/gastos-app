@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Button, PopoverBody, UncontrolledPopover } from 'reactstrap'
+import React from 'react'
+import { Button, UncontrolledPopover } from 'reactstrap'
 import Cards from "react-credit-cards-2"
 
 const TCPopover = ({creditCard,creditCardId}) => {

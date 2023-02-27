@@ -74,7 +74,7 @@ const ItemTCTableComponent = ({items,type}) => {
                         <td>{items[i].fecha_cierre}</td>
                         <td>{items[i].fecha}</td>
                         <td>$ {items[i].total}</td>
-                        <td><StatusBadgeComponent estado={items[i].estado}/></td>
+                        <td><StatusBadgeComponent status={items[i].estado}/></td>
                         <td>
                             <ButtonGroup>
                                 <button className="btn btn-primary" onClick={()=>updateItemModal(items[i],i)}> <AiFillEdit /></button> {"   "}
