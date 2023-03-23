@@ -5,7 +5,6 @@ class StatusManager {
         'Pago': "success",
         'Transferido': "info"
     }; 
-
 }
 
 export default StatusManager;

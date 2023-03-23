@@ -6,7 +6,6 @@ import IconManager from '../../../utils/IconManager';
 const ItemCategoryRender = (props) => {
 
     const icon = IconManager.icons[props.category];
-
     const iconColor = IconManager.iconColor[props.category]
 
     return (

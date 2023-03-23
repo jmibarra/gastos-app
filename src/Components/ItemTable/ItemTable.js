@@ -14,7 +14,6 @@ import ItemCategoryRender from './TableElements/ItemCategoryRender.js';
 const ItemTableComponent = ({items,type}) => {
 
     const { state } = useContext(DateContext);
-
     const { sessionState } = useContext(SessionContext)
 
     const [createModalOpen,setCreateModalOpen] = useState(false);
@@ -105,7 +104,6 @@ const ItemTableComponent = ({items,type}) => {
                 closeModal={closeModal} 
             />
         </>
-        
     )
 }
 
